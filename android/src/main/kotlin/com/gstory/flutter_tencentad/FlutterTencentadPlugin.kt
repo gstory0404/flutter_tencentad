@@ -1,21 +1,47 @@
 package com.gstory.flutter_tencentad
 
+import android.app.Activity
 import android.content.Context
 import androidx.annotation.NonNull
+import com.gstory.flutter_tencentad.interstitialad.InterstitialAd
 import com.gstory.flutter_tencentad.rewardvideoad.RewardVideoAd
 import com.qq.e.comm.managers.GDTADManager
 import com.qq.e.comm.managers.status.SDKStatus
 import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
 /** FlutterTencentadPlugin */
-class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler {
+class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     private lateinit var channel: MethodChannel
     private var applicationContext: Context? = null
+    private var mActivity: Activity? = null
+
+    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        mActivity = binding.activity
+//        Log.e("FlutterUnionadPlugin->","onAttachedToActivity")
+//        FlutterUnionadViewPlugin.registerWith(mFlutterPluginBinding!!,mActivity!!)
+    }
+
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
+        mActivity = binding.activity
+//        Log.e("FlutterUnionadPlugin->","onReattachedToActivityForConfigChanges")
+    }
+
+    override fun onDetachedFromActivityForConfigChanges() {
+        mActivity = null
+//        Log.e("FlutterUnionadPlugin->","onDetachedFromActivityForConfigChanges")
+    }
+
+    override fun onDetachedFromActivity() {
+        mActivity = null
+//        Log.e("FlutterUnionadPlugin->","onDetachedFromActivity")
+    }
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_tencentad")
@@ -35,11 +61,22 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler {
             //获取sdk版本
         } else if (call.method == "getSDKVersion") {
             result.success("${SDKStatus.getSDKVersion()}.${GDTADManager.getInstance().pm.pluginVersion}")
+            //预加载激励广告
         } else if (call.method == "loadRewardVideoAd") {
             RewardVideoAd.init(applicationContext!!,call.arguments as Map<*, *>)
             result.success(true)
+            //展示激励广告
         } else if (call.method == "showRewardVideoAd") {
             RewardVideoAd.showAd()
+            result.success(true)
+            //预加载插屏广告
+        } else if (call.method == "loadUnifiedInterstitialAD") {
+            InterstitialAd.init(mActivity!!,call.arguments as Map<*, *>)
+            result.success(true)
+            //展示插屏广告
+        } else if (call.method == "showUnifiedInterstitialAD") {
+            InterstitialAd.showAd()
+            result.success(true)
         } else {
             result.notImplemented()
         }

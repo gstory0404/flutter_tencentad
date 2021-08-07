@@ -24,7 +24,8 @@ class _MyAppState extends State<MyApp> {
 
   ///初始化
   Future<void> _register() async {
-    _isRegister = await FlutterTencentad.register(appId: "1200020945",debug: true);
+    _isRegister =
+        await FlutterTencentad.register(appId: "1200021532", debug: true);
     _sdkVersion = await FlutterTencentad.getSDKVersion();
     setState(() {});
   }
@@ -47,7 +48,28 @@ class _MyAppState extends State<MyApp> {
                 textColor: Colors.white,
                 child: new Text('激励广告'),
                 onPressed: () async {
-                  await FlutterTencentad.loadRewardVideoAd(codeId: "1022412724880500");
+                  await FlutterTencentad.loadRewardVideoAd(
+                      codeId: "8002118728021979");
+                },
+              ),
+              //插屏广告（半屏）
+              MaterialButton(
+                color: Colors.blue,
+                textColor: Colors.white,
+                child: new Text('插屏广告（半屏）'),
+                onPressed: () async {
+                  await FlutterTencentad.loadUnifiedInterstitialAD(
+                      codeId: "5062710728123927", isFullScreen: false);
+                },
+              ),
+              //插屏广告（全屏）
+              MaterialButton(
+                color: Colors.blue,
+                textColor: Colors.white,
+                child: new Text('插屏广告（全屏）'),
+                onPressed: () async {
+                  await FlutterTencentad.loadUnifiedInterstitialAD(
+                      codeId: "6012914718424906", isFullScreen: true);
                 },
               ),
             ],

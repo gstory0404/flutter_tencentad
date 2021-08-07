@@ -27,7 +27,7 @@ class FlutterTencentad {
   ///
   /// [codeId] 广告ID
   ///
-  static  Future<bool> loadRewardVideoAd({
+  static Future<bool> loadRewardVideoAd({
     required String codeId,
   }) async {
     return await _channel.invokeMethod("loadRewardVideoAd", {"codeId": codeId});
@@ -36,5 +36,24 @@ class FlutterTencentad {
   ///显示激励广告
   static Future<bool> showRewardVideoAd() async {
     return await _channel.invokeMethod("showRewardVideoAd", {});
+  }
+
+  /// # 预加载插屏广告
+  ///
+  /// [codeId] 广告ID
+  ///
+  ///  [isFullScreen] 是否全屏
+  ///
+  static Future<bool> loadUnifiedInterstitialAD(
+      {required String codeId, required bool isFullScreen}) async {
+    return await _channel.invokeMethod("loadUnifiedInterstitialAD", {
+      "codeId": codeId,
+      "isFullScreen": isFullScreen,
+    });
+  }
+
+  /// # 显示新模板渲染插屏
+  static Future<bool> showUnifiedInterstitialAD() async {
+    return await _channel.invokeMethod("showUnifiedInterstitialAD", {});
   }
 }
