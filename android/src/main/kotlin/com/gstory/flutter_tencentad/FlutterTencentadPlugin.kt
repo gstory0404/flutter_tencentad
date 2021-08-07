@@ -21,11 +21,12 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private lateinit var channel: MethodChannel
     private var applicationContext: Context? = null
     private var mActivity: Activity? = null
+    private var mFlutterPluginBinding: FlutterPlugin.FlutterPluginBinding?  = null
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         mActivity = binding.activity
 //        Log.e("FlutterUnionadPlugin->","onAttachedToActivity")
-//        FlutterUnionadViewPlugin.registerWith(mFlutterPluginBinding!!,mActivity!!)
+        FlutterTencentAdViewPlugin.registerWith(mFlutterPluginBinding!!,mActivity!!)
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
@@ -47,6 +48,7 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_tencentad")
         channel.setMethodCallHandler(this)
         applicationContext = flutterPluginBinding.applicationContext
+        mFlutterPluginBinding = flutterPluginBinding
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {

@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_tencentad/banner/banner_ad_view.dart';
 
 class FlutterTencentad {
   static const MethodChannel _channel =
@@ -33,7 +35,7 @@ class FlutterTencentad {
     return await _channel.invokeMethod("loadRewardVideoAd", {"codeId": codeId});
   }
 
-  ///显示激励广告
+  /// # 显示激励广告
   static Future<bool> showRewardVideoAd() async {
     return await _channel.invokeMethod("showRewardVideoAd", {});
   }
@@ -55,5 +57,21 @@ class FlutterTencentad {
   /// # 显示新模板渲染插屏
   static Future<bool> showUnifiedInterstitialAD() async {
     return await _channel.invokeMethod("showUnifiedInterstitialAD", {});
+  }
+
+  /// # banner广告
+  ///
+  /// [codeId] banner广告id
+  ///
+  /// [viewWidth] 广告宽 单位dp
+  ///
+  /// [viewHeight] 广告高  单位dp   宽高比应该为6.4:1
+  ///
+  static Widget bannerAdView(
+      {required String codeId,
+      required double viewWidth,
+      required double viewHeight}) {
+    return BannerAdView(
+        codeId: codeId, viewWidth: viewWidth, viewHeight: viewHeight);
   }
 }
