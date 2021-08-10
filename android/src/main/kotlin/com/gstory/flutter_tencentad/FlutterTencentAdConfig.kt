@@ -8,7 +8,13 @@ package com.gstory.flutter_tencentad
 class FlutterTencentAdConfig {
 
     companion object {
+        //event事件
+        const val adevent = "com.gstory.flutter_tencentad/adevent"
         //BannerAdView
         const val bannerAdView = "com.gstory.flutter_tencentad/BannerAdView"
+        //SplashAdView
+        const val splashAdView = "com.gstory.flutter_tencentad/SplashAdView"
+        //NativeExpressADView
+        const val nativeExpressAdView = "com.gstory.flutter_tencentad/NativeExpressAdView"
     }
 }

@@ -9,26 +9,21 @@ import 'package:flutter_tencentad/flutter_tencentad.dart';
 /// Email: gstory0404@gmail.com
 /// CreateDate: 2021/8/7 17:33
 ///
-class BannerAdView extends StatefulWidget {
+class SplashAdView extends StatefulWidget {
   final String codeId;
-  final double viewWidth;
-  final double viewHeight;
-  final BannerAdCallBack? callBack;
+  final int fetchDelay;
+  final SplashAdCallBack? callBack;
 
-  const BannerAdView({
-    Key? key,
-    required this.codeId,
-    required this.viewWidth,
-    required this.viewHeight,
-    this.callBack,
-  }) : super(key: key);
+  const SplashAdView(
+      {Key? key, required this.codeId, required this.fetchDelay, this.callBack})
+      : super(key: key);
 
   @override
-  _BannerAdViewState createState() => _BannerAdViewState();
+  _SplashAdViewState createState() => _SplashAdViewState();
 }
 
-class _BannerAdViewState extends State<BannerAdView> {
-  String _viewType = "com.gstory.flutter_tencentad/BannerAdView";
+class _SplashAdViewState extends State<SplashAdView> {
+  String _viewType = "com.gstory.flutter_tencentad/SplashAdView";
 
   MethodChannel? _channel;
 
@@ -48,14 +43,13 @@ class _BannerAdViewState extends State<BannerAdView> {
     }
     if (defaultTargetPlatform == TargetPlatform.android) {
       return Container(
-        width: widget.viewWidth,
-        height: widget.viewHeight,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         child: AndroidView(
           viewType: _viewType,
           creationParams: {
             "codeId": widget.codeId,
-            "viewWidth": widget.viewWidth,
-            "viewHeight": widget.viewHeight,
+            "fetchDelay": widget.fetchDelay,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),
@@ -63,14 +57,13 @@ class _BannerAdViewState extends State<BannerAdView> {
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return Container(
-        width: widget.viewWidth,
-        height: widget.viewHeight,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         child: UiKitView(
           viewType: _viewType,
           creationParams: {
             "codeId": widget.codeId,
-            "viewWidth": widget.viewWidth,
-            "viewHeight": widget.viewHeight,
+            "fetchDelay": widget.fetchDelay,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),
@@ -94,6 +87,10 @@ class _BannerAdViewState extends State<BannerAdView> {
       case OnAdMethod.onShow:
         widget.callBack?.onShow!();
         break;
+      //关闭
+      case OnAdMethod.onClose:
+        widget.callBack?.onClose!();
+        break;
       //广告加载失败
       case OnAdMethod.onFail:
         if (mounted) {
@@ -112,14 +109,9 @@ class _BannerAdViewState extends State<BannerAdView> {
       case OnAdMethod.onExpose:
         widget.callBack?.onExpose!();
         break;
-      //关闭
-      case OnAdMethod.onClose:
-        if (mounted) {
-          setState(() {
-            _isShowAd = false;
-          });
-        }
-        widget.callBack?.onClose!();
+      //倒计时
+      case OnAdMethod.onADTick:
+        widget.callBack?.onADTick!(call.arguments);
         break;
     }
   }

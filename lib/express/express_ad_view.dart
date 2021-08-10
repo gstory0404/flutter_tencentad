@@ -9,13 +9,13 @@ import 'package:flutter_tencentad/flutter_tencentad.dart';
 /// Email: gstory0404@gmail.com
 /// CreateDate: 2021/8/7 17:33
 ///
-class BannerAdView extends StatefulWidget {
+class ExpressAdView extends StatefulWidget {
   final String codeId;
-  final double viewWidth;
-  final double viewHeight;
-  final BannerAdCallBack? callBack;
+  final int viewWidth;
+  final int viewHeight;
+  final ExpressAdCallBack? callBack;
 
-  const BannerAdView({
+  const ExpressAdView({
     Key? key,
     required this.codeId,
     required this.viewWidth,
@@ -24,11 +24,11 @@ class BannerAdView extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _BannerAdViewState createState() => _BannerAdViewState();
+  _ExpressAdViewState createState() => _ExpressAdViewState();
 }
 
-class _BannerAdViewState extends State<BannerAdView> {
-  String _viewType = "com.gstory.flutter_tencentad/BannerAdView";
+class _ExpressAdViewState extends State<ExpressAdView> {
+  String _viewType = "com.gstory.flutter_tencentad/NativeExpressAdView";
 
   MethodChannel? _channel;
 
@@ -38,7 +38,9 @@ class _BannerAdViewState extends State<BannerAdView> {
   @override
   void initState() {
     super.initState();
-    _isShowAd = true;
+    setState(() {
+      _isShowAd = true;
+    });
   }
 
   @override
@@ -48,8 +50,8 @@ class _BannerAdViewState extends State<BannerAdView> {
     }
     if (defaultTargetPlatform == TargetPlatform.android) {
       return Container(
-        width: widget.viewWidth,
-        height: widget.viewHeight,
+        width: widget.viewWidth.toDouble(),
+        height: widget.viewHeight.toDouble(),
         child: AndroidView(
           viewType: _viewType,
           creationParams: {
@@ -63,8 +65,8 @@ class _BannerAdViewState extends State<BannerAdView> {
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return Container(
-        width: widget.viewWidth,
-        height: widget.viewHeight,
+        width: widget.viewWidth.toDouble(),
+        height: widget.viewHeight.toDouble(),
         child: UiKitView(
           viewType: _viewType,
           creationParams: {

@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.annotation.NonNull
 import com.gstory.flutter_tencentad.interstitialad.InterstitialAd
 import com.gstory.flutter_tencentad.rewardvideoad.RewardVideoAd
+import com.gstory.flutter_unionad.FlutterTencentAdEventPlugin
 import com.qq.e.comm.managers.GDTADManager
 import com.qq.e.comm.managers.status.SDKStatus
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -49,6 +50,7 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         channel.setMethodCallHandler(this)
         applicationContext = flutterPluginBinding.applicationContext
         mFlutterPluginBinding = flutterPluginBinding
+        FlutterTencentAdEventPlugin().onAttachedToEngine(flutterPluginBinding)
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {

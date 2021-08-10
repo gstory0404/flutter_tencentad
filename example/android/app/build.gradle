@@ -34,7 +34,8 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.gstory.flutter_tencentad_example"
+//        applicationId "com.gstory.flutter_tencentad_example"
+        applicationId "com.hnnuomi.atree"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
@@ -43,10 +44,7 @@ android {
 
     signingConfigs {
         config {
-            storeFile file("..\\key\\tencentad.jks")
-            storePassword "tencentad"
-            keyAlias "tencentad"
-            keyPassword "tencentad"
+
         }
     }
 
