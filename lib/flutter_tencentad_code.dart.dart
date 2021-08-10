@@ -32,7 +32,7 @@ class AdType {
   static const String rewardAd = "rewardAd";
 
   ///插屏广告
-  static const String interactAd = "interactionAd";
+  static const String interactAd = "interactAd";
 }
 
 class OnAdMethod {
