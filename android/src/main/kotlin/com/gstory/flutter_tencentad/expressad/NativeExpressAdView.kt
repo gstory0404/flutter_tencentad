@@ -95,9 +95,9 @@ internal class NativeExpressAdView(
         if (nativeExpressADView.boundData.adPatternType == AdPatternType.NATIVE_VIDEO) {
             nativeExpressADView.setMediaListener(this)
         }
-        nativeExpressADView.render()
         mContainer?.removeAllViews()
         mContainer?.addView(nativeExpressADView)
+        nativeExpressADView.render()
     }
 
     //NativeExpressADView 渲染广告失败
