@@ -70,7 +70,7 @@ FlutterTencentad.splashAdView(
     ////设置开屏广告从请求到展示所花的最大时长（并不是指广告曝光时长），取值范围为[1500, 5000]ms
     fetchDelay: 3000,
     //广告回调
-    callBack: SplashAdCallBack(
+    callBack: FlutterTencentadSplashCallBack(
     onShow: () {
       print("开屏广告显示");
     },
@@ -103,7 +103,7 @@ FlutterTencentad.bannerAdView(
     //广告高  单位dp   宽高比应该为6.4:1
     viewHeight: 100,
     // 广告回调
-    callBack: BannerAdCallBack(
+    callBack: FlutterTencentadBannerCallBack(
         onShow: () {
           print("Banner广告显示");
         },
@@ -133,7 +133,7 @@ FlutterTencentad.expressAdView(
               //广告高  单位dp
               viewHeight: 300,
               //回调事件
-              callBack: ExpressAdCallBack(
+              callBack: FlutterTencentadExpressCallBack(
                 onShow: () {
                   print("动态信息流广告显示");
                 },
@@ -170,7 +170,7 @@ await FlutterTencentad.loadRewardVideoAd(
 ```Dart
  FlutterTencentAdStream.initAdStream(
       //激励广告
-      rewardAdCallBack: RewardAdCallBack(
+    flutterTencentadRewardCallBack: FlutterTencentadRewardCallBack(
         onShow: () {
           print("激励广告显示");
         },
@@ -215,7 +215,7 @@ await FlutterTencentad.loadUnifiedInterstitialAD(
 插屏广告结果监听
 ```dart
 FlutterTencentAdStream.initAdStream(
-  interactionAdCallBack: InteractionAdCallBack(
+    flutterTencentadInteractionCallBack: FlutterTencentadInteractionCallBack(
         onShow: () {
           print("插屏广告显示");
         },

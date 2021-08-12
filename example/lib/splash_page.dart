@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
           ////设置开屏广告从请求到展示所花的最大时长（并不是指广告曝光时长），取值范围为[1500, 5000]ms
           fetchDelay: 3000,
           //广告回调
-          callBack: SplashAdCallBack(
+          callBack: FlutterTencentadSplashCallBack(
             onShow: () {
               print("开屏广告显示");
             },

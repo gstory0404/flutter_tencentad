@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     _register();
     _adViewStream = FlutterTencentAdStream.initAdStream(
       //激励广告
-      rewardAdCallBack: RewardAdCallBack(
+      flutterTencentadRewardCallBack: FlutterTencentadRewardCallBack(
         onShow: () {
           print("激励广告显示");
         },
@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
           print("激励广告奖励  $transId");
         },
       ),
-      interactionAdCallBack: InteractionAdCallBack(
+      flutterTencentadInteractionCallBack: FlutterTencentadInteractionCallBack(
         onShow: () {
           print("插屏广告显示");
         },

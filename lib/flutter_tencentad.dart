@@ -86,13 +86,13 @@ class FlutterTencentad {
   ///
   /// [viewHeight] 广告高  单位dp   宽高比应该为6.4:1
   ///
-  /// [callBack]  广告回调
+  /// [FlutterTencentAdBannerCallBack]  广告回调
   ///
   static Widget bannerAdView(
       {required String codeId,
       required double viewWidth,
       required double viewHeight,
-      BannerAdCallBack? callBack}) {
+      FlutterTencentadBannerCallBack? callBack}) {
     return BannerAdView(
       codeId: codeId,
       viewWidth: viewWidth,
@@ -110,12 +110,12 @@ class FlutterTencentad {
   /// 取值范围为[1500, 5000]ms。如果需要使用默认值，可以调用上一个构造方法，
   /// 或者给 fetchDelay 设为0。
   ///
-  /// [callBack] 广告回调
+  /// [FlutterTencentAdSplashCallBack] 广告回调
   ///
   static Widget splashAdView(
       {required String codeId,
       required int fetchDelay,
-      SplashAdCallBack? callBack}) {
+      FlutterTencentadSplashCallBack? callBack}) {
     return SplashAdView(
       codeId: codeId,
       fetchDelay: fetchDelay,
@@ -132,13 +132,13 @@ class FlutterTencentad {
   ///
   /// [viewHeight] 广告高  单位dp
   ///
-  /// [callBack] 回调事件
+  /// [FlutterTencentAdExpressCallBack] 回调事件
   ///
   static Widget expressAdView(
       {required String codeId,
       required int viewWidth,
       required int viewHeight,
-      ExpressAdCallBack? callBack}) {
+      FlutterTencentadExpressCallBack? callBack}) {
     return ExpressAdView(
       codeId: codeId,
       viewWidth: viewWidth,

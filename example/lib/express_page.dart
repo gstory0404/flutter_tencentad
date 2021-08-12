@@ -35,7 +35,7 @@ class _ExpressPageState extends State<ExpressPage> {
               //广告高  单位dp
               viewHeight: 300,
               //回调事件
-              callBack: ExpressAdCallBack(
+              callBack: FlutterTencentadExpressCallBack(
                 onShow: () {
                   print("动态信息流广告显示");
                 },

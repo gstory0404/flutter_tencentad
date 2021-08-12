@@ -20,61 +20,61 @@ class FlutterTencentAdStream {
   /// [interactionAdCallBack] 插屏广告回调
   ///
   static StreamSubscription initAdStream(
-      {RewardAdCallBack? rewardAdCallBack,
-      InteractionAdCallBack? interactionAdCallBack}) {
+      {FlutterTencentadRewardCallBack? flutterTencentadRewardCallBack,
+        FlutterTencentadInteractionCallBack? flutterTencentadInteractionCallBack}) {
     StreamSubscription _adStream =
         adEventEvent.receiveBroadcastStream().listen((data) {
-      switch (data[AdType.adType]) {
+      switch (data[FlutterTencentadType.adType]) {
 
         ///激励广告
-        case AdType.rewardAd:
-          switch (data[OnAdMethod.onAdMethod]) {
-            case OnAdMethod.onShow:
-              rewardAdCallBack?.onShow!();
+        case FlutterTencentadType.rewardAd:
+          switch (data[FlutterTencentadMethod.onAdMethod]) {
+            case FlutterTencentadMethod.onShow:
+              flutterTencentadRewardCallBack?.onShow!();
               break;
-            case OnAdMethod.onClose:
-              rewardAdCallBack?.onClose!();
+            case FlutterTencentadMethod.onClose:
+              flutterTencentadRewardCallBack?.onClose!();
               break;
-            case OnAdMethod.onFail:
-              rewardAdCallBack?.onFail!(data["code"], data["message"]);
+            case FlutterTencentadMethod.onFail:
+              flutterTencentadRewardCallBack?.onFail!(data["code"], data["message"]);
               break;
-            case OnAdMethod.onClick:
-              rewardAdCallBack?.onClick!();
+            case FlutterTencentadMethod.onClick:
+              flutterTencentadRewardCallBack?.onClick!();
               break;
-            case OnAdMethod.onVerify:
-              rewardAdCallBack?.onVerify!(data["transId"]);
+            case FlutterTencentadMethod.onVerify:
+              flutterTencentadRewardCallBack?.onVerify!(data["transId"]);
               break;
-            case OnAdMethod.onFinish:
-              rewardAdCallBack?.onFinish!();
+            case FlutterTencentadMethod.onFinish:
+              flutterTencentadRewardCallBack?.onFinish!();
               break;
-            case OnAdMethod.onReady:
-              rewardAdCallBack?.onReady!();
+            case FlutterTencentadMethod.onReady:
+              flutterTencentadRewardCallBack?.onReady!();
               break;
-            case OnAdMethod.onUnReady:
-              rewardAdCallBack?.onUnReady!();
+            case FlutterTencentadMethod.onUnReady:
+              flutterTencentadRewardCallBack?.onUnReady!();
               break;
           }
           break;
           ///插屏广告
-        case AdType.interactAd:
-          switch (data[OnAdMethod.onAdMethod]) {
-            case OnAdMethod.onShow:
-              interactionAdCallBack?.onShow!();
+        case FlutterTencentadType.interactAd:
+          switch (data[FlutterTencentadMethod.onAdMethod]) {
+            case FlutterTencentadMethod.onShow:
+              flutterTencentadInteractionCallBack?.onShow!();
               break;
-            case OnAdMethod.onClose:
-              interactionAdCallBack?.onClose!();
+            case FlutterTencentadMethod.onClose:
+              flutterTencentadInteractionCallBack?.onClose!();
               break;
-            case OnAdMethod.onFail:
-              interactionAdCallBack?.onFail!(data["code"], data["message"]);
+            case FlutterTencentadMethod.onFail:
+              flutterTencentadInteractionCallBack?.onFail!(data["code"], data["message"]);
               break;
-            case OnAdMethod.onClick:
-              interactionAdCallBack?.onClick!();
+            case FlutterTencentadMethod.onClick:
+              flutterTencentadInteractionCallBack?.onClick!();
               break;
-            case OnAdMethod.onReady:
-              interactionAdCallBack?.onReady!();
+            case FlutterTencentadMethod.onReady:
+              flutterTencentadInteractionCallBack?.onReady!();
               break;
-            case OnAdMethod.onUnReady:
-              interactionAdCallBack?.onUnReady!();
+            case FlutterTencentadMethod.onUnReady:
+              flutterTencentadInteractionCallBack?.onUnReady!();
               break;
           }
           break;

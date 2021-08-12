@@ -50,31 +50,31 @@ typedef OnVerify = void Function(String transId);
 typedef OnADTick = void Function(int time);
 
 ///banner广告回调
-class BannerAdCallBack {
+class FlutterTencentadBannerCallBack {
   OnShow? onShow;
   OnFail? onFail;
   OnClick? onClick;
   OnExpose? onExpose;
   OnClose? onClose;
 
-  BannerAdCallBack(
+  FlutterTencentadBannerCallBack(
       {this.onShow, this.onFail, this.onClick, this.onExpose, this.onClose});
 }
 
 ///动态信息流/横幅/视频贴片广告回调
-class ExpressAdCallBack {
+class FlutterTencentadExpressCallBack {
   OnShow? onShow;
   OnFail? onFail;
   OnClick? onClick;
   OnExpose? onExpose;
   OnClose? onClose;
 
-  ExpressAdCallBack(
+  FlutterTencentadExpressCallBack(
       {this.onShow, this.onFail, this.onClick, this.onExpose, this.onClose});
 }
 
 ///开屏广告回调
-class SplashAdCallBack {
+class FlutterTencentadSplashCallBack {
   OnClose? onClose;
   OnShow? onShow;
   OnFail? onFail;
@@ -82,7 +82,7 @@ class SplashAdCallBack {
   OnExpose? onExpose;
   OnADTick? onADTick;
 
-  SplashAdCallBack(
+  FlutterTencentadSplashCallBack(
       {this.onShow,
       this.onFail,
       this.onClick,
@@ -92,7 +92,7 @@ class SplashAdCallBack {
 }
 
 ///插屏广告回调
-class InteractionAdCallBack {
+class FlutterTencentadInteractionCallBack {
   OnShow? onShow;
   OnClick? onClick;
   OnClose? onClose;
@@ -101,7 +101,7 @@ class InteractionAdCallBack {
   OnUnReady? onUnReady;
   OnExpose? onExpose;
 
-  InteractionAdCallBack(
+  FlutterTencentadInteractionCallBack(
       {this.onShow,
       this.onClick,
       this.onClose,
@@ -112,7 +112,7 @@ class InteractionAdCallBack {
 }
 
 ///激励广告回调
-class RewardAdCallBack {
+class FlutterTencentadRewardCallBack {
   OnShow? onShow;
   OnClose? onClose;
   OnExpose? onExpose;
@@ -123,7 +123,7 @@ class RewardAdCallBack {
   OnFinish? onFinish;
   OnUnReady? onUnReady;
 
-  RewardAdCallBack(
+  FlutterTencentadRewardCallBack(
       {this.onShow,
       this.onClick,
       this.onExpose,

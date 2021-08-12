@@ -13,7 +13,7 @@ class BannerAdView extends StatefulWidget {
   final String codeId;
   final double viewWidth;
   final double viewHeight;
-  final BannerAdCallBack? callBack;
+  final FlutterTencentadBannerCallBack? callBack;
 
   const BannerAdView({
     Key? key,
@@ -91,11 +91,11 @@ class _BannerAdViewState extends State<BannerAdView> {
   Future<dynamic> _platformCallHandler(MethodCall call) async {
     switch (call.method) {
       //显示广告
-      case OnAdMethod.onShow:
+      case FlutterTencentadMethod.onShow:
         widget.callBack?.onShow!();
         break;
       //广告加载失败
-      case OnAdMethod.onFail:
+      case FlutterTencentadMethod.onFail:
         if (mounted) {
           setState(() {
             _isShowAd = false;
@@ -105,15 +105,15 @@ class _BannerAdViewState extends State<BannerAdView> {
         widget.callBack?.onFail!(map["code"], map["message"]);
         break;
       //点击
-      case OnAdMethod.onClick:
+      case FlutterTencentadMethod.onClick:
         widget.callBack?.onClick!();
         break;
       //曝光
-      case OnAdMethod.onExpose:
+      case FlutterTencentadMethod.onExpose:
         widget.callBack?.onExpose!();
         break;
       //关闭
-      case OnAdMethod.onClose:
+      case FlutterTencentadMethod.onClose:
         if (mounted) {
           setState(() {
             _isShowAd = false;

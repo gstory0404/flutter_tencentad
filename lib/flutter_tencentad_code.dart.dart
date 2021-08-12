@@ -6,26 +6,8 @@ part of 'flutter_tencentad.dart';
 /// @e-mail gstory0404@gmail.com
 /// @time   2020/3/11
 
-///网络类型
-class NetCode {
-  static const int NETWORK_STATE_MOBILE = 1;
-  static const int NETWORK_STATE_2G = 2;
-  static const int NETWORK_STATE_3G = 3;
-  static const int NETWORK_STATE_WIFI = 4;
-  static const int NETWORK_STATE_4G = 5;
-}
-
-///激励视频方向
-class AdOrientation {
-  ///竖屏
-  static const int VERTICAL = 1;
-
-  ///横屏
-  static const int HORIZONTAL = 2;
-}
-
 ///数据类型
-class AdType {
+class FlutterTencentadType {
   static const String adType = "adType";
 
   ///激励广告
@@ -35,7 +17,7 @@ class AdType {
   static const String interactAd = "interactAd";
 }
 
-class OnAdMethod {
+class FlutterTencentadMethod {
   ///stream中 广告方法
   static const String onAdMethod = "onAdMethod";
 

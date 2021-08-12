@@ -32,7 +32,7 @@ class _BannerPageState extends State<BannerPage> {
             //广告高  单位dp   宽高比应该为6.4:1
             viewHeight: 100,
             // 广告回调
-            callBack: BannerAdCallBack(
+            callBack: FlutterTencentadBannerCallBack(
               onShow: () {
                 print("Banner广告显示");
               },

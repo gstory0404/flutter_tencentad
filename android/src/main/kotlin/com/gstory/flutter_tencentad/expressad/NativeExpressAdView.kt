@@ -41,6 +41,7 @@ internal class NativeExpressAdView(
     private var viewHeight: Int
 
     private var nativeExpressAD: NativeExpressAD? = null
+    private var nativeExpressAdView: NativeExpressADView? = null
 
     private var channel: MethodChannel?
 
@@ -70,7 +71,6 @@ internal class NativeExpressAdView(
                 .setAutoPlayPolicy(VideoOption.AutoPlayPolicy.WIFI)
                 .setAutoPlayMuted(true)
                 .build())
-        LogUtil.e("开始加载")
         nativeExpressAD?.loadAD(1)
     }
 
@@ -91,13 +91,13 @@ internal class NativeExpressAdView(
     // 但是想让广告曝光还需要调用 NativeExpressADView 的 render 方法
     override fun onADLoaded(p0: MutableList<NativeExpressADView>?) {
         LogUtil.e("广告数据加载成功")
-        var nativeExpressADView = p0!![0]
-        if (nativeExpressADView.boundData.adPatternType == AdPatternType.NATIVE_VIDEO) {
-            nativeExpressADView.setMediaListener(this)
+        nativeExpressAdView = p0!![0]
+        if (nativeExpressAdView?.boundData?.adPatternType == AdPatternType.NATIVE_VIDEO) {
+            nativeExpressAdView?.setMediaListener(this)
         }
         mContainer?.removeAllViews()
-        mContainer?.addView(nativeExpressADView)
-        nativeExpressADView.render()
+        mContainer?.addView(nativeExpressAdView)
+        nativeExpressAdView?.render()
     }
 
     //NativeExpressADView 渲染广告失败
@@ -116,7 +116,7 @@ internal class NativeExpressAdView(
 
     //广告曝光
     override fun onADExposure(p0: NativeExpressADView?) {
-        LogUtil.e("NativeExpress广告曝光")
+        LogUtil.e("广告曝光")
         channel?.invokeMethod("onExpose", "")
     }
 
@@ -202,6 +202,8 @@ internal class NativeExpressAdView(
     }
 
     override fun dispose() {
+        nativeExpressAdView?.destroy()
+        nativeExpressAdView = null
         mContainer?.removeAllViews()
         mContainer = null
     }

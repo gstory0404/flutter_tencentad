@@ -12,7 +12,7 @@ import 'package:flutter_tencentad/flutter_tencentad.dart';
 class SplashAdView extends StatefulWidget {
   final String codeId;
   final int fetchDelay;
-  final SplashAdCallBack? callBack;
+  final FlutterTencentadSplashCallBack? callBack;
 
   const SplashAdView(
       {Key? key, required this.codeId, required this.fetchDelay, this.callBack})
@@ -84,15 +84,15 @@ class _SplashAdViewState extends State<SplashAdView> {
   Future<dynamic> _platformCallHandler(MethodCall call) async {
     switch (call.method) {
       //显示广告
-      case OnAdMethod.onShow:
+      case FlutterTencentadMethod.onShow:
         widget.callBack?.onShow!();
         break;
       //关闭
-      case OnAdMethod.onClose:
+      case FlutterTencentadMethod.onClose:
         widget.callBack?.onClose!();
         break;
       //广告加载失败
-      case OnAdMethod.onFail:
+      case FlutterTencentadMethod.onFail:
         if (mounted) {
           setState(() {
             _isShowAd = false;
@@ -102,15 +102,15 @@ class _SplashAdViewState extends State<SplashAdView> {
         widget.callBack?.onFail!(map["code"], map["message"]);
         break;
       //点击
-      case OnAdMethod.onClick:
+      case FlutterTencentadMethod.onClick:
         widget.callBack?.onClick!();
         break;
       //曝光
-      case OnAdMethod.onExpose:
+      case FlutterTencentadMethod.onExpose:
         widget.callBack?.onExpose!();
         break;
       //倒计时
-      case OnAdMethod.onADTick:
+      case FlutterTencentadMethod.onADTick:
         widget.callBack?.onADTick!(call.arguments);
         break;
     }
