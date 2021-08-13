@@ -9,6 +9,15 @@ public class SwiftFlutterTencentadPlugin: NSObject, FlutterPlugin {
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    result("iOS " + UIDevice.current.systemVersion)
+    switch call.method {
+    //
+    case "register":
+//        GDTSDKConfig.
+        result(true)
+        break
+    default:
+        result(true)
+        break
+    }
   }
 }
