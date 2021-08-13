@@ -5,57 +5,57 @@ part of 'flutter_tencentad.dart';
 /// @Description: dart类作用描述
 
 ///显示
-typedef OnShow = void Function();
+typedef TOnShow = void Function();
 
 ///曝光
-typedef OnExpose = void Function();
+typedef TOnExpose = void Function();
 
 ///失败
-typedef OnFail = void Function(int code, dynamic message);
+typedef TOnFail = void Function(int code, dynamic message);
 
 ///点击
-typedef OnClick = void Function();
+typedef TOnClick = void Function();
 
 ///视频播放
-typedef OnVideoPlay = void Function();
+typedef TOnVideoPlay = void Function();
 
 ///视频暂停
-typedef OnVideoPause = void Function();
+typedef TOnVideoPause = void Function();
 
 ///视频播放结束
-typedef OnVideoStop = void Function();
+typedef TOnVideoStop = void Function();
 
 ///跳过
-typedef OnSkip = void Function();
+typedef TOnSkip = void Function();
 
 ///倒计时结束
-typedef OnFinish = void Function();
+typedef TOnFinish = void Function();
 
 ///加载超时
-typedef OnTimeOut = void Function();
+typedef TOnTimeOut = void Function();
 
 ///关闭
-typedef OnClose = void Function();
+typedef TOnClose = void Function();
 
 ///广告预加载完成
-typedef OnReady = void Function();
+typedef TOnReady = void Function();
 
 ///广告预加载未完成
-typedef OnUnReady = void Function();
+typedef TOnUnReady = void Function();
 
 ///广告奖励验证
-typedef OnVerify = void Function(String transId);
+typedef TOnVerify = void Function(String transId);
 
 ///倒计时
-typedef OnADTick = void Function(int time);
+typedef TOnADTick = void Function(int time);
 
 ///banner广告回调
 class FlutterTencentadBannerCallBack {
-  OnShow? onShow;
-  OnFail? onFail;
-  OnClick? onClick;
-  OnExpose? onExpose;
-  OnClose? onClose;
+  TOnShow? onShow;
+  TOnFail? onFail;
+  TOnClick? onClick;
+  TOnExpose? onExpose;
+  TOnClose? onClose;
 
   FlutterTencentadBannerCallBack(
       {this.onShow, this.onFail, this.onClick, this.onExpose, this.onClose});
@@ -63,11 +63,11 @@ class FlutterTencentadBannerCallBack {
 
 ///动态信息流/横幅/视频贴片广告回调
 class FlutterTencentadExpressCallBack {
-  OnShow? onShow;
-  OnFail? onFail;
-  OnClick? onClick;
-  OnExpose? onExpose;
-  OnClose? onClose;
+  TOnShow? onShow;
+  TOnFail? onFail;
+  TOnClick? onClick;
+  TOnExpose? onExpose;
+  TOnClose? onClose;
 
   FlutterTencentadExpressCallBack(
       {this.onShow, this.onFail, this.onClick, this.onExpose, this.onClose});
@@ -75,12 +75,12 @@ class FlutterTencentadExpressCallBack {
 
 ///开屏广告回调
 class FlutterTencentadSplashCallBack {
-  OnClose? onClose;
-  OnShow? onShow;
-  OnFail? onFail;
-  OnClick? onClick;
-  OnExpose? onExpose;
-  OnADTick? onADTick;
+  TOnClose? onClose;
+  TOnShow? onShow;
+  TOnFail? onFail;
+  TOnClick? onClick;
+  TOnExpose? onExpose;
+  TOnADTick? onADTick;
 
   FlutterTencentadSplashCallBack(
       {this.onShow,
@@ -93,13 +93,13 @@ class FlutterTencentadSplashCallBack {
 
 ///插屏广告回调
 class FlutterTencentadInteractionCallBack {
-  OnShow? onShow;
-  OnClick? onClick;
-  OnClose? onClose;
-  OnFail? onFail;
-  OnReady? onReady;
-  OnUnReady? onUnReady;
-  OnExpose? onExpose;
+  TOnShow? onShow;
+  TOnClick? onClick;
+  TOnClose? onClose;
+  TOnFail? onFail;
+  TOnReady? onReady;
+  TOnUnReady? onUnReady;
+  TOnExpose? onExpose;
 
   FlutterTencentadInteractionCallBack(
       {this.onShow,
@@ -113,15 +113,15 @@ class FlutterTencentadInteractionCallBack {
 
 ///激励广告回调
 class FlutterTencentadRewardCallBack {
-  OnShow? onShow;
-  OnClose? onClose;
-  OnExpose? onExpose;
-  OnFail? onFail;
-  OnClick? onClick;
-  OnVerify? onVerify;
-  OnReady? onReady;
-  OnFinish? onFinish;
-  OnUnReady? onUnReady;
+  TOnShow? onShow;
+  TOnClose? onClose;
+  TOnExpose? onExpose;
+  TOnFail? onFail;
+  TOnClick? onClick;
+  TOnVerify? onVerify;
+  TOnReady? onReady;
+  TOnFinish? onFinish;
+  TOnUnReady? onUnReady;
 
   FlutterTencentadRewardCallBack(
       {this.onShow,

@@ -1,4 +1,5 @@
 export 'flutter_tencentad_stream.dart';
+export 'flutter_tencentad_code.dart.dart';
 
 import 'dart:async';
 
@@ -6,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tencentad/banner/banner_ad_view.dart';
 import 'package:flutter_tencentad/splash/splash_ad_view.dart';
+import 'flutter_tencentad_code.dart.dart';
 
 import 'express/express_ad_view.dart';
 
 part 'flutter_tencentad_callback.dart';
 
-part 'flutter_tencentad_code.dart.dart';
 
 class FlutterTencentad {
   static const MethodChannel _channel =

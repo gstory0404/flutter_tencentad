@@ -1,5 +1,3 @@
-part of 'flutter_tencentad.dart';
-
 
 /// 描述：
 /// @author guozi

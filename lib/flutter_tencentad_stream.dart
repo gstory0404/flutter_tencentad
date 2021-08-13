@@ -8,7 +8,7 @@ import 'flutter_tencentad.dart';
 /// @CreateDate: 2021/8/9 9:30 下午
 /// @Description: dart类作用描述
 
-const EventChannel adEventEvent =
+const EventChannel tencentAdEventEvent =
     EventChannel("com.gstory.flutter_tencentad/adevent");
 
 class FlutterTencentAdStream {
@@ -23,7 +23,7 @@ class FlutterTencentAdStream {
       {FlutterTencentadRewardCallBack? flutterTencentadRewardCallBack,
         FlutterTencentadInteractionCallBack? flutterTencentadInteractionCallBack}) {
     StreamSubscription _adStream =
-        adEventEvent.receiveBroadcastStream().listen((data) {
+    tencentAdEventEvent.receiveBroadcastStream().listen((data) {
       switch (data[FlutterTencentadType.adType]) {
 
         ///激励广告

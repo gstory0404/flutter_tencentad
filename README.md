@@ -1,7 +1,7 @@
 # 腾讯优量汇广告 Flutter版本
 
 <p>
-<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v0.0.5-success></a>
+<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v0.0.6-success></a>
 </p>
 
 ## 简介
@@ -28,7 +28,7 @@ flutter_tencentad是一款集成了腾讯优量汇广告Android和iOSSDK的Flutt
 ## 集成步骤
 #### 1、pubspec.yaml
 ```Dart
-flutter_tencentad: ^0.0.5
+flutter_tencentad: ^0.0.6
 ```
 引入
 ```Dart
