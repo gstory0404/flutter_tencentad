@@ -43,12 +43,7 @@ android {
     }
 
     signingConfigs {
-        config {
-            storeFile file("..\\key\\treeKey.jks")
-            storePassword "mouqibaba233"
-            keyAlias "treeKey"
-            keyPassword "mouqibaba233"
-        }
+
     }
 
 
@@ -56,12 +51,12 @@ android {
         debug {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.config
+//            signingConfig signingConfigs.config
         }
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.config
+//            signingConfig signingConfigs.config
         }
     }
 }
