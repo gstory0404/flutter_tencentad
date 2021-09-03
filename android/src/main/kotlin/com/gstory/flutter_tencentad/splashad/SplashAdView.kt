@@ -3,9 +3,11 @@ package com.gstory.flutter_tencentad.splashad
 import android.app.Activity
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.gstory.flutter_tencentad.FlutterTencentAdConfig
 import com.gstory.flutter_tencentad.LogUtil
+import com.gstory.flutter_tencentad.UIUtils
 import com.qq.e.ads.splash.SplashAD
 import com.qq.e.ads.splash.SplashADListener
 import com.qq.e.comm.util.AdError
@@ -35,6 +37,8 @@ internal class SplashAdView(
         codeId = params["codeId"] as String
         fetchDelay = params["fetchDelay"] as Int
         mContainer = FrameLayout(activity)
+        mContainer?.layoutParams?.width = ViewGroup.LayoutParams.WRAP_CONTENT
+        mContainer?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
         channel = MethodChannel(messenger, FlutterTencentAdConfig.splashAdView + "_" + id)
         loadSplashAd()
     }

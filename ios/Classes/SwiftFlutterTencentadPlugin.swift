@@ -12,9 +12,11 @@ public class SwiftFlutterTencentadPlugin: NSObject, FlutterPlugin {
     switch call.method {
     //
     case "register":
-//        GDTSDKConfig.
+//        result(GDTSDKConfig.sdkVersion())
         result(true)
         break
+    case "getSDKVersion":
+        result("1.0.0")
     default:
         result(true)
         break

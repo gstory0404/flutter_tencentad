@@ -59,6 +59,9 @@ class _HomePageState extends State<HomePage> {
         onVerify: (transId) {
           print("激励广告奖励  $transId");
         },
+        onExpose: () {
+          print("激励广告曝光");
+        },
       ),
       flutterTencentadInteractionCallBack: FlutterTencentadInteractionCallBack(
         onShow: () {
@@ -72,6 +75,9 @@ class _HomePageState extends State<HomePage> {
         },
         onClose: () {
           print("插屏广告关闭");
+        },
+        onExpose: (){
+          print("插屏广告曝光");
         },
         onReady: () async {
           print("插屏广告预加载准备就绪");

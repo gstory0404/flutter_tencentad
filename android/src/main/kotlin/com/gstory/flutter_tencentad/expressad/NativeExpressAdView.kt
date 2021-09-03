@@ -2,12 +2,11 @@ package com.gstory.flutter_tencentad.expressad
 
 import android.app.Activity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.gstory.flutter_tencentad.FlutterTencentAdConfig
 import com.gstory.flutter_tencentad.LogUtil
-import com.gstory.flutter_tencentad.UIUtils
-import com.qq.e.ads.banner2.UnifiedBannerADListener
-import com.qq.e.ads.banner2.UnifiedBannerView
+import com.qq.e.ads.cfg.DownAPPConfirmPolicy
 import com.qq.e.ads.cfg.VideoOption
 import com.qq.e.ads.nativ.ADSize
 import com.qq.e.ads.nativ.NativeExpressAD
@@ -51,8 +50,8 @@ internal class NativeExpressAdView(
         viewWidth = params["viewWidth"] as Int
         viewHeight = params["viewHeight"] as Int
         mContainer = FrameLayout(activity)
-        mContainer?.layoutParams?.width = UIUtils.dip2px(activity, viewWidth.toFloat()).toInt()
-        mContainer?.layoutParams?.height = UIUtils.dip2px(activity, viewHeight.toFloat()).toInt()
+        mContainer?.layoutParams?.width = ViewGroup.LayoutParams.WRAP_CONTENT
+        mContainer?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
         channel = MethodChannel(messenger, FlutterTencentAdConfig.nativeExpressAdView + "_" + id)
         loadExpressAd()
     }
@@ -68,9 +67,10 @@ internal class NativeExpressAdView(
         }
         nativeExpressAD = NativeExpressAD(activity, adSize, codeId, this)
         nativeExpressAD?.setVideoOption(VideoOption.Builder()
-                .setAutoPlayPolicy(VideoOption.AutoPlayPolicy.WIFI)
+                .setAutoPlayPolicy(VideoOption.AutoPlayPolicy.ALWAYS)
                 .setAutoPlayMuted(true)
                 .build())
+        nativeExpressAD?.setDownAPPConfirmPolicy(DownAPPConfirmPolicy.Default)
         nativeExpressAD?.loadAD(1)
     }
 
@@ -78,7 +78,7 @@ internal class NativeExpressAdView(
         return mContainer!!
     }
 
-/**************平台模板广告加载、渲染、点击状态的回调。****************/
+    /**************平台模板广告加载、渲染、点击状态的回调。****************/
 
     //无广告填充
     override fun onNoAD(p0: AdError?) {
@@ -91,13 +91,19 @@ internal class NativeExpressAdView(
     // 但是想让广告曝光还需要调用 NativeExpressADView 的 render 方法
     override fun onADLoaded(p0: MutableList<NativeExpressADView>?) {
         LogUtil.e("广告数据加载成功")
+        // 释放前一个 NativeExpressADView 的资源
+        if (nativeExpressAdView != null) {
+            nativeExpressAdView?.destroy()
+        }
         nativeExpressAdView = p0!![0]
         if (nativeExpressAdView?.boundData?.adPatternType == AdPatternType.NATIVE_VIDEO) {
             nativeExpressAdView?.setMediaListener(this)
         }
-        mContainer?.removeAllViews()
-        mContainer?.addView(nativeExpressAdView)
         nativeExpressAdView?.render()
+        if(mContainer?.childCount != 0){
+            mContainer?.removeAllViews()
+        }
+        mContainer?.addView(nativeExpressAdView,0)
     }
 
     //NativeExpressADView 渲染广告失败
@@ -105,7 +111,7 @@ internal class NativeExpressAdView(
         LogUtil.e("渲染广告失败")
         var map: MutableMap<String, Any?> = mutableMapOf("code" to 0, "message" to "渲染广告失败")
         channel?.invokeMethod("onFail", map)
-        p0?.destroy()
+        nativeExpressAdView?.destroy()
     }
 
     //NativeExpressADView 渲染广告成功
@@ -148,7 +154,7 @@ internal class NativeExpressAdView(
         LogUtil.e("广告关闭遮盖时调用")
     }
 
-/*****************平台模板视频广告播放状态回调接口，专用于带有视频素材的广告对象**************/
+    /*****************平台模板视频广告播放状态回调接口，专用于带有视频素材的广告对象**************/
 
     //视频播放 View 初始化完成
     override fun onVideoInit(p0: NativeExpressADView?) {
@@ -163,11 +169,13 @@ internal class NativeExpressAdView(
     //视频下载完成
     override fun onVideoCached(p0: NativeExpressADView?) {
         LogUtil.e("视频下载完成")
+//        nativeExpressAdView?.
     }
 
     //视频播放器初始化完成，准备好可以播放了，videoDuration 是视频素材的时间长度，单位为 ms
     override fun onVideoReady(p0: NativeExpressADView?, p1: Long) {
         LogUtil.e("视频播放器初始化完成")
+//        nativeExpressAdView?
     }
 
     //视频开始播放
@@ -203,9 +211,7 @@ internal class NativeExpressAdView(
 
     override fun dispose() {
         nativeExpressAdView?.destroy()
-        nativeExpressAdView = null
         mContainer?.removeAllViews()
-        mContainer = null
     }
 
 }

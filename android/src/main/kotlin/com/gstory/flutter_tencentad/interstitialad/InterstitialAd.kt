@@ -32,6 +32,7 @@ object InterstitialAd {
             codeId,
             interstitialADListener
         )
+//        unifiedInterstitialAD?.setMediaListener(this)
         if(isFullScreen!!){
             unifiedInterstitialAD?.loadFullScreenAD()
         }else{
@@ -46,6 +47,16 @@ object InterstitialAd {
             LogUtil.e("$TAG  插屏全屏视频广告显示失败，无广告")
             return
         }
+        //	广告是否有效，无效广告将无法展示
+        if(!unifiedInterstitialAD?.isValid!!){
+            var map: MutableMap<String, Any?> = mutableMapOf("adType" to "interactAd","onAdMethod" to "onFail","code" to 1 , "message" to "插屏全屏视频视频广告显示失败，无效广告")
+            FlutterTencentAdEventPlugin.sendContent(map)
+            LogUtil.e("$TAG  插屏全屏视频广告显示失败，无效广告")
+            unifiedInterstitialAD?.close()
+            unifiedInterstitialAD?.destroy()
+            unifiedInterstitialAD = null
+            return
+        }
         if(isFullScreen!!){
             unifiedInterstitialAD?.showFullScreenAD(context)
         }else{
@@ -57,8 +68,6 @@ object InterstitialAd {
         //插屏全屏视频广告加载完毕，此回调后才可以调用 show 方法
         override fun onADReceive() {
             LogUtil.e("$TAG  插屏全屏视频广告加载完毕")
-            var map: MutableMap<String, Any?> = mutableMapOf("adType" to "interactAd","onAdMethod" to "onReady")
-            FlutterTencentAdEventPlugin.sendContent(map)
         }
 
         //插屏全屏视频视频广告，视频素材下载完成
@@ -111,6 +120,8 @@ object InterstitialAd {
         //	插屏全屏视频视频广告，渲染成功
         override fun onRenderSuccess() {
             LogUtil.e("$TAG  插屏全屏视频视频广告，渲染成功")
+            var map: MutableMap<String, Any?> = mutableMapOf("adType" to "interactAd","onAdMethod" to "onReady")
+            FlutterTencentAdEventPlugin.sendContent(map)
         }
 
         //插屏全屏视频视频广告，渲染失败

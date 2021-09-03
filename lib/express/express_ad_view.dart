@@ -38,9 +38,6 @@ class _ExpressAdViewState extends State<ExpressAdView> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _isShowAd = true;
-    });
   }
 
   @override
@@ -94,6 +91,11 @@ class _ExpressAdViewState extends State<ExpressAdView> {
     switch (call.method) {
       //显示广告
       case FlutterTencentadMethod.onShow:
+        if (mounted) {
+          setState(() {
+            _isShowAd = true;
+          });
+        }
         widget.callBack?.onShow!();
         break;
       //广告加载失败

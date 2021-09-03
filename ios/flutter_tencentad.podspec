@@ -9,17 +9,18 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
 A new Flutter project.
                        DESC
-  s.homepage         = 'http://example.com'
+  s.homepage         = 'https://github.com/gstory0404/flutter_tencentad'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'gstory' => 'gstory0404@gmail.com' }
   s.source           = { :path => '.' }
+  s.public_header_files = 'Classes/**/*.h'
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.platform = :ios, '9.0'
-  #s.dependency 'GDTMobSDK','~> 4.13.0'
-  #s.static_framework = true
+  s.dependency 'GDTMobSDK','~> 4.13.02'
+  s.static_framework = true
 
   # Flutter.framework does not contain a i386 slice.
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
+  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386'}
   s.swift_version = '5.0'
 end

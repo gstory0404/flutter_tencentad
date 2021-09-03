@@ -14,6 +14,15 @@ import java.lang.reflect.InvocationTargetException
  * @CreateDate: 2021/8/7 18:03
  **/
 object UIUtils {
+
+    fun getScreenWidth(context: Context): Int {
+        return context.resources.displayMetrics.widthPixels
+    }
+
+    fun getScreenHeight(context: Context): Int {
+        return getRealHeight(context)
+    }
+
     fun getScreenWidthDp(context: Context): Float {
         val scale = context.resources.displayMetrics.density.toFloat()
         val width = context.resources.displayMetrics.widthPixels.toFloat()
@@ -22,7 +31,7 @@ object UIUtils {
     }
 
     //全面屏、刘海屏适配
-    fun getHeight(activity: Activity): Float {
+    fun getHeightDp(activity: Activity): Float {
         hideBottomUIMenu(activity)
         val height: Float
         val realHeight = getRealHeight(activity)

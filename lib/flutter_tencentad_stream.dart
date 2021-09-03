@@ -53,6 +53,9 @@ class FlutterTencentAdStream {
             case FlutterTencentadMethod.onUnReady:
               flutterTencentadRewardCallBack?.onUnReady!();
               break;
+            case FlutterTencentadMethod.onExpose:
+              flutterTencentadRewardCallBack?.onExpose!();
+              break;
           }
           break;
           ///插屏广告
@@ -69,6 +72,9 @@ class FlutterTencentAdStream {
               break;
             case FlutterTencentadMethod.onClick:
               flutterTencentadInteractionCallBack?.onClick!();
+              break;
+            case FlutterTencentadMethod.onExpose:
+              flutterTencentadInteractionCallBack?.onExpose!();
               break;
             case FlutterTencentadMethod.onReady:
               flutterTencentadInteractionCallBack?.onReady!();

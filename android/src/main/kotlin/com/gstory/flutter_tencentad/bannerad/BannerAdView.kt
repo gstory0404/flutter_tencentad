@@ -2,10 +2,10 @@ package com.gstory.flutter_tencentad.bannerad
 
 import android.app.Activity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.gstory.flutter_tencentad.FlutterTencentAdConfig
 import com.gstory.flutter_tencentad.LogUtil
-import com.gstory.flutter_tencentad.UIUtils
 import com.qq.e.ads.banner2.UnifiedBannerADListener
 import com.qq.e.ads.banner2.UnifiedBannerView
 import com.qq.e.comm.util.AdError
@@ -48,15 +48,14 @@ internal class BannerAdView(
         viewWidth = width.toFloat()
         viewHeight = height.toFloat()
         mContainer = FrameLayout(activity)
-        mContainer?.layoutParams?.width = UIUtils.dip2px(activity, viewWidth).toInt()
-        mContainer?.layoutParams?.height = UIUtils.dip2px(activity, viewHeight).toInt()
+        mContainer?.layoutParams?.width = ViewGroup.LayoutParams.WRAP_CONTENT
+        mContainer?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
         channel = MethodChannel(messenger, FlutterTencentAdConfig.bannerAdView + "_" + id)
         loadBannerAd()
     }
 
     private fun loadBannerAd() {
         unifiedBannerView = UnifiedBannerView(activity, codeId, this)
-        mContainer?.addView(unifiedBannerView)
         unifiedBannerView?.loadAD()
     }
 
@@ -74,6 +73,7 @@ internal class BannerAdView(
 
     //广告加载成功回调，表示广告相关的资源已经加载完毕，Ready To Show
     override fun onADReceive() {
+        mContainer?.addView(unifiedBannerView)
         LogUtil.e("$TAG  Banner广告加载成功回调")
         channel?.invokeMethod("onShow", "")
     }
