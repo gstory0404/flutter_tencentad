@@ -46,7 +46,11 @@ SDK(4.380.1250)已配置插件中无需额外配置，只需要在android目录�
 
 #### 3、IOS
 
-SDK(4.12.91)已配置插件中，其余根据文档配置
+SDK(4.12.91)已配置插件中，其余根据文档配置。因为使用PlatformView，在Info.plist加入
+```
+ <key>io.flutter.embedded_views_preview</key>
+    <true/>
+```
 
 ## 使用
 
