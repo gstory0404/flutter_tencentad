@@ -1,11 +1,11 @@
-# 腾讯优量汇广告 Flutter版本
+# 腾讯优量汇(广点通)广告 Flutter版本
 
 <p>
-<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v0.0.6-success></a>
+<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.0.0-success></a>
 </p>
 
 ## 简介
-flutter_tencentad是一款集成了腾讯优量汇广告Android和iOSSDK的Flutter插件,方便直接调用优量汇广告SDK方法快速开发
+flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS SDK的Flutter插件,方便直接调用优量汇(广点通)广告SDK方法快速开发
 
 由于优量汇需要上架应用才能使用广告，所以demo不能直接运行，[体验demo](https://www.pgyer.com/j7YB)
 
@@ -28,7 +28,7 @@ flutter_tencentad是一款集成了腾讯优量汇广告Android和iOSSDK的Flutt
 ## 集成步骤
 #### 1、pubspec.yaml
 ```Dart
-flutter_tencentad: ^0.0.6
+flutter_tencentad: ^1.0.0
 ```
 引入
 ```Dart
@@ -46,7 +46,7 @@ SDK(4.380.1250)已配置插件中无需额外配置，只需要在android目录�
 
 #### 3、IOS
 
-开发中
+SDK(4.12.91)已配置插件中，其余根据文档配置
 
 ## 使用
 
@@ -159,6 +159,12 @@ FlutterTencentad.expressAdView(
 await FlutterTencentad.loadRewardVideoAd(
     //广告id
     codeId: "5042816813706194",
+    //用户id
+    userID: "123",
+    //奖励
+    rewardName: "100金币",
+    //奖励数
+    rewardAmount: 100
 );
 ```
 显示激励视频广告
@@ -190,9 +196,12 @@ await FlutterTencentad.loadRewardVideoAd(
         onUnReady: () {
           print("激励广告预加载未准备就绪");
         },
-        onVerify: (transId) {
-          print("激励广告奖励  $transId");
+         onVerify: (transId,rewardName,rewardAmount) {
+          print("激励广告奖励  $transId   $rewardName   $rewardAmount");
         },
+        onFinish: (){
+          print("激励广告完成");
+        }
       ),
     );
 ```

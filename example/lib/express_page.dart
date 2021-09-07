@@ -29,7 +29,7 @@ class _ExpressPageState extends State<ExpressPage> {
             Text("动态信息流/横幅/视频贴片广告"),
             FlutterTencentad.expressAdView(
               //广告id
-              codeId: "4072918853903023",
+              codeId: "7082132016439065",
               //广告宽 单位dp
               viewWidth: 400,
               //广告高  单位dp
@@ -56,14 +56,14 @@ class _ExpressPageState extends State<ExpressPage> {
             //横幅-平台模板2.0
             Text("横幅-平台模板2.0"),
             FlutterTencentad.expressAdView(
-              codeId: "4052216802299999",
+              codeId: "4022830016236204",
               viewWidth: 228,
               viewHeight: 150,
             ),
             //视频贴片
             Text("视频贴片"),
             FlutterTencentad.expressAdView(
-              codeId: "3062711883122271",
+              codeId: "4032136066438475",
               viewWidth: 400,
               viewHeight: 300,
             ),

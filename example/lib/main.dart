@@ -56,12 +56,15 @@ class _HomePageState extends State<HomePage> {
         onUnReady: () {
           print("激励广告预加载未准备就绪");
         },
-        onVerify: (transId) {
-          print("激励广告奖励  $transId");
+        onVerify: (transId,rewardName,rewardAmount) {
+          print("激励广告奖励  $transId   $rewardName   $rewardAmount");
         },
         onExpose: () {
           print("激励广告曝光");
         },
+        onFinish: (){
+          print("激励广告完成");
+        }
       ),
       flutterTencentadInteractionCallBack: FlutterTencentadInteractionCallBack(
         onShow: () {
@@ -76,7 +79,7 @@ class _HomePageState extends State<HomePage> {
         onClose: () {
           print("插屏广告关闭");
         },
-        onExpose: (){
+        onExpose: () {
           print("插屏广告曝光");
         },
         onReady: () async {
@@ -93,7 +96,7 @@ class _HomePageState extends State<HomePage> {
   ///初始化
   Future<void> _register() async {
     _isRegister = await FlutterTencentad.register(
-      appId: "1200009850", //appid
+      appId: "1200082163", //appid
       debug: true, //是否显示日志log
     );
     _sdkVersion = await FlutterTencentad.getSDKVersion();
@@ -119,7 +122,13 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 await FlutterTencentad.loadRewardVideoAd(
                   //广告id
-                  codeId: "5042816813706194",
+                  codeId: "8062535056034159",
+                  //用户id
+                  userID: "123",
+                  //奖励
+                  rewardName: "100金币",
+                  //奖励数
+                  rewardAmount: 100
                 );
               },
             ),
@@ -131,7 +140,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 await FlutterTencentad.loadUnifiedInterstitialAD(
                   //广告id
-                  codeId: "9062813863614416",
+                  codeId: "1052938046031440",
                   //是否全屏
                   isFullScreen: false,
                 );
@@ -144,7 +153,8 @@ class _HomePageState extends State<HomePage> {
               child: new Text('插屏广告（全屏）'),
               onPressed: () async {
                 await FlutterTencentad.loadUnifiedInterstitialAD(
-                    codeId: "5022012853615967", isFullScreen: true);
+                    codeId: "1082430066438422",
+                    isFullScreen: true);
               },
             ),
             //Banner广告（平台模板）

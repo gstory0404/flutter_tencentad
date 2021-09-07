@@ -74,11 +74,11 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             RewardVideoAd.showAd()
             result.success(true)
             //预加载插屏广告
-        } else if (call.method == "loadUnifiedInterstitialAD") {
+        } else if (call.method == "loadInterstitialAD") {
             InterstitialAd.init(mActivity!!,call.arguments as Map<*, *>)
             result.success(true)
             //展示插屏广告
-        } else if (call.method == "showUnifiedInterstitialAD") {
+        } else if (call.method == "showInterstitialAD") {
             InterstitialAd.showAd()
             result.success(true)
         } else {

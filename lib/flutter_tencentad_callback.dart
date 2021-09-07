@@ -44,7 +44,7 @@ typedef TOnReady = void Function();
 typedef TOnUnReady = void Function();
 
 ///广告奖励验证
-typedef TOnVerify = void Function(String transId);
+typedef TOnVerify = void Function(String transId,String rewardName,int rewardAmount);
 
 ///倒计时
 typedef TOnADTick = void Function(int time);

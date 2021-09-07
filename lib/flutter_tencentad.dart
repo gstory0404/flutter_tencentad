@@ -13,7 +13,6 @@ import 'express/express_ad_view.dart';
 
 part 'flutter_tencentad_callback.dart';
 
-
 class FlutterTencentad {
   static const MethodChannel _channel =
       const MethodChannel('flutter_tencentad');
@@ -45,8 +44,16 @@ class FlutterTencentad {
   ///
   static Future<bool> loadRewardVideoAd({
     required String codeId,
+    required String rewardName,
+    required int rewardAmount,
+    required String userID,
   }) async {
-    return await _channel.invokeMethod("loadRewardVideoAd", {"codeId": codeId});
+    return await _channel.invokeMethod("loadRewardVideoAd", {
+      "codeId": codeId,
+      "rewardName": rewardName,
+      "rewardAmount": rewardAmount,
+      "userID": userID
+    });
   }
 
   ///
@@ -65,7 +72,7 @@ class FlutterTencentad {
   ///
   static Future<bool> loadUnifiedInterstitialAD(
       {required String codeId, required bool isFullScreen}) async {
-    return await _channel.invokeMethod("loadUnifiedInterstitialAD", {
+    return await _channel.invokeMethod("loadInterstitialAD", {
       "codeId": codeId,
       "isFullScreen": isFullScreen,
     });
@@ -75,7 +82,7 @@ class FlutterTencentad {
   /// # 显示新模板渲染插屏
   ///
   static Future<bool> showUnifiedInterstitialAD() async {
-    return await _channel.invokeMethod("showUnifiedInterstitialAD", {});
+    return await _channel.invokeMethod("showInterstitialAD", {});
   }
 
   ///

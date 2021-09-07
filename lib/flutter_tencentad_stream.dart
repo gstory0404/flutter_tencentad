@@ -42,7 +42,7 @@ class FlutterTencentAdStream {
               flutterTencentadRewardCallBack?.onClick!();
               break;
             case FlutterTencentadMethod.onVerify:
-              flutterTencentadRewardCallBack?.onVerify!(data["transId"]);
+              flutterTencentadRewardCallBack?.onVerify!(data["transId"],data["rewardName"],data["rewardAmount"]);
               break;
             case FlutterTencentadMethod.onFinish:
               flutterTencentadRewardCallBack?.onFinish!();

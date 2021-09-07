@@ -1,23 +1,28 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Describe initial release.
 
 ## 0.0.2
 
-* TODO: 1、完善android 激励广告、开屏广告、banner广告、动态信息流/横幅/视频贴片广告
+* 1、完善android 激励广告、开屏广告、banner广告、动态信息流/横幅/视频贴片广告
 
 ## 0.0.3
 
-* TODO: 1、fix bug
+* 1、fix bug
 
 ## 0.0.4
 
-* TODO: 1、优化动态信息流/横幅/视频贴片广告加载方式
+* 1、优化动态信息流/横幅/视频贴片广告加载方式
 
 ## 0.0.5
 
-* TODO: 1、优化API
+* 1、优化API
 
 ## 0.0.6
 
-* TODO: 1、优化API
+* 1、优化API
+
+## 1.0.0
+
+* 1、增加ios端广告
+* 2、优化api

@@ -17,7 +17,9 @@ A new Flutter project.
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.platform = :ios, '9.0'
-  s.dependency 'GDTMobSDK','~> 4.13.02'
+ # s.dependency 'GDTMobSDK','~> 4.13.02'
+  s.vendored_frameworks = 'gdtsdk/MySDK.framework'
+  
   s.static_framework = true
 
   # Flutter.framework does not contain a i386 slice.

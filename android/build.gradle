@@ -18,6 +18,9 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
+        flatDir {
+            dirs project(':flutter_tencentad').file('libs')
+        }
     }
 }
 
@@ -33,9 +36,20 @@ android {
     defaultConfig {
         minSdkVersion 16
     }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.qq.e.union:union:4.400.1270'
+//    implementation 'com.qq.e.union:union:4.400.1270'
+    implementation(name: 'GDTSDK.unionNormal.4.400.1270', ext: 'aar')
 }
