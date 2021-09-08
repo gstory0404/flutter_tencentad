@@ -224,8 +224,10 @@ await FlutterTencentad.loadRewardVideoAd(
 预加载插屏广告
 ```dart
 await FlutterTencentad.loadUnifiedInterstitialAD(
-    //广告id
-    codeId: "9062813863614416",
+    //android广告id
+    androidId: "9062813863614416",
+    //ios广告id
+    iosId: "1052938046031440",
     //是否全屏
     isFullScreen: false,
 );
