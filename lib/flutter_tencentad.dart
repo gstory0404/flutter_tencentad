@@ -42,17 +42,27 @@ class FlutterTencentad {
   ///
   /// [codeId] 广告ID
   ///
+  /// [rewardName] 奖励名称
+  ///
+  /// [rewardAmount] 奖励金额
+  ///
+  /// [userID] 用户id
+  ///
+  /// [customData] 扩展参数，服务器回调使用
+  ///
   static Future<bool> loadRewardVideoAd({
     required String codeId,
     required String rewardName,
     required int rewardAmount,
     required String userID,
+    String? customData,
   }) async {
     return await _channel.invokeMethod("loadRewardVideoAd", {
       "codeId": codeId,
       "rewardName": rewardName,
       "rewardAmount": rewardAmount,
-      "userID": userID
+      "userID": userID,
+      "customData":customData ?? "",
     });
   }
 

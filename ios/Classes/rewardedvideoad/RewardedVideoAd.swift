@@ -18,6 +18,7 @@ public class RewardedVideoAd : NSObject,GDTRewardedVideoAdDelegate{
     var userID : String?
     var rewardName : String = ""
     var rewardAmount : Int = 0
+    var customData : String = ""
 
     public func loadRewardedVideoAd(params : NSDictionary) {
         LogUtil.logInstance.printLog(message: params)
@@ -25,13 +26,13 @@ public class RewardedVideoAd : NSObject,GDTRewardedVideoAdDelegate{
         self.userID = params.value(forKey: "userID") as? String
         self.rewardName = params.value(forKey: "rewardName") as? String ?? ""
         self.rewardAmount = params.value(forKey: "rewardAmount") as? Int ?? 0
+        self.customData = params.value(forKey: "customData") as? String ?? ""
         self.rewardVideoAd = GDTRewardVideoAd.init(placementId: mCodeId!)
         self.rewardVideoAd.delegate = self
         self.rewardVideoAd.videoMuted = false
         let a = GDTServerSideVerificationOptions.init();
         a.userIdentifier = self.userID
-        let customReward : Dictionary<String, Any> = ["rewardName" : self.rewardName,"rewardAmount" : self.rewardAmount]
-        a.customRewardString = customReward.description
+        a.customRewardString = customData
         self.rewardVideoAd.load()
     }
 

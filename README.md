@@ -1,7 +1,7 @@
 # 腾讯优量汇(广点通)广告 Flutter版本
 
 <p>
-<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.0.0-success></a>
+<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.0.1-success></a>
 </p>
 
 ## 简介
@@ -28,7 +28,7 @@ flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS
 ## 集成步骤
 #### 1、pubspec.yaml
 ```Dart
-flutter_tencentad: ^1.0.0
+flutter_tencentad: ^1.0.1
 ```
 引入
 ```Dart
@@ -162,13 +162,15 @@ FlutterTencentad.expressAdView(
 ```Dart
 await FlutterTencentad.loadRewardVideoAd(
     //广告id
-    codeId: "5042816813706194",
+    codeId: "8062535056034159",
     //用户id
     userID: "123",
     //奖励
     rewardName: "100金币",
     //奖励数
-    rewardAmount: 100
+    rewardAmount: 100,
+    //扩展参数 服务器回调使用
+    customData: ""
 );
 ```
 显示激励视频广告

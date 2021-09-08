@@ -21,6 +21,7 @@ object RewardVideoAd {
     private var userID: String = ""
     private var rewardName: String = ""
     private var rewardAmount: Int = 0
+    private var customData: String = ""
 
     fun init(context: Context, params: Map<*, *>) {
         this.context = context
@@ -28,13 +29,13 @@ object RewardVideoAd {
         this.userID = params["userID"] as String
         this.rewardName = params["rewardName"] as String
         this.rewardAmount = params["rewardAmount"] as Int
+        this.customData = params["customData"] as String
         loadRewardVideoAd()
     }
 
     private fun loadRewardVideoAd() {
         rewardVideoAD = RewardVideoAD(context, codeId, rewardVideoADListener) // 有声播放
-        var map: MutableMap<String, Any?> = mutableMapOf("rewardName" to this.rewardName, "rewardAmount" to this.rewardAmount)
-        rewardVideoAD?.setServerSideVerificationOptions(ServerSideVerificationOptions.Builder().setUserId(this.userID).setCustomData(map.toString()).build())
+        rewardVideoAD?.setServerSideVerificationOptions(ServerSideVerificationOptions.Builder().setUserId(this.userID).setCustomData(customData).build())
         rewardVideoAD?.loadAD()
     }
 

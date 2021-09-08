@@ -111,7 +111,7 @@ public class NativeExpressAdView : NSObject,FlutterPlatformView,GDTNativeExpress
         LogUtil.logInstance.printLog(message: "信息流拉取原生模板广告失败")
         let map : NSDictionary = ["onAdMethod":"onFail",
                                   "code":-1,
-                                          "message":error!]
+                                  "message":error.debugDescription]
         self.channel?.invokeMethod("onFail", arguments: map)
     }
     

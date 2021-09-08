@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _register();
+    // _register();
     _adViewStream = FlutterTencentAdStream.initAdStream(
       //激励广告
       flutterTencentadRewardCallBack: FlutterTencentadRewardCallBack(
@@ -128,7 +128,9 @@ class _HomePageState extends State<HomePage> {
                   //奖励
                   rewardName: "100金币",
                   //奖励数
-                  rewardAmount: 100
+                  rewardAmount: 100,
+                  //扩展参数 服务器回调使用
+                  customData: ""
                 );
               },
             ),

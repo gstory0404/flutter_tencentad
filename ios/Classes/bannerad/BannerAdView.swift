@@ -111,11 +111,11 @@ public class BannerAdView : NSObject,FlutterPlatformView,GDTUnifiedBannerViewDel
     
     public func unifiedBannerViewFailed(toLoad unifiedBannerView: GDTUnifiedBannerView, error: Error) {
         LogUtil.logInstance.printLog(message: "banner加载失败")
-        LogUtil.logInstance.printLog(message: error)
+        LogUtil.logInstance.printLog(message: error.localizedDescription)
        
         let map : NSDictionary = ["onAdMethod":"onFail",
                                   "code":-1,
-                                          "message":error]
+                                          "message":error.localizedDescription]
         self.channel?.invokeMethod("onFail", arguments: map)
     }
     

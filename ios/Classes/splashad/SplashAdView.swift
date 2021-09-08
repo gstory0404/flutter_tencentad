@@ -84,7 +84,7 @@ public class SplashAdView : NSObject,FlutterPlatformView,GDTSplashAdDelegate{
         LogUtil.logInstance.printLog(message: "开屏广告展示失败")
         LogUtil.logInstance.printLog(message: error)
         let map : NSDictionary = ["code":-1,
-                                          "message":error!]
+                                  "message":error.debugDescription]
         self.channel?.invokeMethod("onFail", arguments: map)
     }
     
