@@ -42,7 +42,7 @@ internal class BannerAdView(
 
 
     init {
-        codeId = params["codeId"] as String
+        codeId = params["androidId"] as String
         var width = params["viewWidth"] as Double
         var height = params["viewHeight"] as Double
         viewWidth = width.toFloat()
@@ -73,6 +73,7 @@ internal class BannerAdView(
 
     //广告加载成功回调，表示广告相关的资源已经加载完毕，Ready To Show
     override fun onADReceive() {
+        mContainer?.removeAllViews()
         mContainer?.addView(unifiedBannerView)
         LogUtil.e("$TAG  Banner广告加载成功回调")
         channel?.invokeMethod("onShow", "")

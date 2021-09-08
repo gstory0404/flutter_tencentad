@@ -20,7 +20,7 @@ public class InterstitialAd : NSObject,GDTUnifiedInterstitialAdDelegate{
     //预加载
     public func loadInterstitialAd(params : NSDictionary) {
         LogUtil.logInstance.printLog(message: params)
-        mCodeId = params.value(forKey: "codeId") as? String
+        mCodeId = params.value(forKey: "iosId") as? String
         isFullScreen = params.value(forKey: "isFullScreen") as? Bool
         self.interstitialAd = GDTUnifiedInterstitialAd.init(placementId: self.mCodeId!)
         self.interstitialAd?.delegate = self

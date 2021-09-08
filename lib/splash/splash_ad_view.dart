@@ -10,13 +10,18 @@ import 'package:flutter_tencentad/flutter_tencentad.dart';
 /// CreateDate: 2021/8/7 17:33
 ///
 class SplashAdView extends StatefulWidget {
-  final String codeId;
+  final String androidId;
+  final String iosId;
   final int fetchDelay;
   final FlutterTencentadSplashCallBack? callBack;
 
-  const SplashAdView(
-      {Key? key, required this.codeId, required this.fetchDelay, this.callBack})
-      : super(key: key);
+  const SplashAdView({
+    Key? key,
+    required this.androidId,
+    required this.iosId,
+    required this.fetchDelay,
+    this.callBack,
+  }) : super(key: key);
 
   @override
   _SplashAdViewState createState() => _SplashAdViewState();
@@ -48,7 +53,7 @@ class _SplashAdViewState extends State<SplashAdView> {
         child: AndroidView(
           viewType: _viewType,
           creationParams: {
-            "codeId": widget.codeId,
+            "androidId": widget.androidId,
             "fetchDelay": widget.fetchDelay,
           },
           onPlatformViewCreated: _registerChannel,
@@ -62,7 +67,7 @@ class _SplashAdViewState extends State<SplashAdView> {
         child: UiKitView(
           viewType: _viewType,
           creationParams: {
-            "codeId": widget.codeId,
+            "iosId": widget.iosId,
             "fetchDelay": widget.fetchDelay,
           },
           onPlatformViewCreated: _registerChannel,

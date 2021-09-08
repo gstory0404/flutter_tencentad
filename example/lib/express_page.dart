@@ -28,42 +28,49 @@ class _ExpressPageState extends State<ExpressPage> {
             //动态信息流-原生-平台模板2.0
             Text("动态信息流/横幅/视频贴片广告"),
             FlutterTencentad.expressAdView(
-              //广告id
-              codeId: "7082132016439065",
-              //广告宽 单位dp
-              viewWidth: 400,
-              //广告高  单位dp
-              viewHeight: 300,
-              //回调事件
-              callBack: FlutterTencentadExpressCallBack(
-                onShow: () {
-                  print("动态信息流广告显示");
-                },
-                onFail: (code, message) {
-                  print("动态信息流广告错误 $code $message");
-                },
-                onClose: () {
-                  print("动态信息流广告关闭");
-                },
-                onExpose: () {
-                  print("动态信息流广告曝光");
-                },
-                onClick: () {
-                  print("动态信息流广告点击");
-                },
-              )
-            ),
+                //android广告id
+                androidId: "4072918853903023",
+                //ios广告id
+                iosId: "7082132016439065",
+                //广告宽 单位dp
+                viewWidth: 400,
+                //广告高  单位dp
+                viewHeight: 300,
+                //回调事件
+                callBack: FlutterTencentadExpressCallBack(
+                  onShow: () {
+                    print("动态信息流广告显示");
+                  },
+                  onFail: (code, message) {
+                    print("动态信息流广告错误 $code $message");
+                  },
+                  onClose: () {
+                    print("动态信息流广告关闭");
+                  },
+                  onExpose: () {
+                    print("动态信息流广告曝光");
+                  },
+                  onClick: () {
+                    print("动态信息流广告点击");
+                  },
+                )),
             //横幅-平台模板2.0
             Text("横幅-平台模板2.0"),
             FlutterTencentad.expressAdView(
-              codeId: "4022830016236204",
+              //android广告id
+              androidId: "4052216802299999",
+              //ios广告id
+              iosId: "4022830016236204",
               viewWidth: 228,
               viewHeight: 150,
             ),
             //视频贴片
             Text("视频贴片"),
             FlutterTencentad.expressAdView(
-              codeId: "4032136066438475",
+              //android广告id
+              androidId: "3062711883122271",
+              //ios广告id
+              iosId: "4032136066438475",
               viewWidth: 400,
               viewHeight: 300,
             ),

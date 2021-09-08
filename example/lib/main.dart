@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // _register();
+    _register();
     _adViewStream = FlutterTencentAdStream.initAdStream(
       //激励广告
       flutterTencentadRewardCallBack: FlutterTencentadRewardCallBack(
@@ -96,7 +96,8 @@ class _HomePageState extends State<HomePage> {
   ///初始化
   Future<void> _register() async {
     _isRegister = await FlutterTencentad.register(
-      appId: "1200082163", //appid
+      androidId: "1200009850",//androidId
+      iosId: "1200082163", //iosId
       debug: true, //是否显示日志log
     );
     _sdkVersion = await FlutterTencentad.getSDKVersion();
@@ -121,8 +122,10 @@ class _HomePageState extends State<HomePage> {
               child: new Text('激励广告'),
               onPressed: () async {
                 await FlutterTencentad.loadRewardVideoAd(
-                  //广告id
-                  codeId: "8062535056034159",
+                  //android广告id
+                  androidId: "5042816813706194",
+                  //ios广告id
+                  iosId: "8062535056034159",
                   //用户id
                   userID: "123",
                   //奖励
@@ -141,8 +144,10 @@ class _HomePageState extends State<HomePage> {
               child: new Text('插屏广告（半屏）'),
               onPressed: () async {
                 await FlutterTencentad.loadUnifiedInterstitialAD(
-                  //广告id
-                  codeId: "1052938046031440",
+                  //android广告id
+                  androidId: "9062813863614416",
+                  //ios广告id
+                  iosId: "1052938046031440",
                   //是否全屏
                   isFullScreen: false,
                 );
@@ -155,7 +160,10 @@ class _HomePageState extends State<HomePage> {
               child: new Text('插屏广告（全屏）'),
               onPressed: () async {
                 await FlutterTencentad.loadUnifiedInterstitialAD(
-                    codeId: "1082430066438422",
+                    //android广告id
+                    androidId: "5022012853615967",
+                    //ios广告id
+                    iosId: "1082430066438422",
                     isFullScreen: true);
               },
             ),

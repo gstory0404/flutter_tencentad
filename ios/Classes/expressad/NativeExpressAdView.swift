@@ -25,7 +25,7 @@ public class NativeExpressAdView : NSObject,FlutterPlatformView,GDTNativeExpress
         self.frame = frame
         self.container = UIView(frame: frame)
         let dict = params as! NSDictionary
-        self.codeId = dict.value(forKey: "codeId") as? String
+        self.codeId = dict.value(forKey: "iosId") as? String
         self.viewWidth = Float(dict.value(forKey: "viewWidth") as! Double)
         self.viewHeight = Float(dict.value(forKey: "viewHeight") as! Double)
         super.init()

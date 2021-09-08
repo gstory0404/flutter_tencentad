@@ -20,14 +20,20 @@ class FlutterTencentad {
   ///
   /// # SDK注册初始化
   ///
-  /// [appId] appId 必填
+  /// [androidId] androidId 必填
+  ///
+  /// [iosId] iosId 必填
   ///
   static Future<bool> register({
-    required String appId,
+    required String androidId,
+    required String iosId,
     bool? debug,
   }) async {
-    return await _channel
-        .invokeMethod("register", {"appId": appId, "debug": debug});
+    return await _channel.invokeMethod("register", {
+      "androidId": androidId,
+      "iosId": iosId,
+      "debug": debug ?? false,
+    });
   }
 
   ///
@@ -40,7 +46,9 @@ class FlutterTencentad {
   ///
   /// # 激励视频广告预加载
   ///
-  /// [codeId] 广告ID
+  /// [androidId] android广告ID
+  ///
+  /// [iosId] ios广告ID
   ///
   /// [rewardName] 奖励名称
   ///
@@ -51,18 +59,20 @@ class FlutterTencentad {
   /// [customData] 扩展参数，服务器回调使用
   ///
   static Future<bool> loadRewardVideoAd({
-    required String codeId,
+    required String androidId,
+    required String iosId,
     required String rewardName,
     required int rewardAmount,
     required String userID,
     String? customData,
   }) async {
     return await _channel.invokeMethod("loadRewardVideoAd", {
-      "codeId": codeId,
+      "androidId": androidId,
+      "iosId": iosId,
       "rewardName": rewardName,
       "rewardAmount": rewardAmount,
       "userID": userID,
-      "customData":customData ?? "",
+      "customData": customData ?? "",
     });
   }
 
@@ -76,14 +86,20 @@ class FlutterTencentad {
   ///
   /// # 预加载插屏广告
   ///
-  /// [codeId] 广告ID
+  /// [androidId] android广告ID
+  ///
+  /// [iosId] ios广告ID
   ///
   ///  [isFullScreen] 是否全屏
   ///
-  static Future<bool> loadUnifiedInterstitialAD(
-      {required String codeId, required bool isFullScreen}) async {
+  static Future<bool> loadUnifiedInterstitialAD({
+    required String androidId,
+    required String iosId,
+    required bool isFullScreen,
+  }) async {
     return await _channel.invokeMethod("loadInterstitialAD", {
-      "codeId": codeId,
+      "androidId": androidId,
+      "iosId": iosId,
       "isFullScreen": isFullScreen,
     });
   }
@@ -98,7 +114,9 @@ class FlutterTencentad {
   ///
   /// # banner广告
   ///
-  /// [codeId] banner广告id
+  /// [androidId] android广告ID
+  ///
+  /// [iosId] ios广告ID
   ///
   /// [viewWidth] 广告宽 单位dp
   ///
@@ -107,12 +125,14 @@ class FlutterTencentad {
   /// [FlutterTencentAdBannerCallBack]  广告回调
   ///
   static Widget bannerAdView(
-      {required String codeId,
+      { required String androidId,
+        required String iosId,
       required double viewWidth,
       required double viewHeight,
       FlutterTencentadBannerCallBack? callBack}) {
     return BannerAdView(
-      codeId: codeId,
+      androidId: androidId,
+      iosId: iosId,
       viewWidth: viewWidth,
       viewHeight: viewHeight,
       callBack: callBack,
@@ -122,7 +142,9 @@ class FlutterTencentad {
   ///
   /// # 开屏广告
   ///
-  /// [codeId] 开屏广告id
+  /// [androidId] android广告ID
+  ///
+  /// [iosId] ios广告ID
   ///
   /// [fetchDelay] 设置开屏广告从请求到展示所花的最大时长（并不是指广告曝光时长），
   /// 取值范围为[1500, 5000]ms。如果需要使用默认值，可以调用上一个构造方法，
@@ -131,11 +153,13 @@ class FlutterTencentad {
   /// [FlutterTencentAdSplashCallBack] 广告回调
   ///
   static Widget splashAdView(
-      {required String codeId,
+      {required String androidId,
+        required String iosId,
       required int fetchDelay,
       FlutterTencentadSplashCallBack? callBack}) {
     return SplashAdView(
-      codeId: codeId,
+      androidId: androidId,
+      iosId: iosId,
       fetchDelay: fetchDelay,
       callBack: callBack,
     );
@@ -144,7 +168,9 @@ class FlutterTencentad {
   ///
   /// # 动态信息流/横幅/视频贴片广告
   ///
-  /// [codeId] 广告id
+  /// [androidId] android广告ID
+  ///
+  /// [iosId] ios广告ID
   ///
   /// [viewWidth] 广告宽 单位dp
   ///
@@ -153,12 +179,14 @@ class FlutterTencentad {
   /// [FlutterTencentAdExpressCallBack] 回调事件
   ///
   static Widget expressAdView(
-      {required String codeId,
+      {required String androidId,
+        required String iosId,
       required int viewWidth,
       required int viewHeight,
       FlutterTencentadExpressCallBack? callBack}) {
     return ExpressAdView(
-      codeId: codeId,
+      androidId: androidId,
+      iosId: iosId,
       viewWidth: viewWidth,
       viewHeight: viewHeight,
       callBack: callBack,

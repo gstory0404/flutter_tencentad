@@ -10,14 +10,16 @@ import 'package:flutter_tencentad/flutter_tencentad.dart';
 /// CreateDate: 2021/8/7 17:33
 ///
 class BannerAdView extends StatefulWidget {
-  final String codeId;
+  final String androidId;
+  final String iosId;
   final double viewWidth;
   final double viewHeight;
   final FlutterTencentadBannerCallBack? callBack;
 
   const BannerAdView({
     Key? key,
-    required this.codeId,
+    required this.androidId,
+    required this.iosId,
     required this.viewWidth,
     required this.viewHeight,
     this.callBack,
@@ -53,7 +55,7 @@ class _BannerAdViewState extends State<BannerAdView> {
         child: AndroidView(
           viewType: _viewType,
           creationParams: {
-            "codeId": widget.codeId,
+            "androidId": widget.androidId,
             "viewWidth": widget.viewWidth,
             "viewHeight": widget.viewHeight,
           },
@@ -68,7 +70,7 @@ class _BannerAdViewState extends State<BannerAdView> {
         child: UiKitView(
           viewType: _viewType,
           creationParams: {
-            "codeId": widget.codeId,
+            "iosId": widget.iosId,
             "viewWidth": widget.viewWidth,
             "viewHeight": widget.viewHeight,
           },

@@ -25,7 +25,7 @@ object RewardVideoAd {
 
     fun init(context: Context, params: Map<*, *>) {
         this.context = context
-        this.codeId = params["codeId"] as String
+        this.codeId = params["androidId"] as String
         this.userID = params["userID"] as String
         this.rewardName = params["rewardName"] as String
         this.rewardAmount = params["rewardAmount"] as Int

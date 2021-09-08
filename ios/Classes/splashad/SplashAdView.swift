@@ -21,7 +21,7 @@ public class SplashAdView : NSObject,FlutterPlatformView,GDTSplashAdDelegate{
         self.frame = frame
         self.container = UIView(frame: frame)
         let dict = params as! NSDictionary
-        self.codeId = dict.value(forKey: "codeId") as? String
+        self.codeId = dict.value(forKey: "iosId") as? String
         self.fetchDelay = dict.value(forKey: "fetchDelay") as! Int
         super.init()
         self.channel = FlutterMethodChannel.init(name: FlutterTencentadConfig.view.splashAdView + "_" + String(id), binaryMessenger: binaryMessenger)

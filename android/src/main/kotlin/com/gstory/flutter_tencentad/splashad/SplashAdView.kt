@@ -27,14 +27,14 @@ internal class SplashAdView(
     private var mContainer: FrameLayout? = null
     private var channel: MethodChannel?
 
-    private var SplashAD: SplashAD? = null
+    private var splashAD: SplashAD? = null
 
     //广告所需参数
     private var codeId: String
     private var fetchDelay: Int = 0
 
     init {
-        codeId = params["codeId"] as String
+        codeId = params["androidId"] as String
         fetchDelay = params["fetchDelay"] as Int
         mContainer = FrameLayout(activity)
         mContainer?.layoutParams?.width = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -44,8 +44,9 @@ internal class SplashAdView(
     }
 
     private fun loadSplashAd() {
-        SplashAD = SplashAD(activity, codeId, this, fetchDelay)
-        SplashAD?.fetchAndShowIn(mContainer)
+        splashAD = SplashAD(activity, codeId, this, fetchDelay)
+        mContainer?.removeAllViews()
+        splashAD?.fetchAndShowIn(mContainer)
     }
 
 

@@ -1,7 +1,7 @@
 # 腾讯优量汇(广点通)广告 Flutter版本
 
 <p>
-<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.0.1-success></a>
+<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.0.2-success></a>
 </p>
 
 ## 简介
@@ -28,7 +28,7 @@ flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS
 ## 集成步骤
 #### 1、pubspec.yaml
 ```Dart
-flutter_tencentad: ^1.0.1
+flutter_tencentad: ^1.0.2
 ```
 引入
 ```Dart
@@ -57,8 +57,9 @@ SDK(4.12.91)已配置插件中，其余根据文档配置。因为使用Platform
 #### 1、SDK初始化
 ```Dart
 await FlutterTencentad.register(
-  appId: "1200009850", //appid
-  debug: true, //是否显示日志log
+    androidId: "1200009850",//androidId
+    iosId: "1200082163", //iosId
+    debug: true, //是否显示日志log
 );
 ```
 #### 2、获取SDK版本
@@ -69,8 +70,10 @@ await FlutterTencentad.getSDKVersion();
 #### 3、开屏广告
 ```Dart
 FlutterTencentad.splashAdView(
-    //广告id
-    codeId: "4052216802299999",
+    //android广告id
+    androidId: "4052216802299999",
+    //ios广告id
+    iosId: "8012030096434021",
     ////设置开屏广告从请求到展示所花的最大时长（并不是指广告曝光时长），取值范围为[1500, 5000]ms
     fetchDelay: 3000,
     //广告回调
@@ -100,8 +103,10 @@ FlutterTencentad.splashAdView(
 #### 4、banner广告
 ```Dart
 FlutterTencentad.bannerAdView(
-    //广告id
-    codeId: "8042711873318113",
+    //android广告id
+    androidId: "8042711873318113",
+    //ios广告id
+    iosId: "6062430096832369",
     //广告宽 单位dp
     viewWidth: 500,
     //广告高  单位dp   宽高比应该为6.4:1
@@ -130,8 +135,10 @@ FlutterTencentad.bannerAdView(
 #### 5、动态信息流/横幅/视频贴片广告
 ```
 FlutterTencentad.expressAdView(
-              //广告id
-              codeId: "4072918853903023",
+              //android广告id
+              androidId: "3062711883122271",
+              //ios广告id
+              iosId: "4032136066438475",
               //广告宽 单位dp
               viewWidth: 400,
               //广告高  单位dp
@@ -161,8 +168,10 @@ FlutterTencentad.expressAdView(
 预加载激励视频广告
 ```Dart
 await FlutterTencentad.loadRewardVideoAd(
-    //广告id
-    codeId: "8062535056034159",
+    //android广告id
+    androidId: "5042816813706194",
+    //ios广告id
+    iosId: "8062535056034159",
     //用户id
     userID: "123",
     //奖励

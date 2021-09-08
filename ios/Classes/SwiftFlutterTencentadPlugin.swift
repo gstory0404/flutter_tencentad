@@ -23,7 +23,7 @@ public class SwiftFlutterTencentadPlugin: NSObject, FlutterPlugin {
     case "register":
         let param = call.arguments as! NSDictionary
         LogUtil.logInstance.isShow(debug: param.value(forKey: "debug") as? Bool ?? false)
-        let appId = param.value(forKey: "appId") as? String
+        let appId = param.value(forKey: "iosId") as? String
         result(GDTSDKConfig.registerAppId(appId))
     case "getSDKVersion":
         result(GDTSDKConfig.sdkVersion())

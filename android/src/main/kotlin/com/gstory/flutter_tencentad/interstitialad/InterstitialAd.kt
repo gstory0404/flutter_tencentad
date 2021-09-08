@@ -21,7 +21,7 @@ object InterstitialAd {
 
     fun init(context: Activity, params: Map<*, *>) {
         this.context = context
-        this.codeId = params["codeId"] as String
+        this.codeId = params["androidId"] as String
         this.isFullScreen = params["isFullScreen"] as Boolean
         loadInterstitialAD()
     }

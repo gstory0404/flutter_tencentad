@@ -56,7 +56,7 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         //注册初始化
         if (call.method == "register") {
-            val appId = call.argument<String>("appId")
+            val appId = call.argument<String>("androidId")
             val debug = call.argument<Boolean>("debug")
             GDTADManager.getInstance().initWith(applicationContext, appId)
             LogUtil.setAppName("flutter_tencentad")

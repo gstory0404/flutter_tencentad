@@ -21,8 +21,10 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       body: Container(
         child: FlutterTencentad.splashAdView(
-          //广告id
-          codeId: "8012030096434021",
+          //android广告id
+          androidId: "4052216802299999",
+          //ios广告id
+          iosId: "8012030096434021",
           ////设置开屏广告从请求到展示所花的最大时长（并不是指广告曝光时长），取值范围为[1500, 5000]ms
           fetchDelay: 3000,
           //广告回调

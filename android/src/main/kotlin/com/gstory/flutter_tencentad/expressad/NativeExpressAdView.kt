@@ -46,7 +46,7 @@ internal class NativeExpressAdView(
 
 
     init {
-        codeId = params["codeId"] as String
+        codeId = params["androidId"] as String
         viewWidth = params["viewWidth"] as Int
         viewHeight = params["viewHeight"] as Int
         mContainer = FrameLayout(activity)
@@ -100,9 +100,7 @@ internal class NativeExpressAdView(
             nativeExpressAdView?.setMediaListener(this)
         }
         nativeExpressAdView?.render()
-        if(mContainer?.childCount != 0){
-            mContainer?.removeAllViews()
-        }
+        mContainer?.removeAllViews()
         mContainer?.addView(nativeExpressAdView,0)
     }
 
