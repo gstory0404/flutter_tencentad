@@ -18,7 +18,7 @@
 		</data>
 		<key>Headers/GDTExpressInterstitialAd.h</key>
 		<data>
-		IsFP1IrqVWVNV2xZEFkIGZRj7bE=
+		KAAXb+isRcj/CWmVjXd8c9hHFJU=
 		</data>
 		<key>Headers/GDTHybridAd.h</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>Headers/GDTLoadAdParams.h</key>
 		<data>
-		+D4QjPICpSeHM8WE7TKuHPAQl2A=
+		BgOh84WG9IgapVHC7HvY5kyvfys=
 		</data>
 		<key>Headers/GDTLogoView.h</key>
 		<data>
@@ -38,15 +38,27 @@
 		</data>
 		<key>Headers/GDTNativeExpressAd.h</key>
 		<data>
-		xqy1jhpLwuvW2kRqVQlyL154IgY=
+		k7p+aiBfGpnpel64Nq3HH5mwoNc=
+		</data>
+		<key>Headers/GDTNativeExpressAdNetworkAdapterProtocol.h</key>
+		<data>
+		uoETwDrlEh4yAYgR829oy1dDcsQ=
+		</data>
+		<key>Headers/GDTNativeExpressAdNetworkConnectorProtocol.h</key>
+		<data>
+		aiQRzhaLjgW9dvxTkxMJ4THWaBs=
 		</data>
 		<key>Headers/GDTNativeExpressAdView.h</key>
 		<data>
 		xNJ5g/UNkLcurt2Nw3Tr8nPuH3c=
 		</data>
+		<key>Headers/GDTNativeExpressAdViewAdapterProtocol.h</key>
+		<data>
+		sHkRlTtyBYkowbIZAEoj7wT5fSU=
+		</data>
 		<key>Headers/GDTNativeExpressProAdManager.h</key>
 		<data>
-		lgyyHcmxP8xlqNsQG1mWOgd3Ijg=
+		wNBoS9Hf8BdmBVnyM58e2gg91Ts=
 		</data>
 		<key>Headers/GDTNativeExpressProAdView.h</key>
 		<data>
@@ -54,15 +66,15 @@
 		</data>
 		<key>Headers/GDTNativeExpressRewardVideoAd.h</key>
 		<data>
-		DRAv5mkhMTVnsgQ5vtsTdg75qjQ=
+		2lkHYPBbIDRiBJ5101InsD0MbGY=
 		</data>
 		<key>Headers/GDTRewardVideoAd.h</key>
 		<data>
-		ubbLa9gBv2o5VKM15dJUW+mMa3k=
+		yXCK7rmHMtS8FT9uGzMMQiE0mXA=
 		</data>
 		<key>Headers/GDTRewardVideoAdNetworkAdapterProtocol.h</key>
 		<data>
-		qAoWmQajZKF83Cm3Ab6vfNxfXTA=
+		+oCEIwOOL7BYDrxMMewuXYtyJPY=
 		</data>
 		<key>Headers/GDTRewardVideoAdNetworkConnectorProtocol.h</key>
 		<data>
@@ -70,7 +82,7 @@
 		</data>
 		<key>Headers/GDTSDKConfig.h</key>
 		<data>
-		68L9VS2SAKdflxVNg82Vb9+boeE=
+		PD4yZfLm2XSFTty8ygv1jQTzPU0=
 		</data>
 		<key>Headers/GDTSDKDefines.h</key>
 		<data>
@@ -82,7 +94,7 @@
 		</data>
 		<key>Headers/GDTSplashAd.h</key>
 		<data>
-		RGcpb8Yivk1xiu2pXYz4/tit2kI=
+		QwFohnvO80tjUlP9DpoR+nIktk0=
 		</data>
 		<key>Headers/GDTSplashAdNetworkAdapterProtocol.h</key>
 		<data>
@@ -106,11 +118,11 @@
 		</data>
 		<key>Headers/GDTUnifiedBannerView.h</key>
 		<data>
-		hyY4AXftkFTiAmyUrGpD9p5SpVk=
+		VF0VAS9KzAAUh9dYBLgvTxN7IPQ=
 		</data>
 		<key>Headers/GDTUnifiedInterstitialAd.h</key>
 		<data>
-		ql4og9EBuXMl3F7lGI6ePAiBGog=
+		xP7kLDP4iG7M7uy4lbbhoEQrYIc=
 		</data>
 		<key>Headers/GDTUnifiedInterstitialAdNetworkAdapterProtocol.h</key>
 		<data>
@@ -122,15 +134,15 @@
 		</data>
 		<key>Headers/GDTUnifiedNativeAd.h</key>
 		<data>
-		Nn5M3K1y7Jy8yW8V1wmXBV5JayI=
+		6i9bj0ruBk7j1EocHIAx8WWEYsk=
 		</data>
 		<key>Headers/GDTUnifiedNativeAdDataObject.h</key>
 		<data>
-		HUJFho2uIhpBReyHGDbmqLL6V2Q=
+		8NkFsDl+hFaScD1aNPwsaeFWfEc=
 		</data>
 		<key>Headers/GDTUnifiedNativeAdNetworkAdapterProtocol.h</key>
 		<data>
-		5ZzwbnBkfGiVlhgUmePaoz9tLdw=
+		1ai6Fd6+VcCxv8CWcZTONpjKexo=
 		</data>
 		<key>Headers/GDTUnifiedNativeAdNetworkConnectorProtocol.h</key>
 		<data>
@@ -150,7 +162,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		NpiGJECaXhUlnP/bgS0uYHZd9mw=
+		+apDAoYTL+3ie8sHKWUtK84KvMU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -196,11 +208,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			IsFP1IrqVWVNV2xZEFkIGZRj7bE=
+			KAAXb+isRcj/CWmVjXd8c9hHFJU=
 			</data>
 			<key>hash2</key>
 			<data>
-			ffLJaNSXFogIGRblqwup/DgxMwJyAGl1KqmeFL90KJk=
+			V2cnvDnNgn44hQCocxzsd64o+sds62hxdqg4G/Rf86E=
 			</data>
 		</dict>
 		<key>Headers/GDTHybridAd.h</key>
@@ -218,11 +230,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+D4QjPICpSeHM8WE7TKuHPAQl2A=
+			BgOh84WG9IgapVHC7HvY5kyvfys=
 			</data>
 			<key>hash2</key>
 			<data>
-			GjofdhnFxjPblD8n/5NDpCT+d/fmWJqnjkAm5gejiiQ=
+			jgVLxP09DzVYK1/GIn37opn5wvQ7hkFmwTooiYRuPkc=
 			</data>
 		</dict>
 		<key>Headers/GDTLogoView.h</key>
@@ -251,11 +263,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xqy1jhpLwuvW2kRqVQlyL154IgY=
+			k7p+aiBfGpnpel64Nq3HH5mwoNc=
 			</data>
 			<key>hash2</key>
 			<data>
-			LEfwAmsZcDsgvql+u25eH4jx1R5pm4J+bBsfjWYUhnc=
+			4ubI+5GCCmuQI8KRSmZ1Rb/weS2Lc9Nmadm59gHyr+0=
+			</data>
+		</dict>
+		<key>Headers/GDTNativeExpressAdNetworkAdapterProtocol.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			uoETwDrlEh4yAYgR829oy1dDcsQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			YVzx2yIXFHcpzCFINxuWjpCsVbAqqqFYwBMEpSsaIYY=
+			</data>
+		</dict>
+		<key>Headers/GDTNativeExpressAdNetworkConnectorProtocol.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			aiQRzhaLjgW9dvxTkxMJ4THWaBs=
+			</data>
+			<key>hash2</key>
+			<data>
+			lTrlT0gnWNRLxMX2KVf+/71Vv6vtWvsTF+ftE3jryiU=
 			</data>
 		</dict>
 		<key>Headers/GDTNativeExpressAdView.h</key>
@@ -269,15 +303,26 @@
 			L8VJgtfeRJgrSD4HieMChRnXxEIpfQ/gGQtLaN/1DpU=
 			</data>
 		</dict>
+		<key>Headers/GDTNativeExpressAdViewAdapterProtocol.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			sHkRlTtyBYkowbIZAEoj7wT5fSU=
+			</data>
+			<key>hash2</key>
+			<data>
+			cL+vIeZYn24ylseFYJ0xVuCDXYUOzPKzNfiXFvg0ydY=
+			</data>
+		</dict>
 		<key>Headers/GDTNativeExpressProAdManager.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			lgyyHcmxP8xlqNsQG1mWOgd3Ijg=
+			wNBoS9Hf8BdmBVnyM58e2gg91Ts=
 			</data>
 			<key>hash2</key>
 			<data>
-			jbne6MkKT0/ZMWrO6CIf2U5TTP9dA0cZEpjHLVjIP2g=
+			V4G0gvyA5netik/TQJpVmOK59qw03/g1qSIXttkr2/k=
 			</data>
 		</dict>
 		<key>Headers/GDTNativeExpressProAdView.h</key>
@@ -295,33 +340,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			DRAv5mkhMTVnsgQ5vtsTdg75qjQ=
+			2lkHYPBbIDRiBJ5101InsD0MbGY=
 			</data>
 			<key>hash2</key>
 			<data>
-			pJw2Ojp9PlaPBcE0pbgykN8HFjbN4/ATY56qObLj7Lo=
+			1dDHHP6vQsX3wC4wfhqCJl8QP4JJcRRhgockjMbfxno=
 			</data>
 		</dict>
 		<key>Headers/GDTRewardVideoAd.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ubbLa9gBv2o5VKM15dJUW+mMa3k=
+			yXCK7rmHMtS8FT9uGzMMQiE0mXA=
 			</data>
 			<key>hash2</key>
 			<data>
-			2jsICNttieidt7/EXzwyTgYXjEkUtDAmOiDSzAqvinI=
+			C+XjRPp5h0aVoGH5ibp/S8eDWIw+AtRiPerohYdsL7I=
 			</data>
 		</dict>
 		<key>Headers/GDTRewardVideoAdNetworkAdapterProtocol.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			qAoWmQajZKF83Cm3Ab6vfNxfXTA=
+			+oCEIwOOL7BYDrxMMewuXYtyJPY=
 			</data>
 			<key>hash2</key>
 			<data>
-			Frf1VSiiv2omMW3a4SkROKWBGP7e8md/kTzZspgScOM=
+			BeADhUkvCuzoK4mqU1FzBWf8tXnQsMPalaE/yiZyKtA=
 			</data>
 		</dict>
 		<key>Headers/GDTRewardVideoAdNetworkConnectorProtocol.h</key>
@@ -339,11 +384,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			68L9VS2SAKdflxVNg82Vb9+boeE=
+			PD4yZfLm2XSFTty8ygv1jQTzPU0=
 			</data>
 			<key>hash2</key>
 			<data>
-			ulvEGTSjPNCv6ug5SU4aN6OdyezRSes9cbtGdEKvtug=
+			7ZhgWcAMg9wihGOhbPSvnrT4hPkI/iCQywp9yYqTPAk=
 			</data>
 		</dict>
 		<key>Headers/GDTSDKDefines.h</key>
@@ -372,11 +417,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			RGcpb8Yivk1xiu2pXYz4/tit2kI=
+			QwFohnvO80tjUlP9DpoR+nIktk0=
 			</data>
 			<key>hash2</key>
 			<data>
-			NcQJPOqEtryevZb2bhG9F6TCeHNdaYBeN8m183eepU4=
+			9utDW2Fb8lgd+XLuNDsMflll7N5rKdPECh0rB1c16k8=
 			</data>
 		</dict>
 		<key>Headers/GDTSplashAdNetworkAdapterProtocol.h</key>
@@ -438,22 +483,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hyY4AXftkFTiAmyUrGpD9p5SpVk=
+			VF0VAS9KzAAUh9dYBLgvTxN7IPQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			/P60ZeRVnnQ4CXCkKlBLl2tFOfeIQLLI5SPvsiMNjPs=
+			1/HmhdpXoib3R9dRryUiXtdkqE2IOm1nR9SNrh0GR8Y=
 			</data>
 		</dict>
 		<key>Headers/GDTUnifiedInterstitialAd.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ql4og9EBuXMl3F7lGI6ePAiBGog=
+			xP7kLDP4iG7M7uy4lbbhoEQrYIc=
 			</data>
 			<key>hash2</key>
 			<data>
-			CZbWV0g0m56D+ztYIVW5Gjo9N3hx+5zLPCdSz/ly/Gs=
+			ba3nQUWeUBfl5y7LeqaDXidOdCW+EGlBIVF+/Ucu8Qg=
 			</data>
 		</dict>
 		<key>Headers/GDTUnifiedInterstitialAdNetworkAdapterProtocol.h</key>
@@ -482,33 +527,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Nn5M3K1y7Jy8yW8V1wmXBV5JayI=
+			6i9bj0ruBk7j1EocHIAx8WWEYsk=
 			</data>
 			<key>hash2</key>
 			<data>
-			NjJXjLLlv0ZQXEnYN5QmNn6xJ2vpOi1AhQ5Be6vgDcE=
+			ijXsMgAJ0WRyHJ/UwarVd1EZfhpGOrhJIVsSX3HSoEU=
 			</data>
 		</dict>
 		<key>Headers/GDTUnifiedNativeAdDataObject.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			HUJFho2uIhpBReyHGDbmqLL6V2Q=
+			8NkFsDl+hFaScD1aNPwsaeFWfEc=
 			</data>
 			<key>hash2</key>
 			<data>
-			Gs3xL+YpdTOeBmyQG1JXL4/3X3pNZDDJl0HKOAC80fI=
+			gsfCBv/AO0BfgH8oPBKjG6mdGaDHyqcq82ASnh1uaK8=
 			</data>
 		</dict>
 		<key>Headers/GDTUnifiedNativeAdNetworkAdapterProtocol.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5ZzwbnBkfGiVlhgUmePaoz9tLdw=
+			1ai6Fd6+VcCxv8CWcZTONpjKexo=
 			</data>
 			<key>hash2</key>
 			<data>
-			FJVxYQR5/LZMc7hZUdNkKLgd4G+GZf6BPfQcDAxZ25g=
+			MDpv/VwpJVy+aFj+w1L+gAkNzKucp56sByNQVYT3Bi0=
 			</data>
 		</dict>
 		<key>Headers/GDTUnifiedNativeAdNetworkConnectorProtocol.h</key>

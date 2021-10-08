@@ -139,7 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-GDT_DEPRECATED_MSG_ATTRIBUTE("GDTExpressInterstitialAd类即将废弃，请使用GDTUnifiedInterstitialAd类")
+GDT_DEPRECATED_MSG_ATTRIBUTE("GDTExpressInterstitialAd类即将在12月废弃，请使用GDTUnifiedInterstitialAd类")
 @interface GDTExpressInterstitialAd : NSObject
 
 /**

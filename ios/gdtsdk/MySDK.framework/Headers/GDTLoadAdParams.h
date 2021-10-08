@@ -23,7 +23,8 @@
 //透传字段，key跟value都由调用方自行指定
 @property (nonatomic, strong) NSDictionary *dictionary;
 
-- (void)setExtraInfo:(NSDictionary*)dict;
+//透传字段，非qq小游戏
+@property (nonatomic, copy) NSDictionary *devExtra;
 
 @end
 

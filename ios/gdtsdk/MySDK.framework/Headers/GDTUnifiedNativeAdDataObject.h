@@ -107,6 +107,12 @@ typedef NS_ENUM(NSInteger, GDTVastAdEventType) {
 @property (nonatomic, readonly) NSString *eCPMLevel;
 
 /**
+ 广告对应的按钮展示文案
+ 此字段可能为空
+ */
+@property (nonatomic, readonly) NSString *buttonText;
+
+/**
  广告对应的CTA文案，自定义CTA视图时建议使用此字段
  广告对应的callToAction文案，比如“立即预约”或“电话咨询”, 自定义callToAction视图时建议使用此字段
 

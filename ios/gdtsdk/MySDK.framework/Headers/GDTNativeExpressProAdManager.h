@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-GDT_DEPRECATED_MSG_ATTRIBUTE("GDTNativeExpressProAdManager类即将废弃，请使用GDTNativeExpressAd类")
+GDT_DEPRECATED_MSG_ATTRIBUTE("GDTNativeExpressProAdManager类即将在12月废弃，请使用GDTNativeExpressAd类")
 @interface GDTNativeExpressProAdManager : NSObject
 
 /**

@@ -162,6 +162,13 @@
 - (instancetype)initWithPlacementId:(NSString *)placementId token:(NSString *)token;
 
 /**
+ *  S2S bidding 竟胜之后调用, 需要在调用广告 show 之前调用
+ *  @param eCPM - 曝光扣费, 单位分，若优量汇竞胜，在广告曝光时回传，必传
+ *  针对本次曝光的媒体期望扣费，常用扣费逻辑包括一价扣费与二价扣费，当采用一价扣费时，胜者出价即为本次扣费价格；当采用二价扣费时，第二名出价为本次扣费价格.
+ */
+- (void)setBidECPM:(NSInteger)eCPM;
+
+/**
  预加载闪屏广告接口
  
  @param placementId 广告位ID

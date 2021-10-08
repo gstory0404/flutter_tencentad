@@ -108,6 +108,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy, readonly) NSString *callToAction;
 
+@property (nonatomic, copy, readonly) NSString *buttonText;
+
 @property (nonatomic, assign, readonly) BOOL skippable;
 
 /**

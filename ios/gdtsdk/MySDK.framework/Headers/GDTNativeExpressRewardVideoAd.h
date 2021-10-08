@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol GDTNativeExpressRewardedVideoAdDelegate;
 
-GDT_DEPRECATED_MSG_ATTRIBUTE("GDTNativeExpressRewardVideoAd类即将废弃，请使用GDTRewardVideoAd类")
+GDT_DEPRECATED_MSG_ATTRIBUTE("GDTNativeExpressRewardVideoAd类即将在12月废弃，请使用GDTRewardVideoAd类")
 @interface GDTNativeExpressRewardVideoAd : NSObject
 
 @property (nonatomic, getter=isAdValid, readonly) BOOL adValid;

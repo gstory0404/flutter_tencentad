@@ -83,5 +83,11 @@
  */
 + (NSString *)getBuyerId;
 
+/**
+ 设置个性化推荐状态
+ @param state 1为关闭个性化推荐，其他值或未设置为打开
+ */
++ (void)setPersonalizedState:(NSInteger)state;
+
 @end
 

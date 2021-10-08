@@ -115,7 +115,7 @@ public class RewardedVideoAd : NSObject,GDTRewardedVideoAdDelegate{
         LogUtil.logInstance.printLog(message: info)
         let map : NSDictionary = ["adType":"rewardAd",
                                           "onAdMethod":"onVerify",
-                                          "transId":info["GDT_TRANS_ID"],
+                                          "transId":info["GDT_TRANS_ID"] as Any,
                                           "rewardAmount":self.rewardAmount,
                                           "rewardName":self.rewardName]
         SwiftFlutterTencentadPlugin.event!.sendEvent(event: map)

@@ -89,7 +89,7 @@ internal class SplashAdView(
     //广告曝光时调用
     override fun onADExposure() {
         LogUtil.e("开屏广告曝光")
-        channel?.invokeMethod("onClick", "")
+        channel?.invokeMethod("onExpose", "")
     }
 
     //广告加载成功的回调，在fetchAdOnly的情况下，
