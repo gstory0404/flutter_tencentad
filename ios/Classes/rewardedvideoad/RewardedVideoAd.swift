@@ -30,9 +30,10 @@ public class RewardedVideoAd : NSObject,GDTRewardedVideoAdDelegate{
         self.rewardVideoAd = GDTRewardVideoAd.init(placementId: mCodeId!)
         self.rewardVideoAd.delegate = self
         self.rewardVideoAd.videoMuted = false
-        let a = GDTServerSideVerificationOptions.init();
-        a.userIdentifier = self.userID
-        a.customRewardString = customData
+        let options = GDTServerSideVerificationOptions.init();
+        options.userIdentifier = self.userID
+        options.customRewardString = customData
+        self.rewardVideoAd.serverSideVerificationOptions = options
         self.rewardVideoAd.load()
     }
 

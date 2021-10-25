@@ -158,7 +158,7 @@
 		</data>
 		<key>Headers/MySDK.h</key>
 		<data>
-		7P7+HxkjiOaeoGVaDWH1ZnjRHTk=
+		5WKzDRlUP/QahhqvMPcs6sdQUhs=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -593,11 +593,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7P7+HxkjiOaeoGVaDWH1ZnjRHTk=
+			5WKzDRlUP/QahhqvMPcs6sdQUhs=
 			</data>
 			<key>hash2</key>
 			<data>
-			bi8ONamefO7oS2zPhZWI1Iz4sVjbXBAXHKnl6zRBsTU=
+			SPDRb0XmzaQmZVYM23kaqSYbwkA/BSwUSmLtLm1R1hg=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
