@@ -9,6 +9,8 @@ flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS
 
 由于优量汇需要上架应用才能使用广告，所以demo不能直接运行，[体验demo](https://www.pgyer.com/j7YB)
 
+#### android端《信息流广告》 曝光异常 请谨慎使用 ！！
+
 ## 官方文档
 * [Android](https://developers.adnet.qq.com/doc/android/access_doc)
 * [IOS](https://developers.adnet.qq.com/doc/ios/guide)
