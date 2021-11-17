@@ -74,6 +74,12 @@ internal class BannerAdView(
     //广告加载成功回调，表示广告相关的资源已经加载完毕，Ready To Show
     override fun onADReceive() {
         mContainer?.removeAllViews()
+        if(unifiedBannerView == null){
+            LogUtil.e("$TAG  Banner广告加载失败 unifiedBannerView不存在或已销毁")
+            var map: MutableMap<String, Any?> = mutableMapOf("code" to 0, "message" to "BannerView不存在或已销毁")
+            channel?.invokeMethod("onFail", map)
+            return
+        }
         mContainer?.addView(unifiedBannerView)
         LogUtil.e("$TAG  Banner广告加载成功回调")
         channel?.invokeMethod("onShow", "")

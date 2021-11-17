@@ -36,8 +36,6 @@
 
 + (NSString *)sdkVersion;
 
-+ (void)enableGPS:(BOOL)enabled;
-
 /**
 * 设置流量渠道号
  渠道号信息主要用来协助平台提升流量变现效果及您的收益，请如实填写，若渠道号无法满足您的诉求请联系平台负责商务

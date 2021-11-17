@@ -35,9 +35,9 @@ internal class NativeExpressAdView(
     private var mContainer: FrameLayout? = null
 
     //广告所需参数
-    private var codeId: String
-    private var viewWidth: Int
-    private var viewHeight: Int
+    private var codeId: String = params["androidId"] as String
+    private var viewWidth: Int = params["viewWidth"] as Int
+    private var viewHeight: Int = params["viewHeight"] as Int
 
     private var nativeExpressAD: NativeExpressAD? = null
     private var nativeExpressAdView: NativeExpressADView? = null
@@ -46,9 +46,6 @@ internal class NativeExpressAdView(
 
 
     init {
-        codeId = params["androidId"] as String
-        viewWidth = params["viewWidth"] as Int
-        viewHeight = params["viewHeight"] as Int
         mContainer = FrameLayout(activity)
         mContainer?.layoutParams?.width = ViewGroup.LayoutParams.WRAP_CONTENT
         mContainer?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -57,13 +54,16 @@ internal class NativeExpressAdView(
     }
 
     private fun loadExpressAd() {
-        var adSize = ADSize(0, 0)
-        if (viewWidth == 0) {
-            adSize = ADSize(ADSize.FULL_WIDTH, viewHeight)
-        } else if (viewHeight == 0) {
-            adSize = ADSize(viewWidth, ADSize.AUTO_HEIGHT)
-        } else {
-            adSize = ADSize(viewWidth, viewHeight)
+        val adSize: ADSize = when {
+            viewWidth == 0 -> {
+                ADSize(ADSize.FULL_WIDTH, viewHeight)
+            }
+            viewHeight == 0 -> {
+                ADSize(viewWidth, ADSize.AUTO_HEIGHT)
+            }
+            else -> {
+                ADSize(viewWidth, viewHeight)
+            }
         }
         nativeExpressAD = NativeExpressAD(activity, adSize, codeId, this)
         nativeExpressAD?.setVideoOption(VideoOption.Builder()
@@ -83,7 +83,7 @@ internal class NativeExpressAdView(
     //无广告填充
     override fun onNoAD(p0: AdError?) {
         LogUtil.e("广告加载失败  ${p0?.errorCode}  ${p0?.errorMsg}")
-        var map: MutableMap<String, Any?> = mutableMapOf("code" to p0?.errorCode, "message" to p0?.errorMsg)
+        val map: MutableMap<String, Any?> = mutableMapOf("code" to p0?.errorCode, "message" to p0?.errorMsg)
         channel?.invokeMethod("onFail", map)
     }
 
@@ -94,6 +94,11 @@ internal class NativeExpressAdView(
         // 释放前一个 NativeExpressADView 的资源
         if (nativeExpressAdView != null) {
             nativeExpressAdView?.destroy()
+        }
+        if(p0?.size == 0){
+            LogUtil.e("未拉取到广告")
+            val map: MutableMap<String, Any?> = mutableMapOf("code" to 0, "message" to "未拉取到广告")
+            channel?.invokeMethod("onFail", map)
         }
         nativeExpressAdView = p0!![0]
         if (nativeExpressAdView?.boundData?.adPatternType == AdPatternType.NATIVE_VIDEO) {
@@ -107,7 +112,7 @@ internal class NativeExpressAdView(
     //NativeExpressADView 渲染广告失败
     override fun onRenderFail(p0: NativeExpressADView?) {
         LogUtil.e("渲染广告失败")
-        var map: MutableMap<String, Any?> = mutableMapOf("code" to 0, "message" to "渲染广告失败")
+        val map: MutableMap<String, Any?> = mutableMapOf("code" to 0, "message" to "渲染广告失败")
         channel?.invokeMethod("onFail", map)
         nativeExpressAdView?.destroy()
     }
