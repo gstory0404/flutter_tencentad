@@ -2,7 +2,7 @@
 //  InsertAd.h
 //  flutter_tencentad
 //
-//  Created by 郭维佳 on 2021/12/1.
+//  Created by gstory on 2021/12/1.
 //
 
 #import <Foundation/Foundation.h>
