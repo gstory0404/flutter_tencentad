@@ -1,15 +1,13 @@
 # 腾讯优量汇(广点通)广告 Flutter版本
 
 <p>
-<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.0.5-success></a>
+<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.1.0-success></a>
 </p>
 
 ## 简介
-flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS SDK的Flutter插件,方便直接调用优量汇(广点通)广告SDK方法快速开发
+flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS SDK的Flutter插件,方便直接调用优量汇(广点通)广告SDK方法快速开发,[体验demo](https://www.pgyer.com/j7YB)
 
-由于优量汇需要上架应用才能使用广告，所以demo不能直接运行，[体验demo](https://www.pgyer.com/j7YB)
-
-#### android端《信息流广告》 曝光异常 请谨慎使用 ！！
+#### android端信息流广告曝光异常 请谨慎使用 ！！,其他广告均正常
 
 ## 官方文档
 * [Android](https://developers.adnet.qq.com/doc/android/access_doc)
@@ -30,14 +28,14 @@ flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS
 ## 集成步骤
 #### 1、pubspec.yaml
 ```Dart
-flutter_tencentad: ^1.0.5
+flutter_tencentad: ^1.1.0
 ```
 引入
 ```Dart
 import 'package:flutter_tencentad/flutter_tencentad.dart';
 ```
 #### 2、Android
-SDK(4.422.1292)已配置插件中无需额外配置，只需要在android目录中AndroidManifest.xml配置
+SDK(4.431.1301)已配置插件中无需额外配置，只需要在android目录中AndroidManifest.xml配置
 ```Java
 <manifest ···
     xmlns:tools="http://schemas.android.com/tools"
@@ -48,7 +46,7 @@ SDK(4.422.1292)已配置插件中无需额外配置，只需要在android目录�
 
 #### 3、IOS
 
-SDK(4.12.91)已配置插件中，其余根据文档配置。因为使用PlatformView，在Info.plist加入
+SDK(4.13.32)已配置插件中，其余根据文档配置。因为使用PlatformView，在Info.plist加入
 ```
  <key>io.flutter.embedded_views_preview</key>
     <true/>
