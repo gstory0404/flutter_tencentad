@@ -7,6 +7,9 @@
 ## 简介
 flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS SDK的Flutter插件,方便直接调用优量汇(广点通)广告SDK方法快速开发,[体验demo](https://www.pgyer.com/j7YB)
 
+<img src="https://github.com/gstory0404/flutter_tencentad/blob/master/images/tencentad.gif" width="30%">
+
+
 ## 官方文档
 * [Android](https://developers.adnet.qq.com/doc/android/access_doc)
 * [IOS](https://developers.adnet.qq.com/doc/ios/guide)
