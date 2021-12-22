@@ -83,7 +83,7 @@ class FlutterTencentAdStream {
               flutterTencentadInteractionCallBack?.onUnReady!();
               break;
             case FlutterTencentadMethod.onVerify:
-              flutterTencentadRewardCallBack?.onVerify!(data["transId"],"",0);
+              flutterTencentadInteractionCallBack?.onVerify!(data["transId"],"",0);
           }
           break;
       }

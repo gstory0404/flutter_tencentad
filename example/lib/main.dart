@@ -172,6 +172,20 @@ class _HomePageState extends State<HomePage> {
                     isFullScreen: true);
               },
             ),
+            //插屏广告（全屏）激励奖励
+            MaterialButton(
+              color: Colors.blue,
+              textColor: Colors.white,
+              child: new Text('插屏广告（全屏）激励奖励'),
+              onPressed: () async {
+                await FlutterTencentad.loadUnifiedInterstitialAD(
+                  //android广告id
+                    androidId: "7002176717594059",
+                    //ios广告id
+                    iosId: "8072071757391116",
+                    isFullScreen: true);
+              },
+            ),
             //Banner广告（平台模板）
             MaterialButton(
               color: Colors.blue,

@@ -235,7 +235,7 @@
 - (void)unifiedInterstitialAdDidRewardEffective:(GDTUnifiedInterstitialAd *)unifiedInterstitial info:(NSDictionary *)info{
     [[LogUtil sharedInstance] print:@"插屏激励广告视频播放达到激励条件回调（只有插屏激励广告位才会有此回调）"];
     NSString *transId = info[@"GDT_TRANS_ID"];
-    NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onVerify",@"transId":transId};
+    NSDictionary *dictionary = @{@"adType":@"interactAd",@"onAdMethod":@"onVerify",@"transId":transId};
     [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
 }
 
