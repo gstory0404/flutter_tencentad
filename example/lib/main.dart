@@ -89,6 +89,9 @@ class _HomePageState extends State<HomePage> {
         onUnReady: () {
           print("插屏广告预加载未准备就绪");
         },
+        onVerify: (transId,rewardName,rewardAmount){
+          print("广告奖励凭证id  $transId");
+        }
       ),
     );
   }
@@ -99,6 +102,8 @@ class _HomePageState extends State<HomePage> {
       androidId: "1200009850",//androidId
       iosId: "1200082163", //iosId
       debug: true, //是否显示日志log
+      personalized: FlutterTencentadPersonalized.show,//是否显示个性化推荐广告
+      channelId: FlutterTencentadChannel.other,//渠道id
     );
     _sdkVersion = await FlutterTencentad.getSDKVersion();
     setState(() {});

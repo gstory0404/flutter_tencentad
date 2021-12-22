@@ -49,13 +49,10 @@ android {
 
     buildTypes {
         debug {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutt signingConfig signingConfigs.config
+            signingConfig signingConfigs.config
         }
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-
+            signingConfig signingConfigs.config
         }
     }
 }

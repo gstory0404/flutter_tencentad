@@ -24,15 +24,23 @@ class FlutterTencentad {
   ///
   /// [iosId] iosId 必填
   ///
+  /// [channelId] channelId 渠道id [FlutterTencentadChannel]
+  ///
+  /// [personalized] personalized 是否开启个性化广告 [FlutterTencentadPersonalized]
+  ///
   static Future<bool> register({
     required String androidId,
     required String iosId,
+    required int personalized,
     bool? debug,
+    int? channelId,
   }) async {
     return await _channel.invokeMethod("register", {
       "androidId": androidId,
       "iosId": iosId,
       "debug": debug ?? false,
+      "channelId": channelId ?? FlutterTencentadChannel.other,
+      "personalized": personalized,
     });
   }
 

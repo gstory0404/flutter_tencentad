@@ -15,6 +15,6 @@ class FlutterTencentAdConfig {
         //SplashAdView
         const val splashAdView = "com.gstory.flutter_tencentad/SplashAdView"
         //NativeExpressADView
-        const val nativeExpressAdView = "com.gstory.flutter_tencentad/NativeExpressAdView"
+        const val nativeAdView = "com.gstory.flutter_tencentad/NativeExpressAdView"
     }
 }

@@ -1,5 +1,6 @@
 package com.gstory.flutter_tencentad.rewardvideoad
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.ServiceConnection
 import com.gstory.flutter_tencentad.LogUtil
@@ -11,6 +12,7 @@ import com.qq.e.ads.rewardvideo.ServerSideVerificationOptions
 import com.qq.e.comm.util.AdError
 
 
+@SuppressLint("StaticFieldLeak")
 object RewardVideoAd {
     private val TAG = "RewardVideoAd"
 

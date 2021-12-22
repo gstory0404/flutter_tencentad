@@ -37,9 +37,17 @@ class _ExpressAdViewState extends State<ExpressAdView> {
   //广告是否显示
   bool _isShowAd = true;
 
+  double _width = 0;
+  double _height = 0;
+
   @override
   void initState() {
     super.initState();
+    _width = widget.viewWidth.toDouble();
+    _height = widget.viewHeight.toDouble();
+    setState(() {
+
+    });
   }
 
   @override
@@ -49,8 +57,8 @@ class _ExpressAdViewState extends State<ExpressAdView> {
     }
     if (defaultTargetPlatform == TargetPlatform.android) {
       return Container(
-        width: widget.viewWidth.toDouble(),
-        height: widget.viewHeight.toDouble(),
+        width: _width,
+        height: _height,
         child: AndroidView(
           viewType: _viewType,
           creationParams: {
@@ -64,8 +72,8 @@ class _ExpressAdViewState extends State<ExpressAdView> {
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return Container(
-        width: widget.viewWidth.toDouble(),
-        height: widget.viewHeight.toDouble(),
+        width: _width,
+        height: _height,
         child: UiKitView(
           viewType: _viewType,
           creationParams: {
@@ -93,8 +101,11 @@ class _ExpressAdViewState extends State<ExpressAdView> {
     switch (call.method) {
       //显示广告
       case FlutterTencentadMethod.onShow:
+        Map map = call.arguments;
         if (mounted) {
           setState(() {
+            _width = map["width"];
+            _height = map["height"];
             _isShowAd = true;
           });
         }

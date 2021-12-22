@@ -1,4 +1,3 @@
-
 /// 描述：
 /// @author guozi
 /// @e-mail gstory0404@gmail.com
@@ -61,4 +60,47 @@ class FlutterTencentadMethod {
 
   ///倒计时
   static const String onADTick = "onADTick";
+}
+
+///渠道id
+class FlutterTencentadChannel {
+  ///百度
+  static const int baidu = 1;
+  ///头条
+  static const int toutiao = 2;
+  ///优量汇
+  static const int tencent = 3;
+  ///搜狗
+  static const int sougou = 4;
+  ///其他网盟
+  static const int otherAd = 5;
+  ///oppe
+  static const int oppo = 6;
+  ///vivo
+  static const int vivo = 7;
+  ///huawei
+  static const int huawei = 8;
+  ///应用宝
+  static const int yinyongbao = 9;
+  ///小米
+  static const int xiaomi = 10;
+  ///金立
+  static const int jinli = 11;
+  ///百度手机助手
+  static const int baiduMobile = 12;
+  ///魅族
+  static const int meizu = 13;
+  ///App Store
+  static const int AppStore = 14;
+  ///其他
+  static const int other = 999;
+}
+
+///个性化广告
+class FlutterTencentadPersonalized {
+  ///屏蔽个性化推荐广告
+  static const int close = 1;
+
+  ///不屏蔽个性化推荐广告
+  static const int show = 0;
 }

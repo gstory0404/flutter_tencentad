@@ -31,6 +31,12 @@
         NSString *appId = call.arguments[@"iosId"];
         BOOL debug = [call.arguments[@"debug"] boolValue];
         BOOL isInit = [GDTSDKConfig registerAppId:appId];
+        NSInteger personalized =  [call.arguments[@"personalized"] intValue];
+        NSInteger channelId =  [call.arguments[@"channelId"] intValue];
+        //关闭个性化推荐
+        [GDTSDKConfig setPersonalizedState:personalized];
+        //渠道id
+        [GDTSDKConfig setChannel:channelId];
         [[LogUtil sharedInstance] debug:debug];
         result([NSNumber numberWithBool:isInit]);
     }else if([@"getSDKVersion" isEqualToString:call.method]){

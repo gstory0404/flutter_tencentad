@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.gstory.flutter_tencentad.FlutterTencentAdConfig
 import com.gstory.flutter_tencentad.LogUtil
+import com.gstory.flutter_tencentad.UIUtils
 import com.qq.e.ads.cfg.DownAPPConfirmPolicy
 import com.qq.e.ads.cfg.VideoOption
 import com.qq.e.ads.nativ.ADSize
@@ -49,7 +50,7 @@ internal class NativeExpressAdView(
         mContainer = FrameLayout(activity)
         mContainer?.layoutParams?.width = ViewGroup.LayoutParams.WRAP_CONTENT
         mContainer?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
-        channel = MethodChannel(messenger, FlutterTencentAdConfig.nativeExpressAdView + "_" + id)
+        channel = MethodChannel(messenger, FlutterTencentAdConfig.nativeAdView + "_" + id)
         loadExpressAd()
     }
 
@@ -90,23 +91,27 @@ internal class NativeExpressAdView(
     //广告数据加载成功，返回了可以用来展示广告的 NativeExpressADView，
     // 但是想让广告曝光还需要调用 NativeExpressADView 的 render 方法
     override fun onADLoaded(p0: MutableList<NativeExpressADView>?) {
-        LogUtil.e("广告数据加载成功")
         // 释放前一个 NativeExpressADView 的资源
         if (nativeExpressAdView != null) {
             nativeExpressAdView?.destroy()
+            nativeExpressAdView = null
         }
         if(p0?.size == 0){
             LogUtil.e("未拉取到广告")
             val map: MutableMap<String, Any?> = mutableMapOf("code" to 0, "message" to "未拉取到广告")
             channel?.invokeMethod("onFail", map)
         }
+        LogUtil.e("广告数据加载成功")
         nativeExpressAdView = p0!![0]
         if (nativeExpressAdView?.boundData?.adPatternType == AdPatternType.NATIVE_VIDEO) {
             nativeExpressAdView?.setMediaListener(this)
         }
+        LogUtil.e("数据加载成功 ${UIUtils.px2dip(activity,nativeExpressAdView?.width!!.toFloat())}  ${UIUtils.px2dip(activity,nativeExpressAdView?.height!!.toFloat())}")
         nativeExpressAdView?.render()
-        mContainer?.removeAllViews()
-        mContainer?.addView(nativeExpressAdView,0)
+        if(mContainer?.childCount!! > 0){
+            mContainer?.removeAllViews()
+        }
+        mContainer?.addView(nativeExpressAdView!!)
     }
 
     //NativeExpressADView 渲染广告失败
@@ -119,8 +124,8 @@ internal class NativeExpressAdView(
 
     //NativeExpressADView 渲染广告成功
     override fun onRenderSuccess(p0: NativeExpressADView?) {
-        LogUtil.e("渲染广告成功")
-        channel?.invokeMethod("onShow", "")
+        val map: MutableMap<String, Any?> = mutableMapOf("width" to UIUtils.px2dip(activity,p0?.width!!.toFloat()), "height" to UIUtils.px2dip(activity,p0?.height!!.toFloat()))
+        channel?.invokeMethod("onShow", map)
     }
 
     //广告曝光
@@ -145,16 +150,6 @@ internal class NativeExpressAdView(
     //因为广告点击等原因离开当前 app 时调用
     override fun onADLeftApplication(p0: NativeExpressADView?) {
         LogUtil.e("因为广告点击等原因离开当前 app")
-    }
-
-    //广告展开遮盖时调用
-    override fun onADOpenOverlay(p0: NativeExpressADView?) {
-        LogUtil.e("广告展开遮盖时调用")
-    }
-
-    //广告关闭遮盖时调用
-    override fun onADCloseOverlay(p0: NativeExpressADView?) {
-        LogUtil.e("广告关闭遮盖时调用")
     }
 
     /*****************平台模板视频广告播放状态回调接口，专用于带有视频素材的广告对象**************/

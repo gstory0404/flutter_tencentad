@@ -1,5 +1,6 @@
 package com.gstory.flutter_tencentad.interstitialad
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import com.gstory.flutter_tencentad.LogUtil
@@ -7,9 +8,12 @@ import com.gstory.flutter_tencentad.rewardvideoad.RewardVideoAd
 import com.qq.e.ads.interstitial2.UnifiedInterstitialAD
 import com.qq.e.ads.interstitial2.UnifiedInterstitialADListener
 import com.gstory.flutter_unionad.FlutterTencentAdEventPlugin
+import com.qq.e.ads.interstitial2.ADRewardListener
 import com.qq.e.ads.rewardvideo.RewardVideoAD
+import com.qq.e.ads.rewardvideo.ServerSideVerificationOptions
 import com.qq.e.comm.util.AdError
 
+@SuppressLint("StaticFieldLeak")
 object InterstitialAd {
     private val TAG = "InterstitialAd"
 
@@ -32,8 +36,8 @@ object InterstitialAd {
             codeId,
             interstitialADListener
         )
-//        unifiedInterstitialAD?.setMediaListener(this)
         if(isFullScreen!!){
+            unifiedInterstitialAD?.setRewardListener(adRewardListener)
             unifiedInterstitialAD?.loadFullScreenAD()
         }else{
             unifiedInterstitialAD?.loadAD()
@@ -136,4 +140,13 @@ object InterstitialAd {
 
     }
 
+
+    private var adRewardListener = object : ADRewardListener {
+        override fun onReward(p0: MutableMap<String, Any>?) {
+            LogUtil.e("$TAG  激励奖励 $p0")
+            var map: MutableMap<String, Any?> = mutableMapOf("adType" to "interactAd","onAdMethod" to "onVerify","transId" to p0!!["transId"])
+            FlutterTencentAdEventPlugin.sendContent(map)
+        }
+
+    }
 }

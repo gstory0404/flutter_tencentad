@@ -120,7 +120,9 @@
  */
 - (void)nativeExpressAdViewRenderSuccess:(GDTNativeExpressAdView *)nativeExpressAdView{
     [[LogUtil sharedInstance] print:@"原生模板广告渲染成功"];
-    [_channel invokeMethod:@"onShow" arguments:nil result:nil];
+   
+    NSDictionary *dictionary = @{@"width": @(nativeExpressAdView.frame.size.width),@"height":@(nativeExpressAdView.frame.size.height)};
+    [_channel invokeMethod:@"onShow" arguments:dictionary result:nil];
 }
 
 

@@ -19,6 +19,6 @@ object FlutterTencentAdViewPlugin {
         //注册splash广告
         binding.platformViewRegistry.registerViewFactory(FlutterTencentAdConfig.splashAdView, SplashAdViewFactory(binding.binaryMessenger,activity))
         //注册Express广告
-        binding.platformViewRegistry.registerViewFactory(FlutterTencentAdConfig.nativeExpressAdView, NativeExpressAdViewFactory(binding.binaryMessenger,activity))
+        binding.platformViewRegistry.registerViewFactory(FlutterTencentAdConfig.nativeAdView, NativeExpressAdViewFactory(binding.binaryMessenger,activity))
     }
 }

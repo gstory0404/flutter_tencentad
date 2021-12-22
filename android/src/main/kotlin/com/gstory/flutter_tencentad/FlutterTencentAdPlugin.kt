@@ -6,7 +6,8 @@ import androidx.annotation.NonNull
 import com.gstory.flutter_tencentad.interstitialad.InterstitialAd
 import com.gstory.flutter_tencentad.rewardvideoad.RewardVideoAd
 import com.gstory.flutter_unionad.FlutterTencentAdEventPlugin
-import com.qq.e.comm.managers.GDTADManager
+import com.qq.e.comm.managers.GDTAdSdk
+import com.qq.e.comm.managers.setting.GlobalSetting
 import com.qq.e.comm.managers.status.SDKStatus
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -58,13 +59,19 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         if (call.method == "register") {
             val appId = call.argument<String>("androidId")
             val debug = call.argument<Boolean>("debug")
-            GDTADManager.getInstance().initWith(applicationContext, appId)
+            val channelId = call.argument<Int>("channelId")
+            val personalized = call.argument<Int>("personalized")
+            //是否开启个性化
+            GlobalSetting.setPersonalizedState(personalized!!)
+            //设置渠道id
+            GlobalSetting.setChannel(channelId)
+            GDTAdSdk.init(applicationContext,appId)
             LogUtil.setAppName("flutter_tencentad")
             LogUtil.setShow(debug!!)
-            result.success(GDTADManager.getInstance().isInitialized)
+            result.success(true)
             //获取sdk版本
         } else if (call.method == "getSDKVersion") {
-            result.success("${SDKStatus.getSDKVersion()}.${GDTADManager.getInstance().pm.pluginVersion}")
+            result.success(SDKStatus.getIntegrationSDKVersion())
             //预加载激励广告
         } else if (call.method == "loadRewardVideoAd") {
             RewardVideoAd.init(applicationContext!!,call.arguments as Map<*, *>)

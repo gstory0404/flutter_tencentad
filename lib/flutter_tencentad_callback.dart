@@ -100,6 +100,7 @@ class FlutterTencentadInteractionCallBack {
   TOnReady? onReady;
   TOnUnReady? onUnReady;
   TOnExpose? onExpose;
+  TOnVerify? onVerify;
 
   FlutterTencentadInteractionCallBack(
       {this.onShow,
@@ -108,7 +109,8 @@ class FlutterTencentadInteractionCallBack {
       this.onFail,
       this.onExpose,
       this.onReady,
-      this.onUnReady});
+      this.onUnReady,
+      this.onVerify});
 }
 
 ///激励广告回调

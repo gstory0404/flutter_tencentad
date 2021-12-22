@@ -108,16 +108,6 @@ internal class BannerAdView(
         LogUtil.e("$TAG  Banner广告点击离开 APP")
     }
 
-    //当广告打开浮层时调用，如打开内置浏览器、内容展示浮层，一般发生在点击之后
-    override fun onADOpenOverlay() {
-        LogUtil.e("$TAG  Banner广告打开浮层")
-    }
-
-    //浮层关闭时调用
-    override fun onADCloseOverlay() {
-        LogUtil.e("$TAG  Banner浮层关闭")
-    }
-
     override fun dispose() {
         unifiedBannerView?.destroy()
         unifiedBannerView = null

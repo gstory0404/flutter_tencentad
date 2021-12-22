@@ -1,17 +1,19 @@
 # 腾讯优量汇(广点通)广告 Flutter版本
 
 <p>
-<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.1.0-success></a>
+<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.1.1-success></a>
 </p>
 
 ## 简介
 flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS SDK的Flutter插件,方便直接调用优量汇(广点通)广告SDK方法快速开发,[体验demo](https://www.pgyer.com/j7YB)
 
-#### android端信息流广告曝光异常 请谨慎使用 ！！,其他广告均正常
-
 ## 官方文档
 * [Android](https://developers.adnet.qq.com/doc/android/access_doc)
 * [IOS](https://developers.adnet.qq.com/doc/ios/guide)
+
+## 版本更新
+
+[更新日志](https://github.com/gstory0404/flutter_tencentad/blob/master/CHANGELOG.md)
 
 ## 本地环境
 ```
@@ -28,7 +30,7 @@ flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS
 ## 集成步骤
 #### 1、pubspec.yaml
 ```Dart
-flutter_tencentad: ^1.1.0
+flutter_tencentad: ^1.1.1
 ```
 引入
 ```Dart
@@ -60,6 +62,8 @@ await FlutterTencentad.register(
     androidId: "1200009850",//androidId
     iosId: "1200082163", //iosId
     debug: true, //是否显示日志log
+    personalized: FlutterTencentadPersonalized.show,//是否显示个性化推荐广告
+    channelId: FlutterTencentadChannel.other,//渠道id
 );
 ```
 #### 2、获取SDK版本
@@ -133,6 +137,7 @@ FlutterTencentad.bannerAdView(
 ```
 
 #### 5、动态信息流/横幅/视频贴片广告
+⚠️ android端信息流广告曝光异常
 ```
 FlutterTencentad.expressAdView(
               //android广告id
@@ -261,13 +266,17 @@ FlutterTencentAdStream.initAdStream(
         onUnReady: () {
           print("插屏广告预加载未准备就绪");
         },
+        onVerify: (transId,rewardName,rewardAmount){
+          print("广告奖励凭证id  $transId");
+        },
   ),
 );
 ```
 
-## 版本更新
+## 错误码
 
-[更新日志](https://github.com/gstory0404/flutter_tencentad/blob/master/CHANGELOG.md)
+[错误码](https://developers.adnet.qq.com/doc/android/union/union_debug#sdk%20%E9%94%99%E8%AF%AF%E7%A0%81)
+
 
 ## 插件链接
 
