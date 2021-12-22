@@ -64,7 +64,7 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             //是否开启个性化
             GlobalSetting.setPersonalizedState(personalized!!)
             //设置渠道id
-            GlobalSetting.setChannel(channelId)
+            GlobalSetting.setChannel(channelId!!)
             GDTAdSdk.init(applicationContext,appId)
             LogUtil.setAppName("flutter_tencentad")
             LogUtil.setShow(debug!!)

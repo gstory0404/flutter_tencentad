@@ -31,7 +31,7 @@ class FlutterTencentad {
   static Future<bool> register({
     required String androidId,
     required String iosId,
-    required int personalized,
+    int? personalized,
     bool? debug,
     int? channelId,
   }) async {
@@ -40,7 +40,7 @@ class FlutterTencentad {
       "iosId": iosId,
       "debug": debug ?? false,
       "channelId": channelId ?? FlutterTencentadChannel.other,
-      "personalized": personalized,
+      "personalized": personalized ?? FlutterTencentadPersonalized.show,
     });
   }
 
