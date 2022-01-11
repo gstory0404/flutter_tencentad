@@ -44,7 +44,8 @@ import 'package:flutter_tencentad/flutter_tencentad.dart';
 ```
 #### 2、Android
 SDK(4.441.1311)已配置插件中无需额外配置，只需要在android目录中AndroidManifest.xml配置
-插件不再默认集成权限
+
+插件1.1.4以后不再默认集成权限
 ```Java
 <manifest ···
     xmlns:tools="http://schemas.android.com/tools"
