@@ -43,18 +43,26 @@ flutter_tencentad: ^1.1.4
 import 'package:flutter_tencentad/flutter_tencentad.dart';
 ```
 #### 2、Android
-SDK(4.431.1301)已配置插件中无需额外配置，只需要在android目录中AndroidManifest.xml配置
+SDK(4.441.1311)已配置插件中无需额外配置，只需要在android目录中AndroidManifest.xml配置
+插件不再默认集成权限
 ```Java
 <manifest ···
     xmlns:tools="http://schemas.android.com/tools"
     ···>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
   <application
         tools:replace="android:label">
 ```
 
 #### 3、IOS
 
-SDK(4.13.32)已配置插件中，其余根据文档配置。因为使用PlatformView，在Info.plist加入
+SDK(4.13.41)已配置插件中，其余根据文档配置。因为使用PlatformView，在Info.plist加入
 ```
  <key>io.flutter.embedded_views_preview</key>
     <true/>

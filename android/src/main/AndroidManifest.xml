@@ -2,10 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
   package="com.gstory.flutter_tencentad">
 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <application>
         <provider
             android:name="com.qq.e.comm.GDTFileProvider"
