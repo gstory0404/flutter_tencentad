@@ -34,7 +34,7 @@ flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS
 #### 1、pubspec.yaml
 ```Dart
 //非聚合
-flutter_tencentad: ^1.1.3
+flutter_tencentad: 1.1.3
 //聚合
 flutter_tencentad: ^1.1.4
 ```
