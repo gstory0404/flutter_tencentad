@@ -107,11 +107,13 @@ internal class NativeExpressAdView(
             nativeExpressAdView?.setMediaListener(this)
         }
         LogUtil.e("数据加载成功 ${UIUtils.px2dip(activity,nativeExpressAdView?.width!!.toFloat())}  ${UIUtils.px2dip(activity,nativeExpressAdView?.height!!.toFloat())}")
-        nativeExpressAdView?.render()
-        if(mContainer?.childCount!! > 0){
-            mContainer?.removeAllViews()
+        if(nativeExpressAdView != null){
+            if(mContainer?.childCount!! > 0){
+                mContainer?.removeAllViews()
+            }
+            mContainer?.addView(nativeExpressAdView!!.rootView)
+            nativeExpressAdView!!.render()
         }
-        mContainer?.addView(nativeExpressAdView!!)
     }
 
     //NativeExpressADView 渲染广告失败
