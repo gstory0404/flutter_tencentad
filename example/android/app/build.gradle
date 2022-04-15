@@ -42,7 +42,9 @@ android {
     }
 
     signingConfigs {
+        config {
 
+        }
     }
 
 

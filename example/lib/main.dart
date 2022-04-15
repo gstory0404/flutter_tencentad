@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                   //android广告id
                   androidId: "5042816813706194",
                   //ios广告id
-                  iosId: "8062535056034159",
+                  iosId: "5083426726434762",
                   //用户id
                   userID: "123",
                   //奖励
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                   //android广告id
                   androidId: "9062813863614416",
                   //ios广告id
-                  iosId: "1052938046031440",
+                  iosId: "9083924706438985",
                   //是否全屏
                   isFullScreen: false,
                 );
@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                     //android广告id
                     androidId: "5022012853615967",
                     //ios广告id
-                    iosId: "1082430066438422",
+                    iosId: "7003920796330973",
                     isFullScreen: true);
               },
             ),
@@ -182,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                   //android广告id
                     androidId: "7002176717594059",
                     //ios广告id
-                    iosId: "8072071757391116",
+                    iosId: "5083426726434762",
                     isFullScreen: true);
               },
             ),

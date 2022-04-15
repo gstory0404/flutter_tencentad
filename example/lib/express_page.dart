@@ -31,7 +31,7 @@ class _ExpressPageState extends State<ExpressPage> {
                 //android广告id
                 androidId: "4072918853903023",
                 //ios广告id
-                iosId: "7082132016439065",
+                iosId: "3003126726737888",
                 //广告宽 单位dp
                 viewWidth: 400,
                 //广告高  单位dp
@@ -60,7 +60,7 @@ class _ExpressPageState extends State<ExpressPage> {
               //android广告id
               androidId: "4052216802299999",
               //ios广告id
-              iosId: "4022830016236204",
+              iosId: "3003126726737888",
               viewWidth: 228,
               viewHeight: 150,
             ),
@@ -70,7 +70,7 @@ class _ExpressPageState extends State<ExpressPage> {
               //android广告id
               androidId: "3062711883122271",
               //ios广告id
-              iosId: "4032136066438475",
+              iosId: "9013224776438964",
               viewWidth: 400,
               viewHeight: 300,
             ),
