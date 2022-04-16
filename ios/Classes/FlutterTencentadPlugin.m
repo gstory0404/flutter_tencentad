@@ -2,7 +2,7 @@
 #import "GDTSDKConfig.h"
 #import "FlutterTencentAdEvent.h"
 #import "RewardAd.h"
-#import "LogUtil.h"
+#import "TLogUtil.h"
 #import "InsertAd.h"
 #import "SplashAd.h"
 #import "BannerAd.h"
@@ -37,7 +37,7 @@
         [GDTSDKConfig setPersonalizedState:personalized];
         //渠道id
         [GDTSDKConfig setChannel:channelId];
-        [[LogUtil sharedInstance] debug:debug];
+        [[TLogUtil sharedInstance] debug:debug];
         result([NSNumber numberWithBool:isInit]);
     }else if([@"getSDKVersion" isEqualToString:call.method]){
         NSString *version = [GDTSDKConfig sdkVersion];

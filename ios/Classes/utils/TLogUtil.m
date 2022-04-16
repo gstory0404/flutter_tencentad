@@ -6,19 +6,19 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LogUtil.h"
+#import "TLogUtil.h"
 
-@interface LogUtil()
+@interface TLogUtil()
 @property(nonatomic,assign) BOOL isDebug;
 @end
 
 
-@implementation LogUtil
+@implementation TLogUtil
 
 + (instancetype)sharedInstance{
-    static LogUtil *myInstance = nil;
+    static TLogUtil *myInstance = nil;
     if(myInstance == nil){
-        myInstance = [[LogUtil alloc]init];
+        myInstance = [[TLogUtil alloc]init];
     }
     return myInstance;
 }

@@ -8,7 +8,7 @@
 #import "RewardAd.h"
 #import "GDTRewardVideoAd.h"
 #import "FlutterTencentAdEvent.h"
-#import "LogUtil.h"
+#import "TLogUtil.h"
 #import "UIViewController+getCurrentVC.h"
 
 @interface RewardAd()<GDTRewardedVideoAdDelegate>
@@ -53,13 +53,13 @@
 //展示广告
 -(void)showAd{
     if (_reward.expiredTimestamp <= [[NSDate date] timeIntervalSince1970]) {
-        [[LogUtil sharedInstance] print:(@"广告已过期，请重新拉取")];
+        [[TLogUtil sharedInstance] print:(@"广告已过期，请重新拉取")];
         NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onFail",@"code":@(-1),@"message":@"广告已过期，请重新拉取"};
         [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
         return;
     }
     if (!_reward.isAdValid) {
-        [[LogUtil sharedInstance] print:(@"广告失效，请重新拉取")];
+        [[TLogUtil sharedInstance] print:(@"广告失效，请重新拉取")];
         NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onFail",@"code":@(-1),@"message":@"广告失效，请重新拉取"};
         [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
         return;
@@ -75,7 +75,7 @@
  @param rewardedVideoAd GDTRewardVideoAd 实例
  */
 - (void)gdt_rewardVideoAdDidLoad:(GDTRewardVideoAd *)rewardedVideoAd{
-    [[LogUtil sharedInstance] print:(@"激励广告数据加载成功")];
+    [[TLogUtil sharedInstance] print:(@"激励广告数据加载成功")];
     NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onReady"};
     [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
 }
@@ -86,7 +86,7 @@
  @param rewardedVideoAd GDTRewardVideoAd 实例
  */
 - (void)gdt_rewardVideoAdVideoDidLoad:(GDTRewardVideoAd *)rewardedVideoAd{
-    [[LogUtil sharedInstance] print:(@"激励广告视频数据下载成功")];
+    [[TLogUtil sharedInstance] print:(@"激励广告视频数据下载成功")];
 }
 
 /**
@@ -95,7 +95,7 @@
  @param rewardedVideoAd GDTRewardVideoAd 实例
  */
 - (void)gdt_rewardVideoAdWillVisible:(GDTRewardVideoAd *)rewardedVideoAd{
-    [[LogUtil sharedInstance] print:(@"激励广告视频播放页即将展示回调")];
+    [[TLogUtil sharedInstance] print:(@"激励广告视频播放页即将展示回调")];
 }
 
 /**
@@ -104,7 +104,7 @@
  @param rewardedVideoAd GDTRewardVideoAd 实例
  */
 - (void)gdt_rewardVideoAdDidExposed:(GDTRewardVideoAd *)rewardedVideoAd{
-    [[LogUtil sharedInstance] print:(@"激励广告曝光")];
+    [[TLogUtil sharedInstance] print:(@"激励广告曝光")];
     NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onExpose"};
     [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
 }
@@ -115,7 +115,7 @@
  @param rewardedVideoAd GDTRewardVideoAd 实例
  */
 - (void)gdt_rewardVideoAdDidClose:(GDTRewardVideoAd *)rewardedVideoAd{
-    [[LogUtil sharedInstance] print:(@"激励广告关闭")];
+    [[TLogUtil sharedInstance] print:(@"激励广告关闭")];
     NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onClose"};
     [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
 }
@@ -126,7 +126,7 @@
  @param rewardedVideoAd GDTRewardVideoAd 实例
  */
 - (void)gdt_rewardVideoAdDidClicked:(GDTRewardVideoAd *)rewardedVideoAd{
-    [[LogUtil sharedInstance] print:(@"激励广告点击")];
+    [[TLogUtil sharedInstance] print:(@"激励广告点击")];
     NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onClick"};
     [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
 }
@@ -138,7 +138,7 @@
  @param error 具体错误信息
  */
 - (void)gdt_rewardVideoAd:(GDTRewardVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error{
-    [[LogUtil sharedInstance] print:(@"激励广告错误,%@",error.userInfo)];
+    [[TLogUtil sharedInstance] print:(@"激励广告错误,%@",error.userInfo)];
     NSInteger code = error.code;
     NSString *message = error.userInfo;
     NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onFail",@"code":@(code),@"message":message};
@@ -162,7 +162,7 @@
  @param info 包含此次广告行为的一些信息，例如 @{@"GDT_TRANS_ID":@"930f1fc8ac59983bbdf4548ee40ac353"}, 通过@“GDT_TRANS_ID”可获取此次广告行为的交易id
  */
 - (void)gdt_rewardVideoAdDidRewardEffective:(GDTRewardVideoAd *)rewardedVideoAd info:(NSDictionary *)info{
-    [[LogUtil sharedInstance] print:(@"激励广告视频广告播放达到激励条件")];
+    [[TLogUtil sharedInstance] print:(@"激励广告视频广告播放达到激励条件")];
     NSString *transId = info[@"GDT_TRANS_ID"];
     NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onVerify",@"transId":transId,@"rewardAmount":_rewardAmount,@"rewardName":_rewardName};
     [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
@@ -174,7 +174,7 @@
  @param rewardedVideoAd GDTRewardVideoAd 实例
  */
 - (void)gdt_rewardVideoAdDidPlayFinish:(GDTRewardVideoAd *)rewardedVideoAd{
-    [[LogUtil sharedInstance] print:(@"激励广告视频广告视频播放完成")];
+    [[TLogUtil sharedInstance] print:(@"激励广告视频广告视频播放完成")];
     NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onFinish"};
     [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
 }

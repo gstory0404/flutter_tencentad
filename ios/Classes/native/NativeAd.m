@@ -7,9 +7,8 @@
 
 #import "NativeAd.h"
 #import "GDTNativeExpressAd.h"
-#import "LogUtil.h"
+#import "TLogUtil.h"
 #import "UIViewController+getCurrentVC.h"
-#import "LogUtil.h"
 #import "GDTNativeExpressAdView.h"
 
 #pragma mark - NaitveAdFactory
@@ -52,7 +51,6 @@
 @implementation NativeAd
 
 - (instancetype)initWithWithFrame:(CGRect)frame viewIdentifier:(int64_t)viewId arguments:(id)args binaryMessenger:(NSObject<FlutterBinaryMessenger> *)messenger{
-    [[LogUtil sharedInstance] print:@"111"];
     if ([super init]) {
         NSDictionary *dic = args;
         _frame = frame;
@@ -87,7 +85,7 @@
  * 拉取原生模板广告成功
  */
 - (void)nativeExpressAdSuccessToLoad:(GDTNativeExpressAd *)nativeExpressAd views:(NSArray<__kindof GDTNativeExpressAdView *> *)views{
-    [[LogUtil sharedInstance] print:@"拉取原生模板广告成功"];
+    [[TLogUtil sharedInstance] print:@"拉取原生模板广告成功"];
     if (views.count) {
            [views enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                GDTNativeExpressAdView *expressView = (GDTNativeExpressAdView *)obj;
@@ -109,7 +107,7 @@
  * 拉取原生模板广告失败
  */
 - (void)nativeExpressAdFailToLoad:(GDTNativeExpressAd *)nativeExpressAd error:(NSError *)error{
-    [[LogUtil sharedInstance] print:(@"拉取原生模板广告失败 %@",error.userInfo)];
+    [[TLogUtil sharedInstance] print:(@"拉取原生模板广告失败 %@",error.userInfo)];
 //    NSDictionary *dictionary = @{@"code":@(-1),@"message":(@"%@",error)};
 //    [_channel invokeMethod:@"onFail" arguments:dictionary result:nil];
 }
@@ -119,7 +117,7 @@
  * 原生模板广告渲染成功, 此时的 nativeExpressAdView.size.height 根据 size.width 完成了动态更新。
  */
 - (void)nativeExpressAdViewRenderSuccess:(GDTNativeExpressAdView *)nativeExpressAdView{
-    [[LogUtil sharedInstance] print:@"原生模板广告渲染成功"];
+    [[TLogUtil sharedInstance] print:@"原生模板广告渲染成功"];
    
     NSDictionary *dictionary = @{@"width": @(nativeExpressAdView.frame.size.width),@"height":@(nativeExpressAdView.frame.size.height)};
     [_channel invokeMethod:@"onShow" arguments:dictionary result:nil];
@@ -130,7 +128,7 @@
  * 原生模板广告渲染失败
  */
 - (void)nativeExpressAdViewRenderFail:(GDTNativeExpressAdView *)nativeExpressAdView{
-    [[LogUtil sharedInstance] print:@"原生模板广告渲染失败"];
+    [[TLogUtil sharedInstance] print:@"原生模板广告渲染失败"];
     NSDictionary *dictionary = @{@"code":@(-1),@"message":@"原生模板广告渲染失败"};
     [_channel invokeMethod:@"onFail" arguments:dictionary result:nil];
 }
@@ -140,7 +138,7 @@
  * 原生模板广告曝光回调
  */
 - (void)nativeExpressAdViewExposure:(GDTNativeExpressAdView *)nativeExpressAdView{
-    [[LogUtil sharedInstance] print:@"原生模板广告曝光回调"];
+    [[TLogUtil sharedInstance] print:@"原生模板广告曝光回调"];
     [_channel invokeMethod:@"onExpose" arguments:nil result:nil];
 }
 
@@ -149,7 +147,7 @@
  * 原生模板广告点击回调
  */
 - (void)nativeExpressAdViewClicked:(GDTNativeExpressAdView *)nativeExpressAdView{
-    [[LogUtil sharedInstance] print:@"原生模板广告点击回调"];
+    [[TLogUtil sharedInstance] print:@"原生模板广告点击回调"];
     [_channel invokeMethod:@"onClick" arguments:nil result:nil];
 }
 
@@ -158,7 +156,7 @@
  * 原生模板广告被关闭
  */
 - (void)nativeExpressAdViewClosed:(GDTNativeExpressAdView *)nativeExpressAdView{
-    [[LogUtil sharedInstance] print:@"原生模板广告被关闭"];
+    [[TLogUtil sharedInstance] print:@"原生模板广告被关闭"];
     [_channel invokeMethod:@"onClose" arguments:nil result:nil];
 }
 
@@ -167,7 +165,7 @@
  * 点击原生模板广告以后即将弹出全屏广告页
  */
 - (void)nativeExpressAdViewWillPresentScreen:(GDTNativeExpressAdView *)nativeExpressAdView{
-    [[LogUtil sharedInstance] print:@"点击原生模板广告以后即将弹出全屏广告页"];
+    [[TLogUtil sharedInstance] print:@"点击原生模板广告以后即将弹出全屏广告页"];
 }
 
 
@@ -175,7 +173,7 @@
  * 点击原生模板广告以后弹出全屏广告页
  */
 - (void)nativeExpressAdViewDidPresentScreen:(GDTNativeExpressAdView *)nativeExpressAdView{
-    [[LogUtil sharedInstance] print:@"点击原生模板广告以后弹出全屏广告页"];
+    [[TLogUtil sharedInstance] print:@"点击原生模板广告以后弹出全屏广告页"];
 }
 
 
@@ -183,7 +181,7 @@
  * 全屏广告页将要关闭
  */
 - (void)nativeExpressAdViewWillDismissScreen:(GDTNativeExpressAdView *)nativeExpressAdView{
-    [[LogUtil sharedInstance] print:@"全屏广告页将要关闭"];
+    [[TLogUtil sharedInstance] print:@"全屏广告页将要关闭"];
 }
 
 
@@ -191,7 +189,7 @@
  * 全屏广告页将要关闭
  */
 - (void)nativeExpressAdViewDidDismissScreen:(GDTNativeExpressAdView *)nativeExpressAdView{
-    [[LogUtil sharedInstance] print:@"全屏广告页将要关闭"];
+    [[TLogUtil sharedInstance] print:@"全屏广告页将要关闭"];
 }
 
 
@@ -199,7 +197,7 @@
  * 详解:当点击应用下载或者广告调用系统程序打开时调用
  */
 - (void)nativeExpressAdViewApplicationWillEnterBackground:(GDTNativeExpressAdView *)nativeExpressAdView{
-    [[LogUtil sharedInstance] print:@"详解:当点击应用下载或者广告调用系统程序打开时调用"];
+    [[TLogUtil sharedInstance] print:@"详解:当点击应用下载或者广告调用系统程序打开时调用"];
 }
 
 
@@ -207,7 +205,7 @@
  * 原生模板视频广告 player 播放状态更新回调
  */
 - (void)nativeExpressAdView:(GDTNativeExpressAdView *)nativeExpressAdView playerStatusChanged:(GDTMediaPlayerStatus)status{
-    [[LogUtil sharedInstance] print:@"原生模板视频广告 player 播放状态更新回调"];
+    [[TLogUtil sharedInstance] print:@"原生模板视频广告 player 播放状态更新回调"];
 }
 
 
@@ -215,7 +213,7 @@
  * 原生视频模板详情页 WillPresent 回调
  */
 - (void)nativeExpressAdViewWillPresentVideoVC:(GDTNativeExpressAdView *)nativeExpressAdView{
-    [[LogUtil sharedInstance] print:@"原生视频模板详情页 WillPresent 回调"];
+    [[TLogUtil sharedInstance] print:@"原生视频模板详情页 WillPresent 回调"];
 }
 
 
@@ -223,7 +221,7 @@
  * 原生视频模板详情页 DidPresent 回调
  */
 - (void)nativeExpressAdViewDidPresentVideoVC:(GDTNativeExpressAdView *)nativeExpressAdView{
-    [[LogUtil sharedInstance] print:@"原生视频模板详情页 DidPresent 回调"];
+    [[TLogUtil sharedInstance] print:@"原生视频模板详情页 DidPresent 回调"];
 }
 
 
@@ -231,7 +229,7 @@
  * 原生视频模板详情页 WillDismiss 回调
  */
 - (void)nativeExpressAdViewWillDismissVideoVC:(GDTNativeExpressAdView *)nativeExpressAdView{
-    [[LogUtil sharedInstance] print:@" 原生视频模板详情页 WillDismiss 回调"];
+    [[TLogUtil sharedInstance] print:@" 原生视频模板详情页 WillDismiss 回调"];
 }
 
 
@@ -239,7 +237,7 @@
  * 原生视频模板详情页 DidDismiss 回调
  */
 - (void)nativeExpressAdViewDidDismissVideoVC:(GDTNativeExpressAdView *)nativeExpressAdView;{
-    [[LogUtil sharedInstance] print:@"原生视频模板详情页 DidDismiss 回调"];
+    [[TLogUtil sharedInstance] print:@"原生视频模板详情页 DidDismiss 回调"];
 }
 
 

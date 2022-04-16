@@ -7,9 +7,8 @@
 
 #import "BannerAd.h"
 #import "GDTUnifiedBannerView.h"
-#import "LogUtil.h"
+#import "TLogUtil.h"
 #import "UIViewController+getCurrentVC.h"
-#import "LogUtil.h"
 
 #pragma mark - BannerAdFactory
 
@@ -88,7 +87,7 @@
  *  当接收服务器返回的广告数据成功后调用该函数
  */
 - (void)unifiedBannerViewDidLoad:(GDTUnifiedBannerView *)unifiedBannerView{
-    [[LogUtil sharedInstance] print:@"请求广告条数据成功后调用"];
+    [[TLogUtil sharedInstance] print:@"请求广告条数据成功后调用"];
     [_channel invokeMethod:@"onShow" arguments:nil result:nil];
 }
 
@@ -97,7 +96,7 @@
  *  当接收服务器返回的广告数据失败后调用该函数
  */
 - (void)unifiedBannerViewFailedToLoad:(GDTUnifiedBannerView *)unifiedBannerView error:(NSError *)error{
-    [[LogUtil sharedInstance] print:@"请求广告条数据失败后调用"];
+    [[TLogUtil sharedInstance] print:@"请求广告条数据失败后调用"];
     NSDictionary *dictionary = @{@"code":@(-1),@"message":error.userInfo};
     [_channel invokeMethod:@"onFail" arguments:dictionary result:nil];
 }
@@ -106,7 +105,7 @@
  *  banner2.0曝光回调
  */
 - (void)unifiedBannerViewWillExpose:(GDTUnifiedBannerView *)unifiedBannerView{
-    [[LogUtil sharedInstance] print:@"banner2.0曝光回调"];
+    [[TLogUtil sharedInstance] print:@"banner2.0曝光回调"];
     [_channel invokeMethod:@"onExpose" arguments:nil result:nil];
 }
 
@@ -114,7 +113,7 @@
  *  banner2.0点击回调
  */
 - (void)unifiedBannerViewClicked:(GDTUnifiedBannerView *)unifiedBannerView{
-    [[LogUtil sharedInstance] print:@"banner2.0点击回调"];
+    [[TLogUtil sharedInstance] print:@"banner2.0点击回调"];
     [_channel invokeMethod:@"onClick" arguments:nil result:nil];
 }
 
@@ -122,35 +121,35 @@
  *  banner2.0广告点击以后即将弹出全屏广告页
  */
 - (void)unifiedBannerViewWillPresentFullScreenModal:(GDTUnifiedBannerView *)unifiedBannerView{
-    [[LogUtil sharedInstance] print:@"banner2.0广告点击以后即将弹出全屏广告页"];
+    [[TLogUtil sharedInstance] print:@"banner2.0广告点击以后即将弹出全屏广告页"];
 }
 
 /**
  *  banner2.0广告点击以后弹出全屏广告页完毕
  */
 - (void)unifiedBannerViewDidPresentFullScreenModal:(GDTUnifiedBannerView *)unifiedBannerView{
-    [[LogUtil sharedInstance] print:@"banner2.0广告点击以后弹出全屏广告页完毕"];
+    [[TLogUtil sharedInstance] print:@"banner2.0广告点击以后弹出全屏广告页完毕"];
 }
 
 /**
  *  全屏广告页即将被关闭
  */
 - (void)unifiedBannerViewWillDismissFullScreenModal:(GDTUnifiedBannerView *)unifiedBannerView{
-    [[LogUtil sharedInstance] print:@"全屏广告页即将被关闭"];
+    [[TLogUtil sharedInstance] print:@"全屏广告页即将被关闭"];
 }
 
 /**
  *  全屏广告页已经被关闭
  */
 - (void)unifiedBannerViewDidDismissFullScreenModal:(GDTUnifiedBannerView *)unifiedBannerView{
-    [[LogUtil sharedInstance] print:@"全屏广告页已经被关闭"];
+    [[TLogUtil sharedInstance] print:@"全屏广告页已经被关闭"];
 }
 
 /**
  *  当点击应用下载或者广告调用系统程序打开
  */
 - (void)unifiedBannerViewWillLeaveApplication:(GDTUnifiedBannerView *)unifiedBannerView{
-    [[LogUtil sharedInstance] print:@"当点击应用下载或者广告调用系统程序打开"];
+    [[TLogUtil sharedInstance] print:@"当点击应用下载或者广告调用系统程序打开"];
 }
 
 /**
@@ -159,7 +158,7 @@
  *  若未启用轮播或不需要再展示，需在回调中将unifiedBannerView从父view移除置nil
  */
 - (void)unifiedBannerViewWillClose:(GDTUnifiedBannerView *)unifiedBannerView{
-    [[LogUtil sharedInstance] print:@"banner2.0被用户关闭时调用"];
+    [[TLogUtil sharedInstance] print:@"banner2.0被用户关闭时调用"];
     [_channel invokeMethod:@"onClose" arguments:nil result:nil];
 }
 

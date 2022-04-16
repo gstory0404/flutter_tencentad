@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LogUtil : NSObject
+@interface TLogUtil : NSObject
 + (instancetype)sharedInstance;
 - (void)debug:(BOOL)isDebug;
 - (void)print:(NSString *)message;
