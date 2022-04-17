@@ -8,7 +8,7 @@
 #import "NativeAd.h"
 #import "GDTNativeExpressAd.h"
 #import "TLogUtil.h"
-#import "UIViewController+getCurrentVC.h"
+#import "TUIViewController+getCurrentVC.h"
 #import "GDTNativeExpressAdView.h"
 
 #pragma mark - NaitveAdFactory

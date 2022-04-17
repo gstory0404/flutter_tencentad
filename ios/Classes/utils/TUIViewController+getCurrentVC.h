@@ -1,5 +1,5 @@
 //
-//  UIViewController+getCurrentVC.h
+//  TUIViewController+getCurrentVC.h
 //  ANChat
 //
 //  Created by gstory on 2021/12/1.

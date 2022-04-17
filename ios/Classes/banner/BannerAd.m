@@ -8,7 +8,7 @@
 #import "BannerAd.h"
 #import "GDTUnifiedBannerView.h"
 #import "TLogUtil.h"
-#import "UIViewController+getCurrentVC.h"
+#import "TUIViewController+getCurrentVC.h"
 
 #pragma mark - BannerAdFactory
 

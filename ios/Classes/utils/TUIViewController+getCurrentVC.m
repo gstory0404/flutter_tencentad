@@ -5,7 +5,7 @@
 //  Created by gstory on 2021/12/1.
 //
 
-#import "UIViewController+getCurrentVC.h"
+#import "TUIViewController+getCurrentVC.h"
 //#import "HNBasePresentationController.h"
 
 @implementation UIViewController (getCurrentVC)

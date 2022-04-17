@@ -9,7 +9,7 @@
 #import "GDTRewardVideoAd.h"
 #import "FlutterTencentAdEvent.h"
 #import "TLogUtil.h"
-#import "UIViewController+getCurrentVC.h"
+#import "TUIViewController+getCurrentVC.h"
 
 @interface RewardAd()<GDTRewardedVideoAdDelegate>
 
