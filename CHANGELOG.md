@@ -1,3 +1,6 @@
+## 1.1.7
+* 修复与flutter_pangrowth文件冲突问题
+
 ## 1.1.6
 * 降低andorid编译版本
 
