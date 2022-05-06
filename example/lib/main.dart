@@ -216,6 +216,15 @@ class _HomePageState extends State<HomePage> {
                 }));
               },
             ),
+            //动态信息流/横幅/视频贴片广告
+            MaterialButton(
+              color: Colors.blue,
+              textColor: Colors.white,
+              child: new Text('app下载列表'),
+              onPressed: () async {
+                await FlutterTencentad.enterAPPDownloadListPage();
+              },
+            ),
           ],
         ),
       ),

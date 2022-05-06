@@ -220,4 +220,9 @@ class FlutterTencentad {
       downloadConfirm: downloadConfirm ?? false,
     );
   }
+
+  ///进入APP下载列表页
+  static Future<bool> enterAPPDownloadListPage() async {
+    return await _channel.invokeMethod("enterAPPDownloadListPage", {});
+  }
 }

@@ -1,14 +1,13 @@
 package com.gstory.flutter_tencentad.splashad
 
 import android.app.Activity
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.gstory.flutter_tencentad.DownloadApkConfirmDialogWebView
+import com.gstory.flutter_tencentad.DownloadApkConfirmDialog
+import com.gstory.flutter_tencentad.DownloadConfirmHelper
 import com.gstory.flutter_tencentad.FlutterTencentAdConfig
 import com.gstory.flutter_tencentad.LogUtil
-import com.gstory.flutter_tencentad.UIUtils
 import com.qq.e.ads.splash.SplashAD
 import com.qq.e.ads.splash.SplashADListener
 import com.qq.e.comm.util.AdError
@@ -46,15 +45,6 @@ internal class SplashAdView(
     private fun loadSplashAd() {
         splashAD = SplashAD(activity, codeId, this, fetchDelay)
         mContainer?.removeAllViews()
-        if(downloadConfirm){
-            splashAD?.setDownloadConfirmListener { p0, p1, p2, p3 ->
-                DownloadApkConfirmDialogWebView(
-                    activity,
-                    p2,
-                    p3
-                ).show()
-            }
-        }
         splashAD?.fetchAndShowIn(mContainer)
     }
 
@@ -106,6 +96,9 @@ internal class SplashAdView(
     // 否则在showAd时会返回广告超时错误。
     override fun onADLoaded(p0: Long) {
         LogUtil.e("开屏广告加载成功 $p0")
+        if(downloadConfirm){
+            splashAD?.setDownloadConfirmListener(DownloadConfirmHelper.DOWNLOAD_CONFIRM_LISTENER)
+        }
     }
 
 

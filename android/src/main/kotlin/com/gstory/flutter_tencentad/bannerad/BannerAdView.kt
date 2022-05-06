@@ -4,14 +4,12 @@ import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.gstory.flutter_tencentad.DownloadApkConfirmDialogWebView
+import com.gstory.flutter_tencentad.DownloadApkConfirmDialog
+import com.gstory.flutter_tencentad.DownloadConfirmHelper
 import com.gstory.flutter_tencentad.FlutterTencentAdConfig
 import com.gstory.flutter_tencentad.LogUtil
-import com.gstory.flutter_tencentad.interstitialad.InterstitialAd
 import com.qq.e.ads.banner2.UnifiedBannerADListener
 import com.qq.e.ads.banner2.UnifiedBannerView
-import com.qq.e.comm.compliance.DownloadConfirmCallBack
-import com.qq.e.comm.compliance.DownloadConfirmListener
 import com.qq.e.comm.util.AdError
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
@@ -89,14 +87,8 @@ internal class BannerAdView(
             channel?.invokeMethod("onFail", map)
             return
         }
-        if(downloadConfirm){
-            unifiedBannerView?.setDownloadConfirmListener { p0, p1, p2, p3 ->
-                DownloadApkConfirmDialogWebView(
-                    activity,
-                    p2,
-                    p3
-                ).show()
-            }
+        if (downloadConfirm) {
+            unifiedBannerView?.setDownloadConfirmListener(DownloadConfirmHelper.DOWNLOAD_CONFIRM_LISTENER)
         }
         mContainer?.addView(unifiedBannerView)
         LogUtil.e("$TAG  Banner广告加载成功回调")

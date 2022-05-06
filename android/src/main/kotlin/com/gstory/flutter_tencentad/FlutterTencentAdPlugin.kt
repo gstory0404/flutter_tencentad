@@ -6,6 +6,7 @@ import androidx.annotation.NonNull
 import com.gstory.flutter_tencentad.interstitialad.InterstitialAd
 import com.gstory.flutter_tencentad.rewardvideoad.RewardVideoAd
 import com.gstory.flutter_unionad.FlutterTencentAdEventPlugin
+import com.qq.e.comm.DownloadService
 import com.qq.e.comm.managers.GDTAdSdk
 import com.qq.e.comm.managers.setting.GlobalSetting
 import com.qq.e.comm.managers.status.SDKStatus
@@ -87,6 +88,10 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             //展示插屏广告
         } else if (call.method == "showInterstitialAD") {
             InterstitialAd.showAd()
+            result.success(true)
+            //进入下载列表
+        } else if (call.method == "enterAPPDownloadListPage") {
+            DownloadService.enterAPPDownloadListPage(mActivity)
             result.success(true)
         } else {
             result.notImplemented()

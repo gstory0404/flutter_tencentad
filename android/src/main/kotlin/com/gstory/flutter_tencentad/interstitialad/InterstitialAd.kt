@@ -2,18 +2,13 @@ package com.gstory.flutter_tencentad.interstitialad
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
-import com.gstory.flutter_tencentad.DownloadApkConfirmDialogWebView
+import com.gstory.flutter_tencentad.DownloadApkConfirmDialog
+import com.gstory.flutter_tencentad.DownloadConfirmHelper
 import com.gstory.flutter_tencentad.LogUtil
-import com.gstory.flutter_tencentad.rewardvideoad.RewardVideoAd
 import com.qq.e.ads.interstitial2.UnifiedInterstitialAD
 import com.qq.e.ads.interstitial2.UnifiedInterstitialADListener
 import com.gstory.flutter_unionad.FlutterTencentAdEventPlugin
 import com.qq.e.ads.interstitial2.ADRewardListener
-import com.qq.e.ads.rewardvideo.RewardVideoAD
-import com.qq.e.ads.rewardvideo.ServerSideVerificationOptions
-import com.qq.e.comm.compliance.DownloadConfirmCallBack
-import com.qq.e.comm.compliance.DownloadConfirmListener
 import com.qq.e.comm.util.AdError
 
 @SuppressLint("StaticFieldLeak")
@@ -25,11 +20,13 @@ object InterstitialAd {
 
     private var codeId: String? = null
     private var isFullScreen: Boolean? = false
+    private var downloadConfirm: Boolean = false
 
     fun init(context: Activity, params: Map<*, *>) {
         this.context = context
         this.codeId = params["androidId"] as String
         this.isFullScreen = params["isFullScreen"] as Boolean
+        this.downloadConfirm = params["downloadConfirm"] as Boolean
         loadInterstitialAD()
     }
 
@@ -74,18 +71,10 @@ object InterstitialAd {
     private var interstitialADListener = object : UnifiedInterstitialADListener{
         //插屏全屏视频广告加载完毕，此回调后才可以调用 show 方法
         override fun onADReceive() {
-            LogUtil.e("$TAG  插屏全屏视频广告加载完毕")
-            unifiedInterstitialAD?.setDownloadConfirmListener(object : DownloadConfirmListener{
-                override fun onDownloadConfirm(
-                    p0: Activity?,
-                    p1: Int,
-                    p2: String?,
-                    p3: DownloadConfirmCallBack?
-                ) {
-                    DownloadApkConfirmDialogWebView(context,p2,p3).show()
-                }
-
-            })
+            LogUtil.e("$TAG  插屏全屏视频广告加载完毕  $downloadConfirm")
+            if(downloadConfirm){
+                unifiedInterstitialAD?.setDownloadConfirmListener(DownloadConfirmHelper.DOWNLOAD_CONFIRM_LISTENER)
+            }
         }
 
         //插屏全屏视频视频广告，视频素材下载完成

@@ -65,6 +65,8 @@ class _ExpressPageState extends State<ExpressPage> {
               iosId: "3003126726737888",
               viewWidth: 228,
               viewHeight: 150,
+              //下载二次确认弹窗 默认false
+              downloadConfirm: true,
             ),
             //视频贴片
             Text("视频贴片"),
@@ -75,6 +77,8 @@ class _ExpressPageState extends State<ExpressPage> {
               iosId: "9013224776438964",
               viewWidth: 400,
               viewHeight: 300,
+              //下载二次确认弹窗 默认false
+              downloadConfirm: true,
             ),
           ],
         ),

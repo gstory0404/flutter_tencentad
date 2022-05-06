@@ -4,16 +4,15 @@ import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.gstory.flutter_tencentad.DownloadApkConfirmDialogWebView
-import com.gstory.flutter_tencentad.FlutterTencentAdConfig
-import com.gstory.flutter_tencentad.LogUtil
-import com.gstory.flutter_tencentad.UIUtils
+import com.gstory.flutter_tencentad.*
 import com.qq.e.ads.cfg.DownAPPConfirmPolicy
 import com.qq.e.ads.cfg.VideoOption
 import com.qq.e.ads.nativ.ADSize
 import com.qq.e.ads.nativ.NativeExpressAD
 import com.qq.e.ads.nativ.NativeExpressADView
 import com.qq.e.ads.nativ.NativeExpressMediaListener
+import com.qq.e.comm.compliance.DownloadConfirmCallBack
+import com.qq.e.comm.compliance.DownloadConfirmListener
 import com.qq.e.comm.constants.AdPatternType
 import com.qq.e.comm.util.AdError
 import io.flutter.plugin.common.BinaryMessenger
@@ -27,12 +26,12 @@ import io.flutter.plugin.platform.PlatformView
  **/
 
 internal class NativeExpressAdView(
-        var activity: Activity,
-        messenger: BinaryMessenger?,
-        id: Int,
-        params: Map<String?, Any?>
+    var activity: Activity,
+    messenger: BinaryMessenger?,
+    id: Int,
+    params: Map<String?, Any?>
 ) :
-        PlatformView, NativeExpressAD.NativeExpressADListener, NativeExpressMediaListener {
+    PlatformView, NativeExpressAD.NativeExpressADListener, NativeExpressMediaListener {
 
     private var mContainer: FrameLayout? = null
 
@@ -69,10 +68,12 @@ internal class NativeExpressAdView(
             }
         }
         nativeExpressAD = NativeExpressAD(activity, adSize, codeId, this)
-        nativeExpressAD?.setVideoOption(VideoOption.Builder()
+        nativeExpressAD?.setVideoOption(
+            VideoOption.Builder()
                 .setAutoPlayPolicy(VideoOption.AutoPlayPolicy.ALWAYS)
                 .setAutoPlayMuted(true)
-                .build())
+                .build()
+        )
         nativeExpressAD?.setDownAPPConfirmPolicy(DownAPPConfirmPolicy.Default)
         nativeExpressAD?.loadAD(1)
     }
@@ -86,7 +87,8 @@ internal class NativeExpressAdView(
     //无广告填充
     override fun onNoAD(p0: AdError?) {
         LogUtil.e("广告加载失败  ${p0?.errorCode}  ${p0?.errorMsg}")
-        val map: MutableMap<String, Any?> = mutableMapOf("code" to p0?.errorCode, "message" to p0?.errorMsg)
+        val map: MutableMap<String, Any?> =
+            mutableMapOf("code" to p0?.errorCode, "message" to p0?.errorMsg)
         channel?.invokeMethod("onFail", map)
     }
 
@@ -98,7 +100,7 @@ internal class NativeExpressAdView(
             nativeExpressAdView?.destroy()
             nativeExpressAdView = null
         }
-        if(p0?.size == 0){
+        if (p0?.size == 0) {
             LogUtil.e("未拉取到广告")
             val map: MutableMap<String, Any?> = mutableMapOf("code" to 0, "message" to "未拉取到广告")
             channel?.invokeMethod("onFail", map)
@@ -108,18 +110,19 @@ internal class NativeExpressAdView(
         if (nativeExpressAdView?.boundData?.adPatternType == AdPatternType.NATIVE_VIDEO) {
             nativeExpressAdView?.setMediaListener(this)
         }
-        if(downloadConfirm){
-            nativeExpressAdView?.setDownloadConfirmListener { p0, p1, p2, p3 ->
-                DownloadApkConfirmDialogWebView(
-                    activity,
-                    p2,
-                    p3
-                ).show()
-            }
+        if (downloadConfirm) {
+            nativeExpressAdView?.setDownloadConfirmListener(DownloadConfirmHelper.DOWNLOAD_CONFIRM_LISTENER)
         }
-        LogUtil.e("数据加载成功 ${UIUtils.px2dip(activity,nativeExpressAdView?.width!!.toFloat())}  ${UIUtils.px2dip(activity,nativeExpressAdView?.height!!.toFloat())}")
-        if(nativeExpressAdView != null){
-            if(mContainer?.childCount!! > 0){
+        LogUtil.e(
+            "数据加载成功 ${
+                UIUtils.px2dip(
+                    activity,
+                    nativeExpressAdView?.width!!.toFloat()
+                )
+            }  ${UIUtils.px2dip(activity, nativeExpressAdView?.height!!.toFloat())}"
+        )
+        if (nativeExpressAdView != null) {
+            if (mContainer?.childCount!! > 0) {
                 mContainer?.removeAllViews()
             }
             mContainer?.addView(nativeExpressAdView!!.rootView)
@@ -137,7 +140,10 @@ internal class NativeExpressAdView(
 
     //NativeExpressADView 渲染广告成功
     override fun onRenderSuccess(p0: NativeExpressADView?) {
-        val map: MutableMap<String, Any?> = mutableMapOf("width" to UIUtils.px2dip(activity,p0?.width!!.toFloat()), "height" to UIUtils.px2dip(activity,p0?.height!!.toFloat()))
+        val map: MutableMap<String, Any?> = mutableMapOf(
+            "width" to UIUtils.px2dip(activity, p0?.width!!.toFloat()),
+            "height" to UIUtils.px2dip(activity, p0?.height!!.toFloat())
+        )
         channel?.invokeMethod("onShow", map)
     }
 

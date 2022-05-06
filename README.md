@@ -295,6 +295,11 @@ FlutterTencentAdStream.initAdStream(
 );
 ```
 
+#### 8、进入APP下载列表（仅android）
+```dart
+await FlutterTencentad.enterAPPDownloadListPage();
+```
+
 ## 错误码
 
 [错误码](https://developers.adnet.qq.com/doc/android/union/union_debug#sdk%20%E9%94%99%E8%AF%AF%E7%A0%81)

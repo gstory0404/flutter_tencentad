@@ -36,7 +36,7 @@ android {
 //        applicationId "com.gstory.flutter_tencentad_example"
         applicationId "com.hnnuomi.atree"
         minSdkVersion 16
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

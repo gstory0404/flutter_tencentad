@@ -2,10 +2,9 @@ package com.gstory.flutter_tencentad.rewardvideoad
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.ServiceConnection
-import com.gstory.flutter_tencentad.DownloadApkConfirmDialogWebView
+import com.gstory.flutter_tencentad.DownloadApkConfirmDialog
+import com.gstory.flutter_tencentad.DownloadConfirmHelper
 import com.gstory.flutter_tencentad.LogUtil
-import com.gstory.flutter_tencentad.interstitialad.InterstitialAd
 import com.gstory.flutter_unionad.FlutterTencentAdEventPlugin
 import com.qq.e.ads.rewardvideo.RewardVideoAD
 import com.qq.e.ads.rewardvideo.RewardVideoADListener
@@ -57,13 +56,7 @@ object RewardVideoAd {
         override fun onADLoad() {
             LogUtil.e("$TAG  激励广告加载成功")
             if(downloadConfirm){
-                rewardVideoAD?.setDownloadConfirmListener { p0, p1, p2, p3 ->
-                    DownloadApkConfirmDialogWebView(
-                        context,
-                        p2,
-                        p3
-                    ).show()
-                }
+                rewardVideoAD?.setDownloadConfirmListener(DownloadConfirmHelper.DOWNLOAD_CONFIRM_LISTENER)
             }
         }
 

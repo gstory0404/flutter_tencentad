@@ -23,7 +23,7 @@ import android.widget.ProgressBar;
 import com.qq.e.comm.compliance.DownloadConfirmCallBack;
 
 
-public class DownloadApkConfirmDialogWebView extends Dialog implements View.OnClickListener {
+public class DownloadApkConfirmDialog extends Dialog implements View.OnClickListener {
   private static final String TAG = "ConfirmDialogWebView";
   private Context context;
   private int orientation;
@@ -42,8 +42,8 @@ public class DownloadApkConfirmDialogWebView extends Dialog implements View.OnCl
   private static final String RELOAD_TEXT = "重新加载";
   private static final String LOAD_ERROR_TEXT = "抱歉，应用信息获取失败";
 
-  public DownloadApkConfirmDialogWebView(Context context, String infoUrl,
-                                         DownloadConfirmCallBack callBack) {
+  public DownloadApkConfirmDialog(Context context, String infoUrl,
+                                  DownloadConfirmCallBack callBack) {
     super(context, R.style.DownloadConfirmDialogFullScreen);//需要全屏显示，同时显示非窗口蒙版
     this.context = context;
     this.callBack = callBack;
@@ -86,7 +86,7 @@ public class DownloadApkConfirmDialogWebView extends Dialog implements View.OnCl
     try {
       loadUrl(url);
     } catch (Exception e) {
-      Log.e(DownloadApkConfirmDialogWebView.TAG, "load error url:" + url, e);
+      Log.e(DownloadApkConfirmDialog.TAG, "load error url:" + url, e);
     }
   }
 
