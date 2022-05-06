@@ -33,6 +33,8 @@ class _BannerPageState extends State<BannerPage> {
             viewWidth: 500,
             //广告高  单位dp   宽高比应该为6.4:1
             viewHeight: 100,
+            //下载二次确认弹窗 默认false
+            downloadConfirm: true,
             // 广告回调
             callBack: FlutterTencentadBannerCallBack(
               onShow: () {

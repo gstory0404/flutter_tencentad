@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import com.gstory.flutter_tencentad.DownloadApkConfirmDialogWebView
 import com.gstory.flutter_tencentad.FlutterTencentAdConfig
 import com.gstory.flutter_tencentad.LogUtil
 import com.gstory.flutter_tencentad.UIUtils
@@ -39,6 +40,7 @@ internal class NativeExpressAdView(
     private var codeId: String = params["androidId"] as String
     private var viewWidth: Int = params["viewWidth"] as Int
     private var viewHeight: Int = params["viewHeight"] as Int
+    private var downloadConfirm: Boolean = params["downloadConfirm"] as Boolean
 
     private var nativeExpressAD: NativeExpressAD? = null
     private var nativeExpressAdView: NativeExpressADView? = null
@@ -105,6 +107,15 @@ internal class NativeExpressAdView(
         nativeExpressAdView = p0!![0]
         if (nativeExpressAdView?.boundData?.adPatternType == AdPatternType.NATIVE_VIDEO) {
             nativeExpressAdView?.setMediaListener(this)
+        }
+        if(downloadConfirm){
+            nativeExpressAdView?.setDownloadConfirmListener { p0, p1, p2, p3 ->
+                DownloadApkConfirmDialogWebView(
+                    activity,
+                    p2,
+                    p3
+                ).show()
+            }
         }
         LogUtil.e("数据加载成功 ${UIUtils.px2dip(activity,nativeExpressAdView?.width!!.toFloat())}  ${UIUtils.px2dip(activity,nativeExpressAdView?.height!!.toFloat())}")
         if(nativeExpressAdView != null){

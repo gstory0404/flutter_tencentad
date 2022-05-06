@@ -15,6 +15,7 @@ class BannerAdView extends StatefulWidget {
   final double viewWidth;
   final double viewHeight;
   final FlutterTencentadBannerCallBack? callBack;
+  final bool downloadConfirm;
 
   const BannerAdView({
     Key? key,
@@ -23,6 +24,7 @@ class BannerAdView extends StatefulWidget {
     required this.viewWidth,
     required this.viewHeight,
     this.callBack,
+    required this.downloadConfirm
   }) : super(key: key);
 
   @override
@@ -58,6 +60,7 @@ class _BannerAdViewState extends State<BannerAdView> {
             "androidId": widget.androidId,
             "viewWidth": widget.viewWidth,
             "viewHeight": widget.viewHeight,
+            "downloadConfirm":widget.downloadConfirm,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),

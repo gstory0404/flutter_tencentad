@@ -30,31 +30,49 @@ class FlutterTencentAdStream {
         case FlutterTencentadType.rewardAd:
           switch (data[FlutterTencentadMethod.onAdMethod]) {
             case FlutterTencentadMethod.onShow:
-              flutterTencentadRewardCallBack?.onShow!();
+              if(flutterTencentadRewardCallBack?.onShow != null){
+                flutterTencentadRewardCallBack?.onShow!();
+              }
               break;
             case FlutterTencentadMethod.onClose:
-              flutterTencentadRewardCallBack?.onClose!();
+              if(flutterTencentadRewardCallBack?.onClose != null){
+                flutterTencentadRewardCallBack?.onClose!();
+              }
               break;
             case FlutterTencentadMethod.onFail:
-              flutterTencentadRewardCallBack?.onFail!(data["code"], data["message"]);
+              if(flutterTencentadRewardCallBack?.onFail != null){
+                flutterTencentadRewardCallBack?.onFail!(data["code"], data["message"]);
+              }
               break;
             case FlutterTencentadMethod.onClick:
-              flutterTencentadRewardCallBack?.onClick!();
+              if(flutterTencentadRewardCallBack?.onClick != null){
+                flutterTencentadRewardCallBack?.onClick!();
+              }
               break;
             case FlutterTencentadMethod.onVerify:
-              flutterTencentadRewardCallBack?.onVerify!(data["transId"],data["rewardName"],data["rewardAmount"]);
+              if(flutterTencentadRewardCallBack?.onVerify != null){
+                flutterTencentadRewardCallBack?.onVerify!(data["transId"],data["rewardName"],data["rewardAmount"]);
+              }
               break;
             case FlutterTencentadMethod.onFinish:
-              flutterTencentadRewardCallBack?.onFinish!();
+              if(flutterTencentadRewardCallBack?.onFinish != null){
+                flutterTencentadRewardCallBack?.onFinish!();
+              }
               break;
             case FlutterTencentadMethod.onReady:
-              flutterTencentadRewardCallBack?.onReady!();
+              if(flutterTencentadRewardCallBack?.onReady != null){
+                flutterTencentadRewardCallBack?.onReady!();
+              }
               break;
             case FlutterTencentadMethod.onUnReady:
-              flutterTencentadRewardCallBack?.onUnReady!();
+              if(flutterTencentadRewardCallBack?.onUnReady != null){
+                flutterTencentadRewardCallBack?.onUnReady!();
+              }
               break;
             case FlutterTencentadMethod.onExpose:
-              flutterTencentadRewardCallBack?.onExpose!();
+              if(flutterTencentadRewardCallBack?.onExpose != null){
+                flutterTencentadRewardCallBack?.onExpose!();
+              }
               break;
           }
           break;
@@ -62,28 +80,44 @@ class FlutterTencentAdStream {
         case FlutterTencentadType.interactAd:
           switch (data[FlutterTencentadMethod.onAdMethod]) {
             case FlutterTencentadMethod.onShow:
-              flutterTencentadInteractionCallBack?.onShow!();
+              if(flutterTencentadInteractionCallBack?.onShow != null){
+                flutterTencentadInteractionCallBack?.onShow!();
+              }
               break;
             case FlutterTencentadMethod.onClose:
-              flutterTencentadInteractionCallBack?.onClose!();
+              if(flutterTencentadInteractionCallBack?.onClose != null){
+                flutterTencentadInteractionCallBack?.onClose!();
+              }
               break;
             case FlutterTencentadMethod.onFail:
-              flutterTencentadInteractionCallBack?.onFail!(data["code"], data["message"]);
+              if(flutterTencentadInteractionCallBack?.onFail != null){
+                flutterTencentadInteractionCallBack?.onFail!(data["code"], data["message"]);
+              }
               break;
             case FlutterTencentadMethod.onClick:
-              flutterTencentadInteractionCallBack?.onClick!();
+              if(flutterTencentadInteractionCallBack?.onClick != null){
+                flutterTencentadInteractionCallBack?.onClick!();
+              }
               break;
             case FlutterTencentadMethod.onExpose:
-              flutterTencentadInteractionCallBack?.onExpose!();
+              if(flutterTencentadInteractionCallBack?.onExpose != null){
+                flutterTencentadInteractionCallBack?.onExpose!();
+              }
               break;
             case FlutterTencentadMethod.onReady:
-              flutterTencentadInteractionCallBack?.onReady!();
+              if(flutterTencentadInteractionCallBack?.onReady != null){
+                flutterTencentadInteractionCallBack?.onReady!();
+              }
               break;
             case FlutterTencentadMethod.onUnReady:
-              flutterTencentadInteractionCallBack?.onUnReady!();
+              if(flutterTencentadInteractionCallBack?.onUnReady != null){
+                flutterTencentadInteractionCallBack?.onUnReady!();
+              }
               break;
             case FlutterTencentadMethod.onVerify:
-              flutterTencentadInteractionCallBack?.onVerify!(data["transId"],"",0);
+              if(flutterTencentadInteractionCallBack?.onVerify != null){
+                flutterTencentadInteractionCallBack?.onVerify!(data["transId"],"",0);
+              }
           }
           break;
       }

@@ -66,6 +66,8 @@ class FlutterTencentad {
   ///
   /// [customData] 扩展参数，服务器回调使用
   ///
+  /// [downloadConfirm] 下载二次确认弹窗 默认false
+  ///
   static Future<bool> loadRewardVideoAd({
     required String androidId,
     required String iosId,
@@ -73,6 +75,7 @@ class FlutterTencentad {
     required int rewardAmount,
     required String userID,
     String? customData,
+    bool? downloadConfirm,
   }) async {
     return await _channel.invokeMethod("loadRewardVideoAd", {
       "androidId": androidId,
@@ -81,6 +84,7 @@ class FlutterTencentad {
       "rewardAmount": rewardAmount,
       "userID": userID,
       "customData": customData ?? "",
+      "downloadConfirm": downloadConfirm ?? false,
     });
   }
 
@@ -100,15 +104,19 @@ class FlutterTencentad {
   ///
   ///  [isFullScreen] 是否全屏
   ///
+  /// [downloadConfirm] 下载二次确认弹窗 默认false
+  ///
   static Future<bool> loadUnifiedInterstitialAD({
     required String androidId,
     required String iosId,
     required bool isFullScreen,
+    bool? downloadConfirm,
   }) async {
     return await _channel.invokeMethod("loadInterstitialAD", {
       "androidId": androidId,
       "iosId": iosId,
       "isFullScreen": isFullScreen,
+      "downloadConfirm": downloadConfirm ?? false,
     });
   }
 
@@ -132,11 +140,14 @@ class FlutterTencentad {
   ///
   /// [FlutterTencentAdBannerCallBack]  广告回调
   ///
+  /// [downloadConfirm] 下载二次确认弹窗 默认false
+  ///
   static Widget bannerAdView(
-      { required String androidId,
-        required String iosId,
+      {required String androidId,
+      required String iosId,
       required double viewWidth,
       required double viewHeight,
+      bool? downloadConfirm,
       FlutterTencentadBannerCallBack? callBack}) {
     return BannerAdView(
       androidId: androidId,
@@ -144,6 +155,7 @@ class FlutterTencentad {
       viewWidth: viewWidth,
       viewHeight: viewHeight,
       callBack: callBack,
+      downloadConfirm: downloadConfirm ?? false,
     );
   }
 
@@ -160,16 +172,20 @@ class FlutterTencentad {
   ///
   /// [FlutterTencentAdSplashCallBack] 广告回调
   ///
+  /// [downloadConfirm] 下载二次确认弹窗 默认false
+  ///
   static Widget splashAdView(
       {required String androidId,
-        required String iosId,
+      required String iosId,
       required int fetchDelay,
+      bool? downloadConfirm,
       FlutterTencentadSplashCallBack? callBack}) {
     return SplashAdView(
       androidId: androidId,
       iosId: iosId,
       fetchDelay: fetchDelay,
       callBack: callBack,
+      downloadConfirm: downloadConfirm ?? false,
     );
   }
 
@@ -186,11 +202,14 @@ class FlutterTencentad {
   ///
   /// [FlutterTencentAdExpressCallBack] 回调事件
   ///
+  /// [downloadConfirm] 下载二次确认弹窗 默认false
+  ///
   static Widget expressAdView(
       {required String androidId,
-        required String iosId,
+      required String iosId,
       required int viewWidth,
       required int viewHeight,
+      bool? downloadConfirm,
       FlutterTencentadExpressCallBack? callBack}) {
     return ExpressAdView(
       androidId: androidId,
@@ -198,6 +217,7 @@ class FlutterTencentad {
       viewWidth: viewWidth,
       viewHeight: viewHeight,
       callBack: callBack,
+      downloadConfirm: downloadConfirm ?? false,
     );
   }
 }

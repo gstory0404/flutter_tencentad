@@ -3,6 +3,7 @@ package com.gstory.flutter_tencentad.interstitialad
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import com.gstory.flutter_tencentad.DownloadApkConfirmDialogWebView
 import com.gstory.flutter_tencentad.LogUtil
 import com.gstory.flutter_tencentad.rewardvideoad.RewardVideoAd
 import com.qq.e.ads.interstitial2.UnifiedInterstitialAD
@@ -11,6 +12,8 @@ import com.gstory.flutter_unionad.FlutterTencentAdEventPlugin
 import com.qq.e.ads.interstitial2.ADRewardListener
 import com.qq.e.ads.rewardvideo.RewardVideoAD
 import com.qq.e.ads.rewardvideo.ServerSideVerificationOptions
+import com.qq.e.comm.compliance.DownloadConfirmCallBack
+import com.qq.e.comm.compliance.DownloadConfirmListener
 import com.qq.e.comm.util.AdError
 
 @SuppressLint("StaticFieldLeak")
@@ -72,6 +75,17 @@ object InterstitialAd {
         //插屏全屏视频广告加载完毕，此回调后才可以调用 show 方法
         override fun onADReceive() {
             LogUtil.e("$TAG  插屏全屏视频广告加载完毕")
+            unifiedInterstitialAD?.setDownloadConfirmListener(object : DownloadConfirmListener{
+                override fun onDownloadConfirm(
+                    p0: Activity?,
+                    p1: Int,
+                    p2: String?,
+                    p3: DownloadConfirmCallBack?
+                ) {
+                    DownloadApkConfirmDialogWebView(context,p2,p3).show()
+                }
+
+            })
         }
 
         //插屏全屏视频视频广告，视频素材下载完成

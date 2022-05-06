@@ -3,6 +3,7 @@ package com.gstory.flutter_tencentad.rewardvideoad
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.ServiceConnection
+import com.gstory.flutter_tencentad.DownloadApkConfirmDialogWebView
 import com.gstory.flutter_tencentad.LogUtil
 import com.gstory.flutter_tencentad.interstitialad.InterstitialAd
 import com.gstory.flutter_unionad.FlutterTencentAdEventPlugin
@@ -24,6 +25,7 @@ object RewardVideoAd {
     private var rewardName: String = ""
     private var rewardAmount: Int = 0
     private var customData: String = ""
+    private var downloadConfirm: Boolean = false
 
     fun init(context: Context, params: Map<*, *>) {
         this.context = context
@@ -32,6 +34,7 @@ object RewardVideoAd {
         this.rewardName = params["rewardName"] as String
         this.rewardAmount = params["rewardAmount"] as Int
         this.customData = params["customData"] as String
+        this.downloadConfirm = params["downloadConfirm"] as Boolean
         loadRewardVideoAd()
     }
 
@@ -53,6 +56,15 @@ object RewardVideoAd {
     private var rewardVideoADListener = object : RewardVideoADListener {
         override fun onADLoad() {
             LogUtil.e("$TAG  激励广告加载成功")
+            if(downloadConfirm){
+                rewardVideoAD?.setDownloadConfirmListener { p0, p1, p2, p3 ->
+                    DownloadApkConfirmDialogWebView(
+                        context,
+                        p2,
+                        p3
+                    ).show()
+                }
+            }
         }
 
         override fun onVideoCached() {

@@ -92,6 +92,8 @@ FlutterTencentad.splashAdView(
     iosId: "8012030096434021",
     ////设置开屏广告从请求到展示所花的最大时长（并不是指广告曝光时长），取值范围为[1500, 5000]ms
     fetchDelay: 3000,
+    //下载二次确认弹窗 默认false
+    downloadConfirm: true,
     //广告回调
     callBack: FlutterTencentadSplashCallBack(
     onShow: () {
@@ -127,6 +129,8 @@ FlutterTencentad.bannerAdView(
     viewWidth: 500,
     //广告高  单位dp   宽高比应该为6.4:1
     viewHeight: 100,
+    //下载二次确认弹窗 默认false
+    downloadConfirm: true,
     // 广告回调
     callBack: FlutterTencentadBannerCallBack(
         onShow: () {
@@ -160,6 +164,8 @@ FlutterTencentad.expressAdView(
               viewWidth: 400,
               //广告高  单位dp
               viewHeight: 300,
+              //下载二次确认弹窗 默认false
+               downloadConfirm: true,
               //回调事件
               callBack: FlutterTencentadExpressCallBack(
                 onShow: () {
@@ -197,6 +203,8 @@ await FlutterTencentad.loadRewardVideoAd(
     rewardAmount: 100,
     //扩展参数 服务器回调使用
     customData: ""
+    //下载二次确认弹窗 默认false
+    downloadConfirm: true,
 );
 ```
 显示激励视频广告
@@ -247,6 +255,8 @@ await FlutterTencentad.loadUnifiedInterstitialAD(
     iosId: "1052938046031440",
     //是否全屏
     isFullScreen: false,
+    //下载二次确认弹窗 默认false
+    downloadConfirm: true,
 );
 ```
 

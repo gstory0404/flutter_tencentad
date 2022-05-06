@@ -36,74 +36,61 @@ class _HomePageState extends State<HomePage> {
     _register();
     _adViewStream = FlutterTencentAdStream.initAdStream(
       //激励广告
-      flutterTencentadRewardCallBack: FlutterTencentadRewardCallBack(
-        onShow: () {
-          print("激励广告显示");
-        },
-        onClick: () {
-          print("激励广告点击");
-        },
-        onFail: (code, message) {
-          print("激励广告失败 $code $message");
-        },
-        onClose: () {
-          print("激励广告关闭");
-        },
-        onReady: () async {
-          print("激励广告预加载准备就绪");
-          await FlutterTencentad.showRewardVideoAd();
-        },
-        onUnReady: () {
-          print("激励广告预加载未准备就绪");
-        },
-        onVerify: (transId,rewardName,rewardAmount) {
-          print("激励广告奖励  $transId   $rewardName   $rewardAmount");
-        },
-        onExpose: () {
-          print("激励广告曝光");
-        },
-        onFinish: (){
-          print("激励广告完成");
-        }
-      ),
-      flutterTencentadInteractionCallBack: FlutterTencentadInteractionCallBack(
-        onShow: () {
-          print("插屏广告显示");
-        },
-        onClick: () {
-          print("插屏广告点击");
-        },
-        onFail: (code, message) {
-          print("插屏广告失败 $code $message");
-        },
-        onClose: () {
-          print("插屏广告关闭");
-        },
-        onExpose: () {
-          print("插屏广告曝光");
-        },
-        onReady: () async {
-          print("插屏广告预加载准备就绪");
-          await FlutterTencentad.showUnifiedInterstitialAD();
-        },
-        onUnReady: () {
-          print("插屏广告预加载未准备就绪");
-        },
-        onVerify: (transId,rewardName,rewardAmount){
-          print("广告奖励凭证id  $transId");
-        }
-      ),
+      flutterTencentadRewardCallBack:
+          FlutterTencentadRewardCallBack(onShow: () {
+        print("激励广告显示");
+      }, onClick: () {
+        print("激励广告点击");
+      }, onFail: (code, message) {
+        print("激励广告失败 $code $message");
+      }, onClose: () {
+        print("激励广告关闭");
+      }, onReady: () async {
+        print("激励广告预加载准备就绪");
+        await FlutterTencentad.showRewardVideoAd();
+      }, onUnReady: () {
+        print("激励广告预加载未准备就绪");
+      }, onVerify: (transId, rewardName, rewardAmount) {
+        print("激励广告奖励  $transId   $rewardName   $rewardAmount");
+      }, onExpose: () {
+        print("激励广告曝光");
+      }, onFinish: () {
+        print("激励广告完成");
+      }),
+      flutterTencentadInteractionCallBack:
+          FlutterTencentadInteractionCallBack(onShow: () {
+        print("插屏广告显示");
+      }, onClick: () {
+        print("插屏广告点击");
+      }, onFail: (code, message) {
+        print("插屏广告失败 $code $message");
+      }, onClose: () {
+        print("插屏广告关闭");
+      }, onExpose: () {
+        print("插屏广告曝光");
+      }, onReady: () async {
+        print("插屏广告预加载准备就绪");
+        await FlutterTencentad.showUnifiedInterstitialAD();
+      }, onUnReady: () {
+        print("插屏广告预加载未准备就绪");
+      }, onVerify: (transId, rewardName, rewardAmount) {
+        print("广告奖励凭证id  $transId");
+      }),
     );
   }
 
   ///初始化
   Future<void> _register() async {
     _isRegister = await FlutterTencentad.register(
-      androidId: "1200009850",//androidId
-      iosId: "1200082163", //iosId
-      debug: true, //是否显示日志log
-      personalized: FlutterTencentadPersonalized.show,//是否显示个性化推荐广告
-      channelId: FlutterTencentadChannel.other,//渠道id
+      androidId: "1200009850",
+      //androidId
+      iosId: "1200082163",
+      //iosId
+      debug: true,
+      //是否显示日志log
+      personalized: FlutterTencentadPersonalized.show,
+      //是否显示个性化推荐广告
+      channelId: FlutterTencentadChannel.other, //渠道id
     );
     _sdkVersion = await FlutterTencentad.getSDKVersion();
     setState(() {});
@@ -138,7 +125,9 @@ class _HomePageState extends State<HomePage> {
                   //奖励数
                   rewardAmount: 100,
                   //扩展参数 服务器回调使用
-                  customData: ""
+                  customData: "",
+                  //下载二次确认弹窗 默认false
+                  downloadConfirm: true,
                 );
               },
             ),
@@ -155,6 +144,8 @@ class _HomePageState extends State<HomePage> {
                   iosId: "9083924706438985",
                   //是否全屏
                   isFullScreen: false,
+                  //下载二次确认弹窗 默认false
+                  downloadConfirm: true,
                 );
               },
             ),
@@ -165,11 +156,14 @@ class _HomePageState extends State<HomePage> {
               child: new Text('插屏广告（全屏）'),
               onPressed: () async {
                 await FlutterTencentad.loadUnifiedInterstitialAD(
-                    //android广告id
-                    androidId: "5022012853615967",
-                    //ios广告id
-                    iosId: "7003920796330973",
-                    isFullScreen: true);
+                  //android广告id
+                  androidId: "5022012853615967",
+                  //ios广告id
+                  iosId: "7003920796330973",
+                  isFullScreen: true,
+                  //下载二次确认弹窗 默认false
+                  downloadConfirm: true,
+                );
               },
             ),
             //插屏广告（全屏）激励奖励
@@ -180,10 +174,13 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 await FlutterTencentad.loadUnifiedInterstitialAD(
                   //android广告id
-                    androidId: "7002176717594059",
-                    //ios广告id
-                    iosId: "5083426726434762",
-                    isFullScreen: true);
+                  androidId: "7002176717594059",
+                  //ios广告id
+                  iosId: "5083426726434762",
+                  isFullScreen: true,
+                  //下载二次确认弹窗 默认false
+                  downloadConfirm: true,
+                );
               },
             ),
             //Banner广告（平台模板）

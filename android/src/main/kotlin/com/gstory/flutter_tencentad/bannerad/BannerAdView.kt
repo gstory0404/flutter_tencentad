@@ -4,10 +4,14 @@ import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import com.gstory.flutter_tencentad.DownloadApkConfirmDialogWebView
 import com.gstory.flutter_tencentad.FlutterTencentAdConfig
 import com.gstory.flutter_tencentad.LogUtil
+import com.gstory.flutter_tencentad.interstitialad.InterstitialAd
 import com.qq.e.ads.banner2.UnifiedBannerADListener
 import com.qq.e.ads.banner2.UnifiedBannerView
+import com.qq.e.comm.compliance.DownloadConfirmCallBack
+import com.qq.e.comm.compliance.DownloadConfirmListener
 import com.qq.e.comm.util.AdError
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
@@ -20,12 +24,12 @@ import io.flutter.plugin.platform.PlatformView
  **/
 
 internal class BannerAdView(
-        var activity: Activity,
-        messenger: BinaryMessenger?,
-        id: Int,
-        params: Map<String?, Any?>
+    var activity: Activity,
+    messenger: BinaryMessenger?,
+    id: Int,
+    params: Map<String?, Any?>
 ) :
-        PlatformView, UnifiedBannerADListener {
+    PlatformView, UnifiedBannerADListener {
 
     private val TAG = "BannerAdView"
 
@@ -40,11 +44,14 @@ internal class BannerAdView(
 
     private var channel: MethodChannel?
 
+    private var downloadConfirm: Boolean
+
 
     init {
         codeId = params["androidId"] as String
         var width = params["viewWidth"] as Double
         var height = params["viewHeight"] as Double
+        downloadConfirm = params["downloadConfirm"] as Boolean
         viewWidth = width.toFloat()
         viewHeight = height.toFloat()
         mContainer = FrameLayout(activity)
@@ -67,18 +74,29 @@ internal class BannerAdView(
     //广告加载失败，error 对象包含了错误码和错误信息
     override fun onNoAD(p0: AdError?) {
         LogUtil.e("$TAG  Banner广告加载失败  ${p0?.errorCode}  ${p0?.errorMsg}")
-        var map: MutableMap<String, Any?> = mutableMapOf("code" to p0?.errorCode, "message" to p0?.errorMsg)
+        var map: MutableMap<String, Any?> =
+            mutableMapOf("code" to p0?.errorCode, "message" to p0?.errorMsg)
         channel?.invokeMethod("onFail", map)
     }
 
     //广告加载成功回调，表示广告相关的资源已经加载完毕，Ready To Show
     override fun onADReceive() {
         mContainer?.removeAllViews()
-        if(unifiedBannerView == null){
+        if (unifiedBannerView == null) {
             LogUtil.e("$TAG  Banner广告加载失败 unifiedBannerView不存在或已销毁")
-            var map: MutableMap<String, Any?> = mutableMapOf("code" to 0, "message" to "BannerView不存在或已销毁")
+            var map: MutableMap<String, Any?> =
+                mutableMapOf("code" to 0, "message" to "BannerView不存在或已销毁")
             channel?.invokeMethod("onFail", map)
             return
+        }
+        if(downloadConfirm){
+            unifiedBannerView?.setDownloadConfirmListener { p0, p1, p2, p3 ->
+                DownloadApkConfirmDialogWebView(
+                    activity,
+                    p2,
+                    p3
+                ).show()
+            }
         }
         mContainer?.addView(unifiedBannerView)
         LogUtil.e("$TAG  Banner广告加载成功回调")

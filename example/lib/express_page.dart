@@ -36,6 +36,8 @@ class _ExpressPageState extends State<ExpressPage> {
                 viewWidth: 400,
                 //广告高  单位dp
                 viewHeight: 300,
+                //下载二次确认弹窗 默认false
+                downloadConfirm: true,
                 //回调事件
                 callBack: FlutterTencentadExpressCallBack(
                   onShow: () {

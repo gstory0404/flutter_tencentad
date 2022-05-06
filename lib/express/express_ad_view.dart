@@ -15,6 +15,7 @@ class ExpressAdView extends StatefulWidget {
   final int viewWidth;
   final int viewHeight;
   final FlutterTencentadExpressCallBack? callBack;
+  final bool downloadConfirm;
 
   const ExpressAdView({
     Key? key,
@@ -23,6 +24,7 @@ class ExpressAdView extends StatefulWidget {
     required this.viewWidth,
     required this.viewHeight,
     this.callBack,
+    required this.downloadConfirm
   }) : super(key: key);
 
   @override
@@ -65,6 +67,7 @@ class _ExpressAdViewState extends State<ExpressAdView> {
             "androidId": widget.androidId,
             "viewWidth": widget.viewWidth,
             "viewHeight": widget.viewHeight,
+            "downloadConfirm":widget.downloadConfirm,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),

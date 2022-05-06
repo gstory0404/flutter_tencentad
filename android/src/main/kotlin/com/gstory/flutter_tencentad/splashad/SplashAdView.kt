@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import com.gstory.flutter_tencentad.DownloadApkConfirmDialogWebView
 import com.gstory.flutter_tencentad.FlutterTencentAdConfig
 import com.gstory.flutter_tencentad.LogUtil
 import com.gstory.flutter_tencentad.UIUtils
@@ -30,12 +31,11 @@ internal class SplashAdView(
     private var splashAD: SplashAD? = null
 
     //广告所需参数
-    private var codeId: String
-    private var fetchDelay: Int = 0
+    private var codeId: String = params["androidId"] as String
+    private var fetchDelay: Int = params["fetchDelay"] as Int
+    private var downloadConfirm: Boolean = params["downloadConfirm"] as Boolean
 
     init {
-        codeId = params["androidId"] as String
-        fetchDelay = params["fetchDelay"] as Int
         mContainer = FrameLayout(activity)
         mContainer?.layoutParams?.width = ViewGroup.LayoutParams.WRAP_CONTENT
         mContainer?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -46,6 +46,15 @@ internal class SplashAdView(
     private fun loadSplashAd() {
         splashAD = SplashAD(activity, codeId, this, fetchDelay)
         mContainer?.removeAllViews()
+        if(downloadConfirm){
+            splashAD?.setDownloadConfirmListener { p0, p1, p2, p3 ->
+                DownloadApkConfirmDialogWebView(
+                    activity,
+                    p2,
+                    p3
+                ).show()
+            }
+        }
         splashAD?.fetchAndShowIn(mContainer)
     }
 

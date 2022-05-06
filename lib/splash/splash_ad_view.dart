@@ -14,6 +14,7 @@ class SplashAdView extends StatefulWidget {
   final String iosId;
   final int fetchDelay;
   final FlutterTencentadSplashCallBack? callBack;
+  final bool downloadConfirm;
 
   const SplashAdView({
     Key? key,
@@ -21,6 +22,7 @@ class SplashAdView extends StatefulWidget {
     required this.iosId,
     required this.fetchDelay,
     this.callBack,
+    required this.downloadConfirm,
   }) : super(key: key);
 
   @override
@@ -55,6 +57,7 @@ class _SplashAdViewState extends State<SplashAdView> {
           creationParams: {
             "androidId": widget.androidId,
             "fetchDelay": widget.fetchDelay,
+            "downloadConfirm": widget.downloadConfirm,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),
