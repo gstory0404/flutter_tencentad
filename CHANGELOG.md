@@ -1,3 +1,7 @@
+## 1.2.0
+* 兼容Flutter3.0
+* ios升级4.13.65
+
 ## 1.1.7
 * 修复与flutter_pangrowth文件冲突问题
 

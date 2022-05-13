@@ -23,7 +23,7 @@ import io.flutter.plugin.platform.PlatformView
 
 internal class BannerAdView(
     var activity: Activity,
-    messenger: BinaryMessenger?,
+    messenger: BinaryMessenger,
     id: Int,
     params: Map<String?, Any?>
 ) :

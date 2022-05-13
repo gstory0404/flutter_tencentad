@@ -1,7 +1,7 @@
 # 腾讯优量汇(广点通)广告 Flutter版本
 
 <p>
-<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.1.7-success></a>
+<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.2.0-success></a>
 </p>
 
 ## 简介
@@ -20,20 +20,20 @@ flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS
 
 ## 本地环境
 ```
-[✓] Flutter (Channel stable, 2.2.3, on macOS 11.5.1 20G80 darwin-x64, locale zh-Hans-CN)
-[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.2)
-[✓] Xcode - develop for iOS and macOS
+[✓] Flutter (Channel stable, 3.0.0, on macOS 12.3.1 21E258 darwin-x64, locale zh-Hans-CN)
+[✓] Android toolchain - develop for Android devices (Android SDK version 33.0.0-rc1)
+[✓] Xcode - develop for iOS and macOS (Xcode 13.3.1)
 [✓] Chrome - develop for the web
-[✓] Android Studio (version 2020.3)
-[✓] VS Code (version 1.56.2)
-[✓] Connected device (2 available)
-
+[✓] Android Studio (version 2021.1)
+[✓] VS Code (version 1.66.2)
+[✓] Connected device (4 available)
+[✓] HTTP Host Availability
 ```
 
 ## 集成步骤
 #### 1、pubspec.yaml
 ```Dart
-flutter_tencentad: ^1.1.7
+flutter_tencentad: ^1.2.0
 ```
 引入
 ```Dart
@@ -60,7 +60,7 @@ SDK(4.460.1330)已配置插件中无需额外配置，只需要在android目录�
 
 #### 3、IOS
 
-SDK(4.13.62)已配置插件中，其余根据文档配置。因为使用PlatformView，在Info.plist加入
+SDK(4.13.65)已配置插件中，其余根据文档配置。因为使用PlatformView，在Info.plist加入
 ```
  <key>io.flutter.embedded_views_preview</key>
     <true/>
