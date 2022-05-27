@@ -20,12 +20,13 @@ flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS
 
 ## 本地环境
 ```
-[✓] Flutter (Channel stable, 3.0.0, on macOS 12.3.1 21E258 darwin-x64, locale zh-Hans-CN)
+[✓] Flutter (Channel stable, 3.0.1, on macOS 12.4 21F79 darwin-x64, locale zh-Hans-CN)
 [✓] Android toolchain - develop for Android devices (Android SDK version 33.0.0-rc1)
-[✓] Xcode - develop for iOS and macOS (Xcode 13.3.1)
+[✓] Xcode - develop for iOS and macOS (Xcode 13.4)
 [✓] Chrome - develop for the web
-[✓] Android Studio (version 2021.1)
-[✓] VS Code (version 1.66.2)
+[✓] Android Studio (version 2021.2)
+[✓] IntelliJ IDEA Ultimate Edition (version 2022.1.1)
+[✓] VS Code (version 1.67.1)
 [✓] Connected device (4 available)
 [✓] HTTP Host Availability
 ```
