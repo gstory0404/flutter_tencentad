@@ -1,3 +1,7 @@
+## 1.2.2
+* android升级[4.482.1352](https://developers.adnet.qq.com/doc/android/union/union_version)
+* ios升级[4.13.81](https://developers.adnet.qq.com/doc/ios/union/union_version)
+* 
 ## 1.2.1
 * android升级[4.13.65](https://developers.adnet.qq.com/doc/android/union/union_version)
 * ios升级[4.13.65](https://developers.adnet.qq.com/doc/ios/union/union_version)

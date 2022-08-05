@@ -28,7 +28,7 @@ class _BannerPageState extends State<BannerPage> {
             //android广告id
             androidId: "8042711873318113",
             //ios广告id
-            iosId: "3003321726231778",
+            iosId: "4043774915303757",
             //广告宽 单位dp
             viewWidth: 500,
             //广告高  单位dp   宽高比应该为6.4:1
@@ -58,7 +58,7 @@ class _BannerPageState extends State<BannerPage> {
               //android广告id
               androidId: "8042711873318113",
               //ios广告id
-              iosId: "7013623726731814",
+              iosId: "4043774915303757",
               viewWidth: 500,
               viewHeight: 200),
         ],

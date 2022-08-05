@@ -24,7 +24,7 @@ class _SplashPageState extends State<SplashPage> {
           //android广告id
           androidId: "4052216802299999",
           //ios广告id
-          iosId: "4063020736638922",
+          iosId: "3053975955207733",
           ////设置开屏广告从请求到展示所花的最大时长（并不是指广告曝光时长），取值范围为[1500, 5000]ms
           fetchDelay: 3000,
           //下载二次确认弹窗 默认false

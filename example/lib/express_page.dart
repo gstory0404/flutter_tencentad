@@ -31,7 +31,7 @@ class _ExpressPageState extends State<ExpressPage> {
                 //android广告id
                 androidId: "4072918853903023",
                 //ios广告id
-                iosId: "3003126726737888",
+                iosId: "6023578995600715",
                 //广告宽 单位dp
                 viewWidth: 400,
                 //广告高  单位dp
@@ -60,9 +60,9 @@ class _ExpressPageState extends State<ExpressPage> {
             Text("横幅-平台模板2.0"),
             FlutterTencentad.expressAdView(
               //android广告id
-              androidId: "4052216802299999",
+              androidId: "4072918853903023",
               //ios广告id
-              iosId: "3003126726737888",
+              iosId: "6023578995600715",
               viewWidth: 228,
               viewHeight: 150,
               //下载二次确认弹窗 默认false
@@ -72,9 +72,9 @@ class _ExpressPageState extends State<ExpressPage> {
             Text("视频贴片"),
             FlutterTencentad.expressAdView(
               //android广告id
-              androidId: "3062711883122271",
+              androidId: "9013670915436201",
               //ios广告id
-              iosId: "9013224776438964",
+              iosId: "4033278955532222",
               viewWidth: 400,
               viewHeight: 300,
               //下载二次确认弹窗 默认false

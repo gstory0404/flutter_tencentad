@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
     _isRegister = await FlutterTencentad.register(
       androidId: "1200009850",
       //androidId
-      iosId: "1200082163",
+      iosId: "1200718557",
       //iosId
       debug: true,
       //是否显示日志log
@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                   //android广告id
                   androidId: "5042816813706194",
                   //ios广告id
-                  iosId: "5083426726434762",
+                  iosId: "4023171869997790",
                   //用户id
                   userID: "123",
                   //奖励
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                   //android广告id
                   androidId: "9062813863614416",
                   //ios广告id
-                  iosId: "9083924706438985",
+                  iosId: "5093576955904702",
                   //是否全屏
                   isFullScreen: false,
                   //下载二次确认弹窗 默认false
@@ -157,9 +157,9 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 await FlutterTencentad.loadUnifiedInterstitialAD(
                   //android广告id
-                  androidId: "5022012853615967",
+                  androidId: "7002176717594059",
                   //ios广告id
-                  iosId: "7003920796330973",
+                  iosId: "9043571925301857",
                   isFullScreen: true,
                   //下载二次确认弹窗 默认false
                   downloadConfirm: true,
@@ -176,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                   //android广告id
                   androidId: "7002176717594059",
                   //ios广告id
-                  iosId: "5083426726434762",
+                  iosId: "9043571925301857",
                   isFullScreen: true,
                   //下载二次确认弹窗 默认false
                   downloadConfirm: true,
