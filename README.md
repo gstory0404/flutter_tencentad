@@ -318,6 +318,9 @@ await FlutterTencentad.enterAPPDownloadListPage();
 |文档预览插件|[file_preview](https://github.com/gstory0404/file_preview)|
 |滤镜|[gpu_image](https://github.com/gstory0404/gpu_image)|
 
+### 开源不易，觉得有用的话可以请作者喝杯奶茶🧋
+<img src="https://github.com/gstory0404/flutter_tencentad/blob/master/images/weixin.jpg" width = "200" height = "160" alt="打赏"/>
+
 ## 联系方式
 * Email: gstory0404@gmail.com
 * Blog：https://www.gstory.cn/
