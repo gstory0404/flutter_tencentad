@@ -43,10 +43,7 @@ android {
 
     signingConfigs {
         config {
-            storeFile file("..\\key\\treeKey.jks")
-            storePassword "mouqibaba233"
-            keyAlias "treeKey"
-            keyPassword "mouqibaba233"
+
         }
     }
 
