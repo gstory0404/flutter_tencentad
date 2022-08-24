@@ -69,8 +69,8 @@
  *  当接收服务器返回的广告数据失败后调用该函数
  */
 - (void)unifiedInterstitialFailToLoadAd:(GDTUnifiedInterstitialAd *)unifiedInterstitial error:(NSError *)error{
-    [[TLogUtil sharedInstance] print:(@"插屏2.0广告预加载失败回调 %@",error.userInfo)];
-    NSDictionary *dictionary = @{@"adType":@"interactAd",@"onAdMethod":@"onFail",@"code":@(-1),@"message":(@"%@",error.userInfo)};
+    [[TLogUtil sharedInstance] print:(@"插屏2.0广告预加载失败回调 %@",error.description)];
+    NSDictionary *dictionary = @{@"adType":@"interactAd",@"onAdMethod":@"onFail",@"code":@(-1),@"message":error.description};
     [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
 }
 
@@ -95,8 +95,8 @@
  *  插屏2.0广告渲染失败
  */
 - (void)unifiedInterstitialRenderFail:(GDTUnifiedInterstitialAd *)unifiedInterstitial error:(NSError *)error{
-    [[TLogUtil sharedInstance] print:(@"插屏2.0广告渲染失败 %@",error.userInfo)];
-    NSDictionary *dictionary = @{@"adType":@"interactAd",@"onAdMethod":@"onFail",@"code":@(-1),@"message":(@"插屏2.0广告渲染失败 %@",error.userInfo)};
+    [[TLogUtil sharedInstance] print:(@"插屏2.0广告渲染失败 %@",error.description)];
+    NSDictionary *dictionary = @{@"adType":@"interactAd",@"onAdMethod":@"onFail",@"code":@(-1),@"message":error.description};
     [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
 }
 
@@ -123,8 +123,8 @@
  *  插屏2.0广告展示失败回调该函数
  */
 - (void)unifiedInterstitialFailToPresent:(GDTUnifiedInterstitialAd *)unifiedInterstitial error:(NSError *)error{
-    [[TLogUtil sharedInstance] print:(@"插屏2.0广告视图展示失败回调 %@",error.userInfo)];
-    NSDictionary *dictionary = @{@"adType":@"interactAd",@"onAdMethod":@"onFail",@"code":@(-1),@"message":(@"%@",error.userInfo)};
+    [[TLogUtil sharedInstance] print:(@"插屏2.0广告视图展示失败回调 %@",error.description)];
+    NSDictionary *dictionary = @{@"adType":@"interactAd",@"onAdMethod":@"onFail",@"code":@(-1),@"message":error.description};
     [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
 }
 

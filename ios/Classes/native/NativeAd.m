@@ -107,7 +107,7 @@
  * 拉取原生模板广告失败
  */
 - (void)nativeExpressAdFailToLoad:(GDTNativeExpressAd *)nativeExpressAd error:(NSError *)error{
-    [[TLogUtil sharedInstance] print:(@"拉取原生模板广告失败 %@",error.userInfo)];
+    [[TLogUtil sharedInstance] print:(@"拉取原生模板广告失败 %@",error.description)];
 //    NSDictionary *dictionary = @{@"code":@(-1),@"message":(@"%@",error)};
 //    [_channel invokeMethod:@"onFail" arguments:dictionary result:nil];
 }

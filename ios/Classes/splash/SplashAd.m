@@ -102,7 +102,7 @@
  */
 - (void)splashAdFailToPresent:(GDTSplashAd *)splashAd withError:(NSError *)error{
     [[TLogUtil sharedInstance] print:@"开屏广告展示失败"];
-    NSDictionary *dictionary = @{@"code":@(-1),@"message":(@"广告展示失败%@",error.userInfo)};
+    NSDictionary *dictionary = @{@"code":@(-1),@"message":(@"广告展示失败%@",error.description)};
     [_channel invokeMethod:@"onFail" arguments:dictionary result:nil];
 }
 

@@ -138,9 +138,9 @@
  @param error 具体错误信息
  */
 - (void)gdt_rewardVideoAd:(GDTRewardVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error{
-    [[TLogUtil sharedInstance] print:(@"激励广告错误,%@",error.userInfo)];
+    [[TLogUtil sharedInstance] print:(@"激励广告错误,%@",error.description)];
     NSInteger code = error.code;
-    NSString *message = error.userInfo;
+    NSString *message = error.description;
     NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onFail",@"code":@(code),@"message":message};
     [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
 }

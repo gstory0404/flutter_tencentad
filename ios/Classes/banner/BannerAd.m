@@ -97,7 +97,7 @@
  */
 - (void)unifiedBannerViewFailedToLoad:(GDTUnifiedBannerView *)unifiedBannerView error:(NSError *)error{
     [[TLogUtil sharedInstance] print:@"请求广告条数据失败后调用"];
-    NSDictionary *dictionary = @{@"code":@(-1),@"message":error.userInfo};
+    NSDictionary *dictionary = @{@"code":@(-1),@"message":error.description};
     [_channel invokeMethod:@"onFail" arguments:dictionary result:nil];
 }
 
