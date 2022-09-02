@@ -48,7 +48,7 @@
         result(@YES);
         //显示激励广告
     }else if([@"showRewardVideoAd" isEqualToString:call.method]){
-        [[RewardAd sharedInstance] showAd];
+        [[RewardAd sharedInstance] showAd:call.arguments];
         result(@YES);
         //预加载插屏广告
     }else if([@"loadInterstitialAD" isEqualToString:call.method]){
@@ -56,7 +56,7 @@
         result(@YES);
         ////展示插屏广告
     }else if([@"showInterstitialAD" isEqualToString:call.method]){
-        [[InsertAd sharedInstance] showAd];
+        [[InsertAd sharedInstance] showAd:call.arguments];
         result(@YES);
     } else {
         result(FlutterMethodNotImplemented);

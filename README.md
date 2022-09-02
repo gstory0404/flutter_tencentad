@@ -1,4 +1,4 @@
-# 腾讯优量汇(广点通)广告 Flutter版本
+# 腾讯优量汇(广点通)广告 Flutter版本（支持bidding）
 
 <p>
 <a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.2.3-success></a>
@@ -86,41 +86,60 @@ await FlutterTencentad.getSDKVersion();
 
 #### 3、开屏广告
 ```Dart
+FlutterTencentAdBiddingController _bidding =
+new FlutterTencentAdBiddingController();
 FlutterTencentad.splashAdView(
     //android广告id
-    androidId: "4052216802299999",
+    androidId: widget.androidId,
     //ios广告id
-    iosId: "8012030096434021",
+    iosId: widget.iosId,
     ////设置开屏广告从请求到展示所花的最大时长（并不是指广告曝光时长），取值范围为[1500, 5000]ms
     fetchDelay: 3000,
     //下载二次确认弹窗 默认false
     downloadConfirm: true,
+    //是否开启竞价 默认不开启
+    isBidding: widget.isBidding,
+    //竞价结果回传
+    bidding: _bidding,
     //广告回调
-    callBack: FlutterTencentadSplashCallBack(
-    onShow: () {
-      print("开屏广告显示");
-    },
-    onADTick: (time) {
-      print("开屏广告倒计时剩余时间 $time");
-    },
-    onClick: () {
-      print("开屏广告点击");
-    },
-    onClose: () {
-      print("开屏广告关闭");
-      Navigator.pop(context);
-    },
-      onExpose: () {
-      print("开屏广告曝光");
-    },
-      onFail: (code, message) {
-      print("开屏广告失败  $code $message");
-},
-),
+    callBack: FlutterTencentadSplashCallBack(onShow: () {
+          print("开屏广告显示");
+        }, onADTick: (time) {
+          print("开屏广告倒计时剩余时间 $time");
+        }, onClick: () {
+          print("开屏广告点击");
+        }, onClose: () {
+          print("开屏广告关闭");
+          Navigator.pop(context);
+        }, onExpose: () {
+          print("开屏广告曝光");
+        }, onFail: (code, message) {
+          print("开屏广告失败  $code $message");
+          Navigator.pop(context);
+        }, onECPM: (ecpmLevel, ecpm) {
+          print("开屏广告竞价  ecpmLevel=$ecpmLevel  ecpm=$ecpm");
+            //规则 自己根据业务处理
+            if (ecpm > 0) {
+            //竞胜出价，类型为Integer
+            //最大竞败方出价，类型为Integer
+            _bidding.biddingResult(
+            FlutterTencentBiddingResult().success(ecpm, 0));
+            } else {
+            //竞胜方出价（单位：分），类型为Integer
+            //优量汇广告竞败原因 FlutterTencentAdBiddingLossReason
+            //竞胜方渠道ID FlutterTencentAdADNID
+            _bidding.biddingResult(FlutterTencentBiddingResult().fail(
+            1000,
+            FlutterTencentAdBiddingLossReason.LOW_PRICE,
+            FlutterTencentAdADNID.othoerADN));
+            }
+        }),
 ),
 ```
 #### 4、banner广告
 ```Dart
+FlutterTencentAdBiddingController _bidding =
+new FlutterTencentAdBiddingController();
 FlutterTencentad.bannerAdView(
     //android广告id
     androidId: "8042711873318113",
@@ -132,6 +151,10 @@ FlutterTencentad.bannerAdView(
     viewHeight: 100,
     //下载二次确认弹窗 默认false
     downloadConfirm: true,
+    //是否开启竞价 默认不开启
+    isBidding: widget.isBidding,
+    //竞价结果回传
+    bidding: _bidding,
     // 广告回调
     callBack: FlutterTencentadBannerCallBack(
         onShow: () {
@@ -148,6 +171,23 @@ FlutterTencentad.bannerAdView(
         },
         onClick: () {
           print("Banner广告点击");
+        }, onECPM: (ecpmLevel, ecpm) {
+            print("Banner广告竞价  ecpmLevel=$ecpmLevel  ecpm=$ecpm");
+            //规则 自己根据业务处理
+            if (ecpm > 0) {
+                //竞胜出价，类型为Integer
+                //最大竞败方出价，类型为Integer
+                _bidding.biddingResult(
+                FlutterTencentBiddingResult().success(ecpm, 0));
+            } else {
+                //竞胜方出价（单位：分），类型为Integer
+                //优量汇广告竞败原因 FlutterTencentAdBiddingLossReason
+                //竞胜方渠道ID FlutterTencentAdADNID
+                _bidding.biddingResult(FlutterTencentBiddingResult().fail(
+                1000,
+                FlutterTencentAdBiddingLossReason.LOW_PRICE,
+                FlutterTencentAdADNID.othoerADN));
+            }
         },
     ),
 ),
@@ -155,36 +195,57 @@ FlutterTencentad.bannerAdView(
 
 #### 5、动态信息流/横幅/视频贴片广告
 ⚠️ android端信息流广告曝光异常
-```
+```dart
+FlutterTencentAdBiddingController _bidding =
+new FlutterTencentAdBiddingController();
 FlutterTencentad.expressAdView(
               //android广告id
-              androidId: "3062711883122271",
+              androidId: "4033498034524284",
               //ios广告id
-              iosId: "4032136066438475",
-              //广告宽 单位dp
+              iosId: "4033278955532222",
               viewWidth: 400,
-              //广告高  单位dp
               viewHeight: 300,
               //下载二次确认弹窗 默认false
-               downloadConfirm: true,
+              downloadConfirm: true,
+              //是否开启竞价模式
+              isBidding: true,
+              bidding: _bidding,
               //回调事件
               callBack: FlutterTencentadExpressCallBack(
-                onShow: () {
-                  print("动态信息流广告显示");
-                },
-                onFail: (code, message) {
-                  print("动态信息流广告错误 $code $message");
-                },
-                onClose: () {
-                  print("动态信息流广告关闭");
-                },
-                onExpose: () {
-                  print("动态信息流广告曝光");
-                },
-                onClick: () {
-                  print("动态信息流广告点击");
-                },
-              )
+                  onShow: () {
+                    print("动态信息流广告显示");
+                  },
+                  onFail: (code, message) {
+                    print("动态信息流广告错误 $code $message");
+                  },
+                  onClose: () {
+                    print("动态信息流广告关闭");
+                  },
+                  onExpose: () {
+                    print("动态信息流广告曝光");
+                  },
+                  onClick: () {
+                    print("动态信息流广告点击");
+                  },
+                  onECPM: (ecpmLevel, ecpm) {
+                    print("动态信息流广告竞价  ecpmLevel=$ecpmLevel  ecpm=$ecpm");
+                    //规则 自己根据业务处理
+                    if (ecpm > 0) {
+                      //竞胜出价，类型为Integer
+                      //最大竞败方出价，类型为Integer
+                      _bidding.biddingResult(
+                          FlutterTencentBiddingResult().success(ecpm, 0));
+                    } else {
+                      //竞胜方出价（单位：分），类型为Integer
+                      //优量汇广告竞败原因 FlutterTencentAdBiddingLossReason
+                      //竞胜方渠道ID FlutterTencentAdADNID
+                      _bidding.biddingResult(FlutterTencentBiddingResult().fail(
+                          1000,
+                          FlutterTencentAdBiddingLossReason.LOW_PRICE,
+                          FlutterTencentAdADNID.othoerADN));
+                    }
+                  }
+              ),
             ),
 ```
 
@@ -206,6 +267,8 @@ await FlutterTencentad.loadRewardVideoAd(
     customData: ""
     //下载二次确认弹窗 默认false
     downloadConfirm: true,
+    //是否开启竞价
+    isBidding: true,
 );
 ```
 显示激励视频广告
@@ -213,7 +276,7 @@ await FlutterTencentad.loadRewardVideoAd(
   await FlutterTencentad.showRewardVideoAd();
 ```
 监听激励视频结果
-
+> 当为竞价时触发onECPM，否则触发onReady
 ```Dart
  FlutterTencentAdStream.initAdStream(
       //激励广告
@@ -242,7 +305,26 @@ await FlutterTencentad.loadRewardVideoAd(
         },
         onFinish: (){
           print("激励广告完成");
-        }
+        },
+        onECPM: (ecpmLevel, ecpm) async {
+            print("激励广告竞价  ecpmLevel=$ecpmLevel  ecpm=$ecpm");
+            //规则 自己根据业务处理
+            if (ecpm > 0) {
+                //竞胜出价，类型为Integer
+                //最大竞败方出价，类型为Integer
+                await FlutterTencentad.showRewardVideoAd(
+                result: FlutterTencentBiddingResult().success(ecpm, 0));
+            } else {
+                //竞胜方出价（单位：分），类型为Integer
+                //优量汇广告竞败原因 FlutterTencentAdBiddingLossReason
+                //竞胜方渠道ID FlutterTencentAdADNID
+                await FlutterTencentad.showRewardVideoAd(
+                result: FlutterTencentBiddingResult().fail(
+                1000,
+                FlutterTencentAdBiddingLossReason.LOW_PRICE,
+                FlutterTencentAdADNID.othoerADN));
+          }
+        },
       ),
     );
 ```
@@ -258,6 +340,8 @@ await FlutterTencentad.loadUnifiedInterstitialAD(
     isFullScreen: false,
     //下载二次确认弹窗 默认false
     downloadConfirm: true,
+    //是否开启竞价
+    isBidding: true,
 );
 ```
 
@@ -267,6 +351,7 @@ await FlutterTencentad.loadUnifiedInterstitialAD(
 ```
 
 插屏广告结果监听
+> 当为竞价时触发onECPM，否则触发onReady
 ```dart
 FlutterTencentAdStream.initAdStream(
     flutterTencentadInteractionCallBack: FlutterTencentadInteractionCallBack(
@@ -292,6 +377,25 @@ FlutterTencentAdStream.initAdStream(
         onVerify: (transId,rewardName,rewardAmount){
           print("广告奖励凭证id  $transId");
         },
+        onECPM: (ecpmLevel, ecpm) async {
+            print("插屏广告竞价  ecpmLevel=$ecpmLevel  ecpm=$ecpm");
+            //规则 自己根据业务处理
+            if (ecpm > 0) {
+                //竞胜出价，类型为Integer
+                //最大竞败方出价，类型为Integer
+                await FlutterTencentad.showUnifiedInterstitialAD(
+                result: FlutterTencentBiddingResult().success(ecpm, 0));
+            } else {
+                //竞胜方出价（单位：分），类型为Integer
+                //优量汇广告竞败原因 FlutterTencentAdBiddingLossReason
+                //竞胜方渠道ID FlutterTencentAdADNID
+                await FlutterTencentad.showUnifiedInterstitialAD(
+                result: FlutterTencentBiddingResult().fail(
+                1000,
+                FlutterTencentAdBiddingLossReason.LOW_PRICE,
+                FlutterTencentAdADNID.othoerADN));
+            }
+      },
   ),
 );
 ```

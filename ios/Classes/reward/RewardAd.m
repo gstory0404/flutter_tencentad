@@ -19,7 +19,7 @@
 @property(nonatomic,strong) NSString *rewardAmount;
 @property(nonatomic,strong) NSString *userID;
 @property(nonatomic,strong) NSString *customData;
-
+@property(nonatomic,assign) BOOL isBidding;
 @end
 
 @implementation RewardAd
@@ -43,6 +43,7 @@
     _reward = [[GDTRewardVideoAd alloc] initWithPlacementId:_codeId];
     _reward.delegate = self;
     _reward.videoMuted = false;
+    self.isBidding =[dic[@"isBidding"] boolValue];
     GDTServerSideVerificationOptions  *options = [[GDTServerSideVerificationOptions alloc] init];
     options.userIdentifier = _userID;
     options.customRewardString = _customData;
@@ -51,7 +52,7 @@
 }
 
 //展示广告
--(void)showAd{
+-(void)showAd:(NSDictionary*)arguments{
     if (_reward.expiredTimestamp <= [[NSDate date] timeIntervalSince1970]) {
         [[TLogUtil sharedInstance] print:(@"广告已过期，请重新拉取")];
         NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onFail",@"code":@(-1),@"message":@"广告已过期，请重新拉取"};
@@ -64,7 +65,23 @@
         [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
         return;
     }
-    [_reward showAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+    if(self.isBidding){
+        BOOL isSuccess = [arguments[@"isBidding"] boolValue];
+        if(isSuccess){
+            NSDictionary *dictionary = @{GDT_M_W_E_COST_PRICE:@([arguments[@"expectCostPrice"] intValue]),
+                                         GDT_M_W_H_LOSS_PRICE:@([arguments[@"highestLossPrice"] intValue])};
+            [self.reward sendWinNotificationWithInfo:dictionary];
+            [self.reward showAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+        }else{
+            NSDictionary *dictionary = @{GDT_M_L_WIN_PRICE:@([arguments[@"winPrice"] intValue]),
+                                         GDT_M_L_LOSS_REASON:@([arguments[@"lossReason"] intValue]),
+                                         GDT_M_ADNID: arguments[@"adnId"]};
+            [self.reward sendWinNotificationWithInfo:dictionary];
+        }
+    }else{
+        [self.reward showAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+    }
+    
 }
 
 #pragma mark - 广告请求delegate
@@ -76,8 +93,15 @@
  */
 - (void)gdt_rewardVideoAdDidLoad:(GDTRewardVideoAd *)rewardedVideoAd{
     [[TLogUtil sharedInstance] print:(@"激励广告数据加载成功")];
-    NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onReady"};
-    [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
+    //是否开启竞价
+    if(self.isBidding){
+        NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onECPM",@"ecpmLevel":self.reward.eCPMLevel == nil ? @"" : self.reward.eCPMLevel,@"ecpm":@(self.reward.eCPM)};
+        [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
+    }else{
+        NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onReady"};
+        [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
+    }
+   
 }
 
 /**

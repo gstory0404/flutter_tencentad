@@ -44,6 +44,7 @@
 @property(nonatomic,strong) FlutterMethodChannel *channel;
 @property(nonatomic,strong) NSString *codeId;
 @property(nonatomic,assign) NSInteger fetchDelay;
+@property(nonatomic,assign) BOOL isBidding;
 @end
 
 @implementation SplashAd
@@ -55,8 +56,25 @@
         _viewId = viewId;
         _codeId = dic[@"iosId"];
         _fetchDelay =[dic[@"_fetchDelay"] intValue];
+        self.isBidding =[dic[@"isBidding"] boolValue];
         NSString* channelName = [NSString stringWithFormat:@"com.gstory.flutter_tencentad/SplashAdView_%lld", viewId];
         _channel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:messenger];
+        [self.channel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
+            // 竞价成功
+            if ([@"biddingSucceeded" isEqualToString:call.method]) {
+                NSDictionary *dictionary = @{GDT_M_W_E_COST_PRICE:@([call.arguments[@"expectCostPrice"] intValue]),
+                                             GDT_M_W_H_LOSS_PRICE:@([call.arguments[@"highestLossPrice"] intValue])};
+                [self.splash sendWinNotificationWithInfo:dictionary];
+                //展示广告
+                [self.splash showFullScreenAdInWindow:[UIApplication sharedApplication].keyWindow withLogoImage:nil skipView:nil];
+                //竞价失败
+            } else if([@"biddingFail" isEqualToString:call.method]) {
+                NSDictionary *dictionary = @{GDT_M_L_WIN_PRICE:@([call.arguments[@"winPrice"] intValue]),
+                                             GDT_M_L_LOSS_REASON:@([call.arguments[@"lossReason"] intValue]),
+                                             GDT_M_ADNID: call.arguments[@"adnId"]};
+                [self.splash sendWinNotificationWithInfo:dictionary];
+            }
+        }];
         [self loadSplashAd];
     }
     return self;
@@ -94,7 +112,13 @@
         [_channel invokeMethod:@"onFail" arguments:dictionary result:nil];
         return;
     }
-    [_splash showFullScreenAdInWindow:[UIApplication sharedApplication].keyWindow withLogoImage:nil skipView:nil];
+    //是否开启竞价
+    if(self.isBidding){
+        NSDictionary *dictionary = @{@"ecpmLevel":self.splash.eCPMLevel == nil ? @"" : self.splash.eCPMLevel,@"ecpm":@(self.splash.eCPM)};
+        [_channel invokeMethod:@"onECPM" arguments:dictionary result:nil];
+    }else{
+        [self.splash showFullScreenAdInWindow:[UIApplication sharedApplication].keyWindow withLogoImage:nil skipView:nil];
+    }
 }
 
 /**

@@ -13,6 +13,8 @@ import 'express/express_ad_view.dart';
 
 part 'flutter_tencentad_callback.dart';
 
+part 'flutter_tencentad_bidding_controller.dart';
+
 class FlutterTencentad {
   static const MethodChannel _channel =
       const MethodChannel('flutter_tencentad');
@@ -68,6 +70,7 @@ class FlutterTencentad {
   ///
   /// [downloadConfirm] 下载二次确认弹窗 默认false
   ///
+  /// [isBidding] 是否开启竞价模式 默认false
   static Future<bool> loadRewardVideoAd({
     required String androidId,
     required String iosId,
@@ -76,6 +79,7 @@ class FlutterTencentad {
     required String userID,
     String? customData,
     bool? downloadConfirm,
+    bool? isBidding,
   }) async {
     return await _channel.invokeMethod("loadRewardVideoAd", {
       "androidId": androidId,
@@ -85,14 +89,17 @@ class FlutterTencentad {
       "userID": userID,
       "customData": customData ?? "",
       "downloadConfirm": downloadConfirm ?? false,
+      "isBidding": isBidding ?? false,
     });
   }
 
   ///
   /// # 显示激励广告
   ///
-  static Future<bool> showRewardVideoAd() async {
-    return await _channel.invokeMethod("showRewardVideoAd", {});
+  /// [result] 竞价成功、失败后调用 [FlutterTencentBiddingResult] ,isBidding = true时必传
+  static Future<bool> showRewardVideoAd(
+      {FlutterTencentBiddingResult? result}) async {
+    return await _channel.invokeMethod("showRewardVideoAd", result?.toJson());
   }
 
   ///
@@ -106,25 +113,33 @@ class FlutterTencentad {
   ///
   /// [downloadConfirm] 下载二次确认弹窗 默认false
   ///
+  /// [isBidding] 是否开启竞价模式 默认false
+  ///
   static Future<bool> loadUnifiedInterstitialAD({
     required String androidId,
     required String iosId,
     required bool isFullScreen,
     bool? downloadConfirm,
+    bool? isBidding,
   }) async {
     return await _channel.invokeMethod("loadInterstitialAD", {
       "androidId": androidId,
       "iosId": iosId,
       "isFullScreen": isFullScreen,
       "downloadConfirm": downloadConfirm ?? false,
+      "isBidding": isBidding ?? false,
     });
   }
 
   ///
   /// # 显示新模板渲染插屏
   ///
-  static Future<bool> showUnifiedInterstitialAD() async {
-    return await _channel.invokeMethod("showInterstitialAD", {});
+  ///
+  /// [result] 竞价成功、失败后调用 [FlutterTencentBiddingResult] ,isBidding = true时必传
+  ///
+  static Future<bool> showUnifiedInterstitialAD(
+      {FlutterTencentBiddingResult? result}) async {
+    return await _channel.invokeMethod("showInterstitialAD", result?.toJson());
   }
 
   ///
@@ -142,12 +157,18 @@ class FlutterTencentad {
   ///
   /// [downloadConfirm] 下载二次确认弹窗 默认false
   ///
+  /// [isBidding] 是否开启竞价模式 默认false
+  ///
+  /// [bidding] 竞价成功、失败后调用 [FlutterTencentAdBiddingController] ,isBidding = true时必传
+  ///
   static Widget bannerAdView(
       {required String androidId,
       required String iosId,
       required double viewWidth,
       required double viewHeight,
       bool? downloadConfirm,
+      bool? isBidding,
+      FlutterTencentAdBiddingController? bidding,
       FlutterTencentadBannerCallBack? callBack}) {
     return BannerAdView(
       androidId: androidId,
@@ -156,6 +177,8 @@ class FlutterTencentad {
       viewHeight: viewHeight,
       callBack: callBack,
       downloadConfirm: downloadConfirm ?? false,
+      isBidding: isBidding ?? false,
+      bidding: bidding,
     );
   }
 
@@ -174,11 +197,17 @@ class FlutterTencentad {
   ///
   /// [downloadConfirm] 下载二次确认弹窗 默认false
   ///
+  /// [isBidding] 是否开启竞价模式 默认false
+  ///
+  /// [bidding] 竞价成功、失败后调用 [FlutterTencentAdBiddingController] ,isBidding = true时必传
+  ///
   static Widget splashAdView(
       {required String androidId,
       required String iosId,
       required int fetchDelay,
       bool? downloadConfirm,
+      bool? isBidding,
+      FlutterTencentAdBiddingController? bidding,
       FlutterTencentadSplashCallBack? callBack}) {
     return SplashAdView(
       androidId: androidId,
@@ -186,6 +215,8 @@ class FlutterTencentad {
       fetchDelay: fetchDelay,
       callBack: callBack,
       downloadConfirm: downloadConfirm ?? false,
+      isBidding: isBidding ?? false,
+      bidding: bidding,
     );
   }
 
@@ -204,12 +235,18 @@ class FlutterTencentad {
   ///
   /// [downloadConfirm] 下载二次确认弹窗 默认false
   ///
+  /// [isBidding] 是否开启竞价模式 默认false
+  ///
+  /// [bidding] 竞价成功、失败后调用 [FlutterTencentAdBiddingController] ,isBidding = true时必传
+  ///
   static Widget expressAdView(
       {required String androidId,
       required String iosId,
       required int viewWidth,
       required int viewHeight,
       bool? downloadConfirm,
+      bool? isBidding,
+      FlutterTencentAdBiddingController? bidding,
       FlutterTencentadExpressCallBack? callBack}) {
     return ExpressAdView(
       androidId: androidId,
@@ -218,6 +255,8 @@ class FlutterTencentad {
       viewHeight: viewHeight,
       callBack: callBack,
       downloadConfirm: downloadConfirm ?? false,
+      isBidding: isBidding ?? false,
+      bidding: bidding,
     );
   }
 

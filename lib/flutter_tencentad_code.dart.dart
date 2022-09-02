@@ -60,6 +60,8 @@ class FlutterTencentadMethod {
 
   ///倒计时
   static const String onADTick = "onADTick";
+  ///竞价
+  static const String onECPM = "onECPM";
 }
 
 ///渠道id
@@ -103,4 +105,25 @@ class FlutterTencentadPersonalized {
 
   ///不屏蔽个性化推荐广告
   static const int show = 0;
+}
+
+
+///竞价失败原因
+class FlutterTencentAdBiddingLossReason {
+  /// 竞争力不足，如优量汇不是本次竞价的最高出价方，可上报此竞败原因
+  static const int LOW_PRICE = 1;
+  /// 返回超时，如优量汇在本次竞价中未返回广告，可上报此竞败原因
+  static const int TIME_OUT = 2;
+  ///其他
+  static const int OTHER = 10001;
+}
+
+///本次竞胜方渠道ID
+class FlutterTencentAdADNID {
+  ///1 - 输给优量汇其它广告，当优量汇目标价报价为本次竞价的最高报价时，可上报此值，仅对混合比价类型的开发者适用
+  static const String tencentADN = "1";
+  /// 2 - 输给第三方ADN，当其它ADN报价为本次竞价的最高报价时，可上报此值，您无需回传具体竞胜方渠道；
+  static const String othoerADN = "2";
+  ///  3 - 输给自售广告主，当自售广告源报价为本次竞价的最高报价时，可上报此值，仅对有自售广告源的开发者使用
+  static const String appADN = "3";
 }

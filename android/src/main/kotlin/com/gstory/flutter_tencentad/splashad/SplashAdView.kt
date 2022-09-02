@@ -1,6 +1,7 @@
 package com.gstory.flutter_tencentad.splashad
 
 import android.app.Activity
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -10,8 +11,10 @@ import com.gstory.flutter_tencentad.FlutterTencentAdConfig
 import com.gstory.flutter_tencentad.LogUtil
 import com.qq.e.ads.splash.SplashAD
 import com.qq.e.ads.splash.SplashADListener
+import com.qq.e.comm.pi.IBidding
 import com.qq.e.comm.util.AdError
 import io.flutter.plugin.common.BinaryMessenger
+import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
 
@@ -22,7 +25,7 @@ internal class SplashAdView(
         id: Int,
         params: Map<String?, Any?>
 ) :
-        PlatformView, SplashADListener {
+        PlatformView, SplashADListener ,  MethodChannel.MethodCallHandler {
 
     private var mContainer: FrameLayout? = null
     private var channel: MethodChannel?
@@ -33,19 +36,22 @@ internal class SplashAdView(
     private var codeId: String = params["androidId"] as String
     private var fetchDelay: Int = params["fetchDelay"] as Int
     private var downloadConfirm: Boolean = params["downloadConfirm"] as Boolean
+    //是否开启竞价
+    private var isBidding: Boolean = params["isBidding"] as Boolean
 
     init {
         mContainer = FrameLayout(activity)
         mContainer?.layoutParams?.width = ViewGroup.LayoutParams.WRAP_CONTENT
         mContainer?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
         channel = MethodChannel(messenger, FlutterTencentAdConfig.splashAdView + "_" + id)
+        channel?.setMethodCallHandler(this)
         loadSplashAd()
     }
 
     private fun loadSplashAd() {
         splashAD = SplashAD(activity, codeId, this, fetchDelay)
         mContainer?.removeAllViews()
-        splashAD?.fetchAndShowIn(mContainer)
+        splashAD?.fetchAdOnly()
     }
 
 
@@ -54,7 +60,7 @@ internal class SplashAdView(
     }
 
     /*************开屏广告回调******************/
-//广告关闭时调用，可能是用户关闭或者展示时间到。此时一般需要跳过开屏的 Activity，进入应用内容页面
+   //广告关闭时调用，可能是用户关闭或者展示时间到。此时一般需要跳过开屏的 Activity，进入应用内容页面
     override fun onADDismissed() {
         LogUtil.e("开屏广告关闭")
         channel?.invokeMethod("onClose", "")
@@ -99,11 +105,49 @@ internal class SplashAdView(
         if(downloadConfirm){
             splashAD?.setDownloadConfirmListener(DownloadConfirmHelper.DOWNLOAD_CONFIRM_LISTENER)
         }
+        if(isBidding){
+            channel?.invokeMethod("onECPM", mutableMapOf(
+                "ecpmLevel" to splashAD?.ecpmLevel,
+                "ecpm" to splashAD?.ecpm
+            ))
+        }else{
+            splashAD?.showAd(mContainer)
+        }
     }
 
 
     override fun dispose() {
         mContainer?.removeAllViews()
         mContainer = null
+    }
+
+    override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+        when (call.method) {
+            //竞价成功
+            "biddingSucceeded" -> {
+                var arguments = call.arguments as Map<*, *>
+                splashAD?.sendWinNotification(mutableMapOf(
+                    //对应值为竞胜出价，类型为Integer
+                    IBidding.EXPECT_COST_PRICE to arguments["expectCostPrice"],
+                    //对应值为最大竞败方出价，类型为Integer
+                    IBidding.HIGHEST_LOSS_PRICE to arguments["highestLossPrice"],
+                ))
+                //展示banner
+                splashAD?.showAd(mContainer)
+            }
+            //竞价失败
+            "biddingFail" -> {
+                var arguments = call.arguments as Map<*, *>
+                splashAD?.sendLossNotification(mutableMapOf(
+                    //值为本次竞胜方出价（单位：分），类型为Integer。选填
+                    IBidding.WIN_PRICE to arguments["winPrice"],
+                    //值为优量汇广告竞败原因，类型为Integer。必填
+                    IBidding.LOSS_REASON to arguments["lossReason"],
+                    //值为本次竞胜方渠道ID，类型为Integer。必填。
+                    IBidding.ADN_ID to arguments["adnId"],
+                ))
+            }
+
+        }
     }
 }

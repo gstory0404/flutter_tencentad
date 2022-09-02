@@ -15,6 +15,8 @@ class SplashAdView extends StatefulWidget {
   final int fetchDelay;
   final FlutterTencentadSplashCallBack? callBack;
   final bool downloadConfirm;
+  final bool isBidding;
+  final FlutterTencentAdBiddingController? bidding;
 
   const SplashAdView({
     Key? key,
@@ -23,6 +25,8 @@ class SplashAdView extends StatefulWidget {
     required this.fetchDelay,
     this.callBack,
     required this.downloadConfirm,
+    required this.isBidding,
+    this.bidding,
   }) : super(key: key);
 
   @override
@@ -58,6 +62,7 @@ class _SplashAdViewState extends State<SplashAdView> {
             "androidId": widget.androidId,
             "fetchDelay": widget.fetchDelay,
             "downloadConfirm": widget.downloadConfirm,
+            "isBidding":widget.isBidding,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),
@@ -72,6 +77,7 @@ class _SplashAdViewState extends State<SplashAdView> {
           creationParams: {
             "iosId": widget.iosId,
             "fetchDelay": widget.fetchDelay,
+            "isBidding":widget.isBidding,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),
@@ -86,6 +92,7 @@ class _SplashAdViewState extends State<SplashAdView> {
   void _registerChannel(int id) {
     _channel = MethodChannel("${_viewType}_$id");
     _channel?.setMethodCallHandler(_platformCallHandler);
+    widget.bidding?.init(_channel);
   }
 
   //监听原生view传值
@@ -120,6 +127,11 @@ class _SplashAdViewState extends State<SplashAdView> {
       //倒计时
       case FlutterTencentadMethod.onADTick:
         widget.callBack?.onADTick!(call.arguments);
+        break;
+    //竞价
+      case FlutterTencentadMethod.onECPM:
+        Map map = call.arguments;
+        widget.callBack?.onECPM!(map["ecpmLevel"], map["ecpm"]);
         break;
     }
   }

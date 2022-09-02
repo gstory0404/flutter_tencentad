@@ -16,6 +16,8 @@ class ExpressAdView extends StatefulWidget {
   final int viewHeight;
   final FlutterTencentadExpressCallBack? callBack;
   final bool downloadConfirm;
+  final bool isBidding;
+  final FlutterTencentAdBiddingController? bidding;
 
   const ExpressAdView({
     Key? key,
@@ -24,7 +26,9 @@ class ExpressAdView extends StatefulWidget {
     required this.viewWidth,
     required this.viewHeight,
     this.callBack,
-    required this.downloadConfirm
+    required this.downloadConfirm,
+    required this.isBidding,
+    this.bidding,
   }) : super(key: key);
 
   @override
@@ -68,6 +72,7 @@ class _ExpressAdViewState extends State<ExpressAdView> {
             "viewWidth": widget.viewWidth,
             "viewHeight": widget.viewHeight,
             "downloadConfirm":widget.downloadConfirm,
+            "isBidding":widget.isBidding,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),
@@ -83,6 +88,7 @@ class _ExpressAdViewState extends State<ExpressAdView> {
             "iosId": widget.iosId,
             "viewWidth": widget.viewWidth,
             "viewHeight": widget.viewHeight,
+            "isBidding":widget.isBidding,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),
@@ -97,6 +103,7 @@ class _ExpressAdViewState extends State<ExpressAdView> {
   void _registerChannel(int id) {
     _channel = MethodChannel("${_viewType}_$id");
     _channel?.setMethodCallHandler(_platformCallHandler);
+    widget.bidding?.init(_channel);
   }
 
   //监听原生view传值
@@ -140,6 +147,11 @@ class _ExpressAdViewState extends State<ExpressAdView> {
           });
         }
         widget.callBack?.onClose!();
+        break;
+      //竞价
+      case FlutterTencentadMethod.onECPM:
+        Map map = call.arguments;
+        widget.callBack?.onECPM!(map["ecpmLevel"], map["ecpm"]);
         break;
     }
   }

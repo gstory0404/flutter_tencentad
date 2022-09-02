@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface InsertAd : NSObject
 + (instancetype)sharedInstance;
 - (void)initAd:(NSDictionary *)arguments;
-- (void)showAd;
+- (void)showAd:(NSDictionary *)arguments;
 @end
 
 NS_ASSUME_NONNULL_END
