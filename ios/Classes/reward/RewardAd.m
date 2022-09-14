@@ -66,7 +66,7 @@
         return;
     }
     if(self.isBidding){
-        BOOL isSuccess = [arguments[@"isBidding"] boolValue];
+        BOOL isSuccess = [arguments[@"isSuccess"] boolValue];
         if(isSuccess){
             NSDictionary *dictionary = @{GDT_M_W_E_COST_PRICE:@([arguments[@"expectCostPrice"] intValue]),
                                          GDT_M_W_H_LOSS_PRICE:@([arguments[@"highestLossPrice"] intValue])};
