@@ -45,6 +45,7 @@
 @property(nonatomic,strong) NSString *codeId;
 @property(nonatomic,assign) NSInteger viewWidth;
 @property(nonatomic,assign) NSInteger viewHeight;
+@property(nonatomic,assign) BOOL isBidding;
 @end
 
 
@@ -58,9 +59,25 @@
         _codeId = dic[@"iosId"];
         _viewWidth =[dic[@"viewWidth"] intValue];
         _viewHeight =[dic[@"viewHeight"] intValue];
+        self.isBidding =[dic[@"isBidding"] boolValue];
         NSString* channelName = [NSString stringWithFormat:@"com.gstory.flutter_tencentad/BannerAdView_%lld", viewId];
         _channel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:messenger];
-        _container = [[UIView alloc] initWithFrame:frame];
+        [self.channel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
+            // 竞价成功
+            if ([@"biddingSucceeded" isEqualToString:call.method]) {
+                NSDictionary *dictionary = @{GDT_M_W_E_COST_PRICE:@([call.arguments[@"expectCostPrice"] intValue]),
+                                             GDT_M_W_H_LOSS_PRICE:@([call.arguments[@"highestLossPrice"] intValue])};
+                [_banner sendWinNotificationWithInfo:dictionary];
+                [_container addSubview:_banner];
+                [_channel invokeMethod:@"onShow" arguments:nil result:nil];
+                //竞价失败
+            } else if([@"biddingFail" isEqualToString:call.method]) {
+                NSDictionary *dictionary = @{GDT_M_L_WIN_PRICE:@([call.arguments[@"winPrice"] intValue]),
+                                             GDT_M_L_LOSS_REASON:@([call.arguments[@"lossReason"] intValue]),
+                                             GDT_M_ADNID: call.arguments[@"adnId"]};
+                [self.banner sendWinNotificationWithInfo:dictionary];
+            }
+        }];
         [self loadBannerAd];
     }
     return self;
@@ -78,7 +95,7 @@
         _banner.delegate = self;
         _banner.autoSwitchInterval = 30;
     }
-    [_container addSubview:_banner];
+    
     [_banner loadAdAndShow];
 }
 
@@ -88,7 +105,16 @@
  */
 - (void)unifiedBannerViewDidLoad:(GDTUnifiedBannerView *)unifiedBannerView{
     [[TLogUtil sharedInstance] print:@"请求广告条数据成功后调用"];
-    [_channel invokeMethod:@"onShow" arguments:nil result:nil];
+    //    [[TLogUtil sharedInstance] print:self.banner.eCPMLevel];
+    //    [[TLogUtil sharedInstance] print:@(self.banner.eCPM)];
+    //是否开启竞价
+    if(self.isBidding){
+        NSDictionary *dictionary = @{@"ecpmLevel":self.banner.eCPMLevel == nil ? @"" : self.banner.eCPMLevel,@"ecpm":@(self.banner.eCPM)};
+        [_channel invokeMethod:@"onECPM" arguments:dictionary result:nil];
+    }else{
+        [_container addSubview:_banner];
+        [_channel invokeMethod:@"onShow" arguments:nil result:nil];
+    }
 }
 
 /**

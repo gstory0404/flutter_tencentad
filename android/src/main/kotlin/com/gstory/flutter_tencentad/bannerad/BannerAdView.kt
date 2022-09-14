@@ -1,6 +1,7 @@
 package com.gstory.flutter_tencentad.bannerad
 
 import android.app.Activity
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -10,8 +11,10 @@ import com.gstory.flutter_tencentad.FlutterTencentAdConfig
 import com.gstory.flutter_tencentad.LogUtil
 import com.qq.e.ads.banner2.UnifiedBannerADListener
 import com.qq.e.ads.banner2.UnifiedBannerView
+import com.qq.e.comm.pi.IBidding
 import com.qq.e.comm.util.AdError
 import io.flutter.plugin.common.BinaryMessenger
+import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
 
@@ -27,7 +30,7 @@ internal class BannerAdView(
     id: Int,
     params: Map<String?, Any?>
 ) :
-    PlatformView, UnifiedBannerADListener {
+    PlatformView, UnifiedBannerADListener, MethodChannel.MethodCallHandler {
 
     private val TAG = "BannerAdView"
 
@@ -43,6 +46,8 @@ internal class BannerAdView(
     private var channel: MethodChannel?
 
     private var downloadConfirm: Boolean
+    //是否开启竞价
+    private var isBidding: Boolean = params["isBidding"] as Boolean
 
 
     init {
@@ -56,6 +61,7 @@ internal class BannerAdView(
         mContainer?.layoutParams?.width = ViewGroup.LayoutParams.WRAP_CONTENT
         mContainer?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
         channel = MethodChannel(messenger, FlutterTencentAdConfig.bannerAdView + "_" + id)
+        channel?.setMethodCallHandler(this)
         loadBannerAd()
     }
 
@@ -90,9 +96,17 @@ internal class BannerAdView(
         if (downloadConfirm) {
             unifiedBannerView?.setDownloadConfirmListener(DownloadConfirmHelper.DOWNLOAD_CONFIRM_LISTENER)
         }
-        mContainer?.addView(unifiedBannerView)
-        LogUtil.e("$TAG  Banner广告加载成功回调")
-        channel?.invokeMethod("onShow", "")
+        //竞价 则返回价格 不直接加载
+        if (isBidding) {
+            channel?.invokeMethod("onECPM", mutableMapOf(
+                "ecpmLevel" to unifiedBannerView?.ecpmLevel,
+                "ecpm" to unifiedBannerView?.ecpm
+            ))
+        } else {
+            LogUtil.e("$TAG  Banner广告加载成功回调")
+            mContainer?.addView(unifiedBannerView)
+            channel?.invokeMethod("onShow", "")
+        }
     }
 
     //当广告曝光时发起的回调
@@ -121,6 +135,39 @@ internal class BannerAdView(
     override fun dispose() {
         unifiedBannerView?.destroy()
         unifiedBannerView = null
+    }
+
+    override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+        when (call.method) {
+            //竞价成功
+            "biddingSucceeded" -> {
+                var arguments = call.arguments as Map<*, *>
+                val map: MutableMap<String, Any?> = mutableMapOf(
+                    //对应值为竞胜出价，类型为Integer
+                    IBidding.EXPECT_COST_PRICE to arguments["expectCostPrice"],
+                    //对应值为最大竞败方出价，类型为Integer
+                    IBidding.HIGHEST_LOSS_PRICE to arguments["highestLossPrice"],
+                )
+                unifiedBannerView?.sendWinNotification(map)
+                //展示banner
+                mContainer?.addView(unifiedBannerView)
+                channel?.invokeMethod("onShow", "")
+            }
+            //竞价失败
+            "biddingFail" -> {
+                var arguments = call.arguments as Map<*, *>
+                val map: MutableMap<String, Any?> = mutableMapOf(
+                    //值为本次竞胜方出价（单位：分），类型为Integer。选填
+                    IBidding.WIN_PRICE to arguments["winPrice"],
+                    //值为优量汇广告竞败原因，类型为Integer。必填
+                    IBidding.LOSS_REASON to arguments["lossReason"],
+                    //值为本次竞胜方渠道ID，类型为Integer。必填。
+                    IBidding.ADN_ID to arguments["adnId"],
+                )
+                unifiedBannerView?.sendLossNotification(map)
+            }
+
+        }
     }
 
 }

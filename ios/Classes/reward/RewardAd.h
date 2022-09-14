@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sharedInstance;
 - (void)initAd:(NSDictionary *)arguments;
-- (void)showAd;
+- (void)showAd:(NSDictionary *)arguments;
 
 @end
 

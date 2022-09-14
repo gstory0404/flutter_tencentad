@@ -79,7 +79,7 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             result.success(true)
             //展示激励广告
         } else if (call.method == "showRewardVideoAd") {
-            RewardVideoAd.showAd()
+            RewardVideoAd.showAd(call.arguments as Map<*, *>)
             result.success(true)
             //预加载插屏广告
         } else if (call.method == "loadInterstitialAD") {
@@ -87,7 +87,7 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             result.success(true)
             //展示插屏广告
         } else if (call.method == "showInterstitialAD") {
-            InterstitialAd.showAd()
+            InterstitialAd.showAd(call.arguments as Map<*, *>)
             result.success(true)
             //进入下载列表
         } else if (call.method == "enterAPPDownloadListPage") {

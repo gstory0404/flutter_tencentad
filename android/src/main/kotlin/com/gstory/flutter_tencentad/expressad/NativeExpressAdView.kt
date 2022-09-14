@@ -1,6 +1,7 @@
 package com.gstory.flutter_tencentad.expressad
 
 import android.app.Activity
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -14,8 +15,10 @@ import com.qq.e.ads.nativ.NativeExpressMediaListener
 import com.qq.e.comm.compliance.DownloadConfirmCallBack
 import com.qq.e.comm.compliance.DownloadConfirmListener
 import com.qq.e.comm.constants.AdPatternType
+import com.qq.e.comm.pi.IBidding
 import com.qq.e.comm.util.AdError
 import io.flutter.plugin.common.BinaryMessenger
+import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
 
@@ -31,7 +34,8 @@ internal class NativeExpressAdView(
     id: Int,
     params: Map<String?, Any?>
 ) :
-    PlatformView, NativeExpressAD.NativeExpressADListener, NativeExpressMediaListener {
+    PlatformView, NativeExpressAD.NativeExpressADListener, NativeExpressMediaListener ,
+    MethodChannel.MethodCallHandler {
 
     private var mContainer: FrameLayout? = null
 
@@ -40,6 +44,9 @@ internal class NativeExpressAdView(
     private var viewWidth: Int = params["viewWidth"] as Int
     private var viewHeight: Int = params["viewHeight"] as Int
     private var downloadConfirm: Boolean = params["downloadConfirm"] as Boolean
+
+    //是否开启竞价
+    private var isBidding: Boolean = params["isBidding"] as Boolean
 
     private var nativeExpressAD: NativeExpressAD? = null
     private var nativeExpressAdView: NativeExpressADView? = null
@@ -52,6 +59,7 @@ internal class NativeExpressAdView(
         mContainer?.layoutParams?.width = ViewGroup.LayoutParams.WRAP_CONTENT
         mContainer?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
         channel = MethodChannel(messenger, FlutterTencentAdConfig.nativeAdView + "_" + id)
+        channel?.setMethodCallHandler(this)
         loadExpressAd()
     }
 
@@ -113,20 +121,20 @@ internal class NativeExpressAdView(
         if (downloadConfirm) {
             nativeExpressAdView?.setDownloadConfirmListener(DownloadConfirmHelper.DOWNLOAD_CONFIRM_LISTENER)
         }
-        LogUtil.e(
-            "数据加载成功 ${
-                UIUtils.px2dip(
-                    activity,
-                    nativeExpressAdView?.width!!.toFloat()
-                )
-            }  ${UIUtils.px2dip(activity, nativeExpressAdView?.height!!.toFloat())}"
-        )
-        if (nativeExpressAdView != null) {
-            if (mContainer?.childCount!! > 0) {
-                mContainer?.removeAllViews()
+        //竞价 则返回价格 不直接加载
+        if (isBidding) {
+            channel?.invokeMethod("onECPM", mutableMapOf(
+                "ecpmLevel" to nativeExpressAdView?.ecpmLevel,
+                "ecpm" to nativeExpressAdView?.ecpm
+            ))
+        } else {
+            if (nativeExpressAdView != null) {
+                if (mContainer?.childCount!! > 0) {
+                    mContainer?.removeAllViews()
+                }
+                mContainer?.addView(nativeExpressAdView!!.rootView)
+                nativeExpressAdView!!.render()
             }
-            mContainer?.addView(nativeExpressAdView!!.rootView)
-            nativeExpressAdView!!.render()
         }
     }
 
@@ -229,6 +237,39 @@ internal class NativeExpressAdView(
     override fun dispose() {
         nativeExpressAdView?.destroy()
         mContainer?.removeAllViews()
+    }
+
+    override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+        when (call.method){
+            //竞价成功
+            "biddingSucceeded" -> {
+                var arguments = call.arguments as Map<*, *>
+                val map: MutableMap<String, Any?> = mutableMapOf(
+                    //对应值为竞胜出价，类型为Integer
+                    IBidding.EXPECT_COST_PRICE to arguments["expectCostPrice"],
+                    //对应值为最大竞败方出价，类型为Integer
+                    IBidding.HIGHEST_LOSS_PRICE to  arguments["highestLossPrice"],
+                )
+                nativeExpressAdView?.sendWinNotification(map)
+                //展示信息流
+                mContainer?.addView(nativeExpressAdView!!.rootView)
+                nativeExpressAdView!!.render()
+            }
+            //竞价失败
+            "biddingFail" -> {
+                var arguments = call.arguments as Map<*, *>
+                val map: MutableMap<String, Any?> = mutableMapOf(
+                    //值为本次竞胜方出价（单位：分），类型为Integer。选填
+                    IBidding.WIN_PRICE to arguments["winPrice"],
+                    //值为优量汇广告竞败原因，类型为Integer。必填
+                    IBidding.LOSS_REASON to  arguments["lossReason"],
+                    //值为本次竞胜方渠道ID，类型为Integer。必填。
+                    IBidding.ADN_ID to  arguments["adnId"],
+                )
+                nativeExpressAdView?.sendLossNotification(map)
+            }
+
+        }
     }
 
 }

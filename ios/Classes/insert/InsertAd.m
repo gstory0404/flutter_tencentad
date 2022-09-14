@@ -17,6 +17,7 @@
 @property(nonatomic,strong) GDTUnifiedInterstitialAd *interstitialAd;
 @property(nonatomic,strong) NSString *codeId;
 @property(nonatomic,assign) BOOL isFullScreen;
+@property(nonatomic,assign) BOOL isBidding;
 @property(nonatomic,strong) UIViewController *currentController;
 
 @end
@@ -38,6 +39,7 @@
     NSDictionary *dic = arguments;
     _codeId = dic[@"iosId"];
     _isFullScreen = [dic[@"isFullScreen"] boolValue];
+    self.isBidding =[dic[@"isBidding"] boolValue];
     _interstitialAd = [[GDTUnifiedInterstitialAd alloc] initWithPlacementId:_codeId];
     _interstitialAd.delegate = self;
     _interstitialAd.videoMuted = false;
@@ -45,11 +47,30 @@
 }
 
 //展示广告
-- (void)showAd{
-    if(_isFullScreen){
-        [_interstitialAd presentFullScreenAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+- (void)showAd:(NSDictionary*)arguments{
+    if(self.isBidding){
+        BOOL isSuccess = [arguments[@"isBidding"] boolValue];
+        if(isSuccess){
+            NSDictionary *dictionary = @{GDT_M_W_E_COST_PRICE:@([arguments[@"expectCostPrice"] intValue]),
+                                         GDT_M_W_H_LOSS_PRICE:@([arguments[@"highestLossPrice"] intValue])};
+            [self.interstitialAd sendWinNotificationWithInfo:dictionary];
+            if(_isFullScreen){
+                [_interstitialAd presentFullScreenAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+            }else{
+                [_interstitialAd presentAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+            }
+        }else{
+            NSDictionary *dictionary = @{GDT_M_L_WIN_PRICE:@([arguments[@"winPrice"] intValue]),
+                                         GDT_M_L_LOSS_REASON:@([arguments[@"lossReason"] intValue]),
+                                         GDT_M_ADNID: arguments[@"adnId"]};
+            [self.interstitialAd sendWinNotificationWithInfo:dictionary];
+        }
     }else{
-        [_interstitialAd presentAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+        if(_isFullScreen){
+            [_interstitialAd presentFullScreenAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+        }else{
+            [_interstitialAd presentAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+        }
     }
 }
 
@@ -87,8 +108,14 @@
  */
 - (void)unifiedInterstitialRenderSuccess:(GDTUnifiedInterstitialAd *)unifiedInterstitial{
     [[TLogUtil sharedInstance] print:@"插屏2.0广告渲染成功"];
-    NSDictionary *dictionary = @{@"adType":@"interactAd",@"onAdMethod":@"onReady"};
-    [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
+    //是否开启竞价
+    if(self.isBidding){
+        NSDictionary *dictionary = @{@"adType":@"interactAd",@"onAdMethod":@"onECPM",@"ecpmLevel":self.interstitialAd.eCPMLevel == nil ? @"" : self.interstitialAd.eCPMLevel,@"ecpm":@(self.interstitialAd.eCPM)};
+        [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
+    }else{
+        NSDictionary *dictionary = @{@"adType":@"interactAd",@"onAdMethod":@"onReady"};
+        [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
+    }
 }
 
 /**

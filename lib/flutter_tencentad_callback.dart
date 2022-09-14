@@ -44,10 +44,14 @@ typedef TOnReady = void Function();
 typedef TOnUnReady = void Function();
 
 ///广告奖励验证
-typedef TOnVerify = void Function(String transId,String rewardName,int rewardAmount);
+typedef TOnVerify = void Function(
+    String transId, String rewardName, int rewardAmount);
 
 ///倒计时
 typedef TOnADTick = void Function(int time);
+
+///竞价回调
+typedef TOnECPM = void Function(String ecpmLevel, int ecpm);
 
 ///banner广告回调
 class FlutterTencentadBannerCallBack {
@@ -56,9 +60,15 @@ class FlutterTencentadBannerCallBack {
   TOnClick? onClick;
   TOnExpose? onExpose;
   TOnClose? onClose;
+  TOnECPM? onECPM;
 
   FlutterTencentadBannerCallBack(
-      {this.onShow, this.onFail, this.onClick, this.onExpose, this.onClose});
+      {this.onShow,
+      this.onFail,
+      this.onClick,
+      this.onExpose,
+      this.onClose,
+      this.onECPM});
 }
 
 ///动态信息流/横幅/视频贴片广告回调
@@ -68,9 +78,15 @@ class FlutterTencentadExpressCallBack {
   TOnClick? onClick;
   TOnExpose? onExpose;
   TOnClose? onClose;
+  TOnECPM? onECPM;
 
   FlutterTencentadExpressCallBack(
-      {this.onShow, this.onFail, this.onClick, this.onExpose, this.onClose});
+      {this.onShow,
+      this.onFail,
+      this.onClick,
+      this.onExpose,
+      this.onClose,
+      this.onECPM});
 }
 
 ///开屏广告回调
@@ -81,6 +97,7 @@ class FlutterTencentadSplashCallBack {
   TOnClick? onClick;
   TOnExpose? onExpose;
   TOnADTick? onADTick;
+  TOnECPM? onECPM;
 
   FlutterTencentadSplashCallBack(
       {this.onShow,
@@ -88,7 +105,8 @@ class FlutterTencentadSplashCallBack {
       this.onClick,
       this.onClose,
       this.onExpose,
-      this.onADTick});
+      this.onADTick,
+      this.onECPM});
 }
 
 ///插屏广告回调
@@ -101,6 +119,7 @@ class FlutterTencentadInteractionCallBack {
   TOnUnReady? onUnReady;
   TOnExpose? onExpose;
   TOnVerify? onVerify;
+  TOnECPM? onECPM;
 
   FlutterTencentadInteractionCallBack(
       {this.onShow,
@@ -110,7 +129,8 @@ class FlutterTencentadInteractionCallBack {
       this.onExpose,
       this.onReady,
       this.onUnReady,
-      this.onVerify});
+      this.onVerify,
+      this.onECPM});
 }
 
 ///激励广告回调
@@ -124,6 +144,7 @@ class FlutterTencentadRewardCallBack {
   TOnReady? onReady;
   TOnFinish? onFinish;
   TOnUnReady? onUnReady;
+  TOnECPM? onECPM;
 
   FlutterTencentadRewardCallBack(
       {this.onShow,
@@ -134,5 +155,6 @@ class FlutterTencentadRewardCallBack {
       this.onVerify,
       this.onReady,
       this.onFinish,
-      this.onUnReady});
+      this.onUnReady,
+      this.onECPM});
 }

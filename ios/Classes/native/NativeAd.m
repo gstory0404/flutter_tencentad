@@ -38,6 +38,7 @@
 @interface NativeAd()<GDTNativeExpressAdDelegete>
 
 @property (nonatomic, strong) GDTNativeExpressAd *native;
+@property (nonatomic, strong) GDTNativeExpressAdView *nativeView;
 @property(nonatomic,strong) UIView *container;
 @property(nonatomic,assign) CGRect frame;
 @property(nonatomic,assign) NSInteger viewId;
@@ -45,6 +46,7 @@
 @property(nonatomic,strong) NSString *codeId;
 @property(nonatomic,assign) NSInteger viewWidth;
 @property(nonatomic,assign) NSInteger viewHeight;
+@property(nonatomic,assign) BOOL isBidding;
 @end
 
 #pragma mark - NativeAd
@@ -58,8 +60,25 @@
         _codeId = dic[@"iosId"];
         _viewWidth =[dic[@"viewWidth"] intValue];
         _viewHeight =[dic[@"viewHeight"] intValue];
+        self.isBidding =[dic[@"isBidding"] boolValue];
         NSString* channelName = [NSString stringWithFormat:@"com.gstory.flutter_tencentad/NativeExpressAdView_%lld", viewId];
         _channel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:messenger];
+        [self.channel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
+            // 竞价成功
+            if ([@"biddingSucceeded" isEqualToString:call.method]) {
+                NSDictionary *dictionary = @{GDT_M_W_E_COST_PRICE:@([call.arguments[@"expectCostPrice"] intValue]),
+                                             GDT_M_W_H_LOSS_PRICE:@([call.arguments[@"highestLossPrice"] intValue])};
+                [self.native sendWinNotificationWithInfo:dictionary];
+                [_container addSubview:self.nativeView];
+                [self.nativeView render];
+                //竞价失败
+            } else if([@"biddingFail" isEqualToString:call.method]) {
+                NSDictionary *dictionary = @{GDT_M_L_WIN_PRICE:@([call.arguments[@"winPrice"] intValue]),
+                                             GDT_M_L_LOSS_REASON:@([call.arguments[@"lossReason"] intValue]),
+                                             GDT_M_ADNID: call.arguments[@"adnId"]};
+                [self.native sendWinNotificationWithInfo:dictionary];
+            }
+        }];
         _container = [[UIView alloc] initWithFrame:frame];
         [self loadNativeAd];
     }
@@ -87,20 +106,19 @@
 - (void)nativeExpressAdSuccessToLoad:(GDTNativeExpressAd *)nativeExpressAd views:(NSArray<__kindof GDTNativeExpressAdView *> *)views{
     [[TLogUtil sharedInstance] print:@"拉取原生模板广告成功"];
     if (views.count) {
-           [views enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-               GDTNativeExpressAdView *expressView = (GDTNativeExpressAdView *)obj;
-               expressView.controller = [UIViewController jsd_getCurrentViewController];
-               [_container addSubview:expressView];
-               [expressView render];
-           }];
-       }
-//    if(views.count > 0){
-//        [_container removeFromSuperview];
-//        GDTNativeExpressAdView *gdtNativeExpressAdView = views[0];
-//        gdtNativeExpressAdView.controller = [UIViewController jsd_getCurrentViewController];
-//        [gdtNativeExpressAdView render];
-//
-//    }
+        [views enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            self.nativeView = (GDTNativeExpressAdView *)obj;
+            self.nativeView.controller = [UIViewController jsd_getCurrentViewController];
+            //是否开启竞价
+            if(self.isBidding){
+                NSDictionary *dictionary = @{@"ecpmLevel":self.nativeView.eCPMLevel == nil ? @"" : self.nativeView.eCPMLevel,@"ecpm":@(self.nativeView.eCPM)};
+                [_channel invokeMethod:@"onECPM" arguments:dictionary result:nil];
+            }else{
+                [_container addSubview:self.nativeView];
+                [self.nativeView render];
+            }
+        }];
+    }
 }
 
 /**
@@ -108,8 +126,8 @@
  */
 - (void)nativeExpressAdFailToLoad:(GDTNativeExpressAd *)nativeExpressAd error:(NSError *)error{
     [[TLogUtil sharedInstance] print:(@"拉取原生模板广告失败 %@",error.description)];
-//    NSDictionary *dictionary = @{@"code":@(-1),@"message":(@"%@",error)};
-//    [_channel invokeMethod:@"onFail" arguments:dictionary result:nil];
+    //    NSDictionary *dictionary = @{@"code":@(-1),@"message":(@"%@",error)};
+    //    [_channel invokeMethod:@"onFail" arguments:dictionary result:nil];
 }
 
 
@@ -118,7 +136,7 @@
  */
 - (void)nativeExpressAdViewRenderSuccess:(GDTNativeExpressAdView *)nativeExpressAdView{
     [[TLogUtil sharedInstance] print:@"原生模板广告渲染成功"];
-   
+    
     NSDictionary *dictionary = @{@"width": @(nativeExpressAdView.frame.size.width),@"height":@(nativeExpressAdView.frame.size.height)};
     [_channel invokeMethod:@"onShow" arguments:dictionary result:nil];
 }
