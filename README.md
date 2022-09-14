@@ -40,7 +40,8 @@ flutter_tencentad: ^1.2.4
 ```Dart
 import 'package:flutter_tencentad/flutter_tencentad.dart';
 ```
-> 使用bidding模版 不管显不显示广告 均需要调用对应Controller 通知广告展示结果
+
+> bidding模式下 必需要调用对应Controller 回传竞价结果
 
 #### 2、Android
 SDK(4.482.1352)已配置插件中无需额外配置，只需要在android目录中AndroidManifest.xml配置
