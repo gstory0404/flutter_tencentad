@@ -1,7 +1,7 @@
 # 腾讯优量汇(广点通)广告 Flutter版本（支持bidding）
 
 <p>
-<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.2.5-success></a>
+<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.2.6-success></a>
 </p>
 
 ## 简介
@@ -34,7 +34,7 @@ flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS
 ## 集成步骤
 #### 1、pubspec.yaml
 ```Dart
-flutter_tencentad: ^1.2.5
+flutter_tencentad: ^1.2.6
 ```
 引入
 ```Dart
@@ -64,7 +64,7 @@ SDK(4.482.1352)已配置插件中无需额外配置，只需要在android目录�
 
 #### 3、IOS
 
-SDK(4.13.81)已配置插件中，其余根据文档配置。因为使用PlatformView，在Info.plist加入
+SDK(4.13.83)已配置插件中，其余根据文档配置。因为使用PlatformView，在Info.plist加入
 ```
  <key>io.flutter.embedded_views_preview</key>
     <true/>

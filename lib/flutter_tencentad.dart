@@ -99,7 +99,7 @@ class FlutterTencentad {
   /// [result] 竞价成功、失败后调用 [FlutterTencentBiddingResult] ,isBidding = true时必传
   static Future<bool> showRewardVideoAd(
       {FlutterTencentBiddingResult? result}) async {
-    return await _channel.invokeMethod("showRewardVideoAd", result?.toJson());
+    return await _channel.invokeMethod("showRewardVideoAd", result?.toJson() ?? {});
   }
 
   ///
@@ -139,7 +139,7 @@ class FlutterTencentad {
   ///
   static Future<bool> showUnifiedInterstitialAD(
       {FlutterTencentBiddingResult? result}) async {
-    return await _channel.invokeMethod("showInterstitialAD", result?.toJson());
+    return await _channel.invokeMethod("showInterstitialAD", result?.toJson() ?? {});
   }
 
   ///
