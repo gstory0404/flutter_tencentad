@@ -2,10 +2,10 @@ PODS:
   - Flutter (1.0.0)
   - flutter_tencentad (0.0.1):
     - Flutter
-    - GDTMobSDK (= 4.13.83)
-  - GDTMobSDK (4.13.83):
-    - GDTMobSDK/GDTMobSDK (= 4.13.83)
-  - GDTMobSDK/GDTMobSDK (4.13.83)
+    - GDTMobSDK (= 4.13.90)
+  - GDTMobSDK (4.13.90):
+    - GDTMobSDK/GDTMobSDK (= 4.13.90)
+  - GDTMobSDK/GDTMobSDK (4.13.90)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -23,8 +23,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  flutter_tencentad: 448f03553ca9651927c46ebba62a815d438c084e
-  GDTMobSDK: b1d5956bc683886256fb903b4a740cbecee58f91
+  flutter_tencentad: b6418a4235801726c6defb3056b50742d4c93e14
+  GDTMobSDK: c94d4870359052a47393916ba1d408ba2aad1d0a
 
 PODFILE CHECKSUM: 663715e941f9adb426e33bf9376914006f9ea95b
 
