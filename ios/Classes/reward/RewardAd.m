@@ -120,6 +120,8 @@
  */
 - (void)gdt_rewardVideoAdWillVisible:(GDTRewardVideoAd *)rewardedVideoAd{
     [[TLogUtil sharedInstance] print:(@"激励广告视频播放页即将展示回调")];
+    NSDictionary *dictionary = @{@"adType":@"interactAd",@"onAdMethod":@"onShow"};
+    [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
 }
 
 /**
