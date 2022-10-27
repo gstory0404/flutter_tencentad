@@ -1,7 +1,7 @@
 # 腾讯优量汇(广点通)广告 Flutter版本（支持bidding）
 
 <p>
-<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.2.10-success></a>
+<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.2.11-success></a>
 </p>
 
 ## 简介
@@ -20,13 +20,14 @@ flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS
 
 ## 本地开发环境
 ```
-[✓] Flutter (Channel stable, 3.0.4, on macOS 12.5 21G72 darwin-x64, locale zh-Hans-CN)
+[✓] Flutter (Channel stable, 3.3.6, on macOS 13.0 22A380 darwin-x64, locale zh-Hans-CN)
 [✓] Android toolchain - develop for Android devices (Android SDK version 33.0.0-rc1)
-[✓] Xcode - develop for iOS and macOS (Xcode 13.4.1)
+[✓] Xcode - develop for iOS and macOS (Xcode 14.0.1)
 [✓] Chrome - develop for the web
-[✓] Android Studio (version 2021.2)
-[✓] IntelliJ IDEA Ultimate Edition (version 2022.1.1)
-[✓] VS Code (version 1.69.2)
+[✓] Android Studio (version 2021.3)
+[✓] IntelliJ IDEA Ultimate Edition (version 2022.2.3)
+[✓] IntelliJ IDEA Ultimate Edition (version 2022.2.3)
+[✓] VS Code (version 1.72.2)
 [✓] Connected device (3 available)
 [✓] HTTP Host Availability
 ```
@@ -34,7 +35,7 @@ flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS
 ## 集成步骤
 #### 1、pubspec.yaml
 ```Dart
-flutter_tencentad: ^1.2.10
+flutter_tencentad: ^1.2.11
 ```
 引入
 ```Dart
