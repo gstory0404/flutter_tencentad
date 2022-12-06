@@ -126,8 +126,8 @@
  */
 - (void)nativeExpressAdFailToLoad:(GDTNativeExpressAd *)nativeExpressAd error:(NSError *)error{
     [[TLogUtil sharedInstance] print:(@"拉取原生模板广告失败 %@",error.description)];
-    //    NSDictionary *dictionary = @{@"code":@(-1),@"message":(@"%@",error)};
-    //    [_channel invokeMethod:@"onFail" arguments:dictionary result:nil];
+    NSDictionary *dictionary = @{@"code":@(-1),@"message":(@"%@",error.description)};
+    [_channel invokeMethod:@"onFail" arguments:dictionary result:nil];
 }
 
 
@@ -136,7 +136,6 @@
  */
 - (void)nativeExpressAdViewRenderSuccess:(GDTNativeExpressAdView *)nativeExpressAdView{
     [[TLogUtil sharedInstance] print:@"原生模板广告渲染成功"];
-    
     NSDictionary *dictionary = @{@"width": @(nativeExpressAdView.frame.size.width),@"height":@(nativeExpressAdView.frame.size.height)};
     [_channel invokeMethod:@"onShow" arguments:dictionary result:nil];
 }

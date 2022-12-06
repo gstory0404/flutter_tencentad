@@ -43,10 +43,14 @@ class _BannerAdViewState extends State<BannerAdView> {
   //广告是否显示
   bool _isShowAd = true;
 
+  double _width = 0;
+  double _height = 0;
+
   @override
   void initState() {
     super.initState();
-    _isShowAd = true;
+    _width = widget.viewWidth;
+    _height = widget.viewHeight;
   }
 
   @override
@@ -56,16 +60,16 @@ class _BannerAdViewState extends State<BannerAdView> {
     }
     if (defaultTargetPlatform == TargetPlatform.android) {
       return Container(
-        width: widget.viewWidth,
-        height: widget.viewHeight,
+        width: _width,
+        height: _height,
         child: AndroidView(
           viewType: _viewType,
           creationParams: {
             "androidId": widget.androidId,
             "viewWidth": widget.viewWidth,
             "viewHeight": widget.viewHeight,
-            "downloadConfirm":widget.downloadConfirm,
-            "isBidding":widget.isBidding,
+            "downloadConfirm": widget.downloadConfirm,
+            "isBidding": widget.isBidding,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),
@@ -73,15 +77,15 @@ class _BannerAdViewState extends State<BannerAdView> {
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return Container(
-        width: widget.viewWidth,
-        height: widget.viewHeight,
+        width: _width,
+        height: _height,
         child: UiKitView(
           viewType: _viewType,
           creationParams: {
             "iosId": widget.iosId,
             "viewWidth": widget.viewWidth,
             "viewHeight": widget.viewHeight,
-            "isBidding":widget.isBidding,
+            "isBidding": widget.isBidding,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),
@@ -101,9 +105,18 @@ class _BannerAdViewState extends State<BannerAdView> {
 
   //监听原生view传值
   Future<dynamic> _platformCallHandler(MethodCall call) async {
+    print("${call.method} ====  ${call.arguments}");
     switch (call.method) {
       //显示广告
       case FlutterTencentadMethod.onShow:
+        Map map = call.arguments;
+        if (mounted) {
+          setState(() {
+            _width = map["width"];
+            _height = map["height"];
+            _isShowAd = true;
+          });
+        }
         widget.callBack?.onShow!();
         break;
       //广告加载失败
@@ -133,7 +146,7 @@ class _BannerAdViewState extends State<BannerAdView> {
         }
         widget.callBack?.onClose!();
         break;
-    //竞价
+      //竞价
       case FlutterTencentadMethod.onECPM:
         Map map = call.arguments;
         widget.callBack?.onECPM!(map["ecpmLevel"], map["ecpm"]);

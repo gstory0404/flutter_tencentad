@@ -31,11 +31,41 @@ class _BannerPageState extends State<BannerPage> {
             //android广告id
             androidId: "8042711873318113",
             //ios广告id
-            iosId: "4043774915303757",
+            iosId: "5004358713683949",
             //广告宽 单位dp
             viewWidth: 640,
             //广告高  单位dp   宽高比应该为6.4:1
             viewHeight: 100,
+            //下载二次确认弹窗 默认false
+            downloadConfirm: true,
+            // 广告回调
+            callBack: FlutterTencentadBannerCallBack(
+              onShow: () {
+                print("Banner广告显示");
+              },
+              onFail: (code, message) {
+                print("Banner广告错误 $code $message");
+              },
+              onClose: () {
+                print("Banner广告关闭");
+              },
+              onExpose: () {
+                print("Banner广告曝光");
+              },
+              onClick: () {
+                print("Banner广告点击");
+              },
+            ),
+          ),
+          FlutterTencentad.bannerAdView(
+            //android广告id
+            androidId: "8042711873318113",
+            //ios广告id
+            iosId: "5004358713683949",
+            //广告宽 单位dp
+            viewWidth: 640,
+            //广告高  单位dp   宽高比应该为6.4:1
+            viewHeight: 60,
             //下载二次确认弹窗 默认false
             downloadConfirm: true,
             // 广告回调

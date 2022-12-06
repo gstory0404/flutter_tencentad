@@ -62,7 +62,7 @@ class _SplashAdViewState extends State<SplashAdView> {
             "androidId": widget.androidId,
             "fetchDelay": widget.fetchDelay,
             "downloadConfirm": widget.downloadConfirm,
-            "isBidding":widget.isBidding,
+            "isBidding": widget.isBidding,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),
@@ -77,7 +77,7 @@ class _SplashAdViewState extends State<SplashAdView> {
           creationParams: {
             "iosId": widget.iosId,
             "fetchDelay": widget.fetchDelay,
-            "isBidding":widget.isBidding,
+            "isBidding": widget.isBidding,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),
@@ -101,6 +101,11 @@ class _SplashAdViewState extends State<SplashAdView> {
       //显示广告
       case FlutterTencentadMethod.onShow:
         widget.callBack?.onShow!();
+        if (mounted) {
+          setState(() {
+            _isShowAd = true;
+          });
+        }
         break;
       //关闭
       case FlutterTencentadMethod.onClose:
@@ -128,7 +133,7 @@ class _SplashAdViewState extends State<SplashAdView> {
       case FlutterTencentadMethod.onADTick:
         widget.callBack?.onADTick!(call.arguments);
         break;
-    //竞价
+      //竞价
       case FlutterTencentadMethod.onECPM:
         Map map = call.arguments;
         widget.callBack?.onECPM!(map["ecpmLevel"], map["ecpm"]);

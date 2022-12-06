@@ -5,10 +5,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.gstory.flutter_tencentad.DownloadApkConfirmDialog
-import com.gstory.flutter_tencentad.DownloadConfirmHelper
-import com.gstory.flutter_tencentad.FlutterTencentAdConfig
-import com.gstory.flutter_tencentad.LogUtil
+import com.gstory.flutter_tencentad.*
 import com.qq.e.ads.banner2.UnifiedBannerADListener
 import com.qq.e.ads.banner2.UnifiedBannerView
 import com.qq.e.comm.pi.IBidding
@@ -105,7 +102,11 @@ internal class BannerAdView(
         } else {
             LogUtil.e("$TAG  Banner广告加载成功回调")
             mContainer?.addView(unifiedBannerView)
-            channel?.invokeMethod("onShow", "")
+            val map: MutableMap<String, Any?> = mutableMapOf(
+                "width" to UIUtils.px2dip(activity, unifiedBannerView?.width!!.toFloat()),
+                "height" to UIUtils.px2dip(activity, unifiedBannerView?.height!!.toFloat())
+            )
+            channel?.invokeMethod("onShow", map)
         }
     }
 
@@ -151,7 +152,11 @@ internal class BannerAdView(
                 unifiedBannerView?.sendWinNotification(map)
                 //展示banner
                 mContainer?.addView(unifiedBannerView)
-                channel?.invokeMethod("onShow", "")
+                val map2: MutableMap<String, Any?> = mutableMapOf(
+                    "width" to UIUtils.px2dip(activity, unifiedBannerView?.width!!.toFloat()),
+                    "height" to UIUtils.px2dip(activity, unifiedBannerView?.height!!.toFloat())
+                )
+                channel?.invokeMethod("onShow", map2)
             }
             //竞价失败
             "biddingFail" -> {

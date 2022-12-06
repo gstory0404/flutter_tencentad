@@ -66,10 +66,11 @@
             // 竞价成功
             if ([@"biddingSucceeded" isEqualToString:call.method]) {
                 NSDictionary *dictionary = @{GDT_M_W_E_COST_PRICE:@([call.arguments[@"expectCostPrice"] intValue]),
-                                             GDT_M_W_H_LOSS_PRICE:@([call.arguments[@"highestLossPrice"] intValue])};
+                                             GDT_M_W_H_LOSS_PRICE:@([call.arguments[@"highestLossPrice"] intValue])
+                };
                 [_banner sendWinNotificationWithInfo:dictionary];
-                [_container addSubview:_banner];
-                [_channel invokeMethod:@"onShow" arguments:nil result:nil];
+                NSDictionary *dictionary2 = @{@"width": @(self.banner.frame.size.width),@"height":@(self.banner.frame.size.height)};
+                [_channel invokeMethod:@"onShow" arguments:dictionary2 result:nil];
                 //竞价失败
             } else if([@"biddingFail" isEqualToString:call.method]) {
                 NSDictionary *dictionary = @{GDT_M_L_WIN_PRICE:@([call.arguments[@"winPrice"] intValue]),
@@ -84,19 +85,19 @@
 }
 
 - (UIView*)view{
-    return  _container;
+    return  self.container;
 }
 
 -(void)loadBannerAd{
     [_container removeFromSuperview];
     CGRect rect = {CGPointZero, CGSizeMake(_viewWidth, _viewHeight)};
-    if(_banner == nil){
-        _banner = [[GDTUnifiedBannerView alloc] initWithFrame:rect placementId:_codeId viewController:[UIViewController jsd_getCurrentViewController]];
-        _banner.delegate = self;
-        _banner.autoSwitchInterval = 30;
+    if(self.banner == nil){
+        self.banner = [[GDTUnifiedBannerView alloc] initWithFrame:rect placementId:_codeId viewController:[UIViewController jsd_getCurrentViewController]];
+        self.banner.delegate = self;
+        self.banner.autoSwitchInterval = 30;
     }
-    
-    [_banner loadAdAndShow];
+    self.container = self.banner;
+    [self.banner loadAdAndShow];
 }
 
 /**
@@ -104,16 +105,17 @@
  *  当接收服务器返回的广告数据成功后调用该函数
  */
 - (void)unifiedBannerViewDidLoad:(GDTUnifiedBannerView *)unifiedBannerView{
-    [[TLogUtil sharedInstance] print:@"请求广告条数据成功后调用"];
+    [[TLogUtil sharedInstance] print:@"Banner广告数据请求成功"];
     //    [[TLogUtil sharedInstance] print:self.banner.eCPMLevel];
     //    [[TLogUtil sharedInstance] print:@(self.banner.eCPM)];
     //是否开启竞价
     if(self.isBidding){
         NSDictionary *dictionary = @{@"ecpmLevel":self.banner.eCPMLevel == nil ? @"" : self.banner.eCPMLevel,@"ecpm":@(self.banner.eCPM)};
-        [_channel invokeMethod:@"onECPM" arguments:dictionary result:nil];
+        [self.channel invokeMethod:@"onECPM" arguments:dictionary result:nil];
     }else{
-        [_container addSubview:_banner];
-        [_channel invokeMethod:@"onShow" arguments:nil result:nil];
+        //        [self.container addSubview:self.banner];
+        NSDictionary *dictionary = @{@"width": @(unifiedBannerView.frame.size.width),@"height":@(unifiedBannerView.frame.size.height)};
+        [self.channel invokeMethod:@"onShow" arguments:dictionary result:nil];
     }
 }
 
