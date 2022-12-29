@@ -1,8 +1,13 @@
 # 腾讯优量汇(广点通)广告 Flutter版本（支持bidding）
 
 <p>
-<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/badge/flutter_tencentad-v1.2.13-success></a>
+<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/pub/v/flutter_tencentad?color=orange></a>
+<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/pub/likes/flutter_tencentad></a>
+<a href="https://pub.flutter-io.cn/packages/flutter_tencentad"><img src=https://img.shields.io/pub/points/flutter_tencentad></a>
+<a href="https://github.com/gstory0404/flutter_tencentad/commits"><img src=https://img.shields.io/github/last-commit/gstory0404/flutter_tencentad></a>
+<a href="https://github.com/gstory0404/flutter_tencentad"><img src=https://img.shields.io/github/stars/gstory0404/flutter_tencentad></a>
 </p>
+
 
 ## 简介
 flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS SDK的Flutter插件,方便直接调用优量汇(广点通)广告SDK方法快速开发,[体验demo](https://www.pgyer.com/j7YB)，可通过[GTAds](https://github.com/gstory0404/GTAds)实现多个广告平台接入、统一管理。
