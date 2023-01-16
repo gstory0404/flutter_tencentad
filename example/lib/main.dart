@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                   //android广告id
                   androidId: "5042816813706194",
                   //ios广告id
-                  iosId: "4023171869997790",
+                  iosId: "3034186385479617",
                   //用户id
                   userID: "123",
                   //奖励
@@ -221,7 +221,7 @@ class _HomePageState extends State<HomePage> {
                   //android广告id
                   androidId: "9062813863614416",
                   //ios广告id
-                  iosId: "5093576955904702",
+                  iosId: "6054482385870649",
                   //是否全屏
                   isFullScreen: false,
                   //下载二次确认弹窗 默认false
@@ -239,7 +239,7 @@ class _HomePageState extends State<HomePage> {
                   //android广告id
                   androidId: "7002176717594059",
                   //ios广告id
-                  iosId: "9043571925301857",
+                  iosId: "3094084365676712",
                   isFullScreen: true,
                   //下载二次确认弹窗 默认false
                   downloadConfirm: true,
@@ -256,7 +256,7 @@ class _HomePageState extends State<HomePage> {
                   //android广告id
                   androidId: "7002176717594059",
                   //ios广告id
-                  iosId: "9043571925301857",
+                  iosId: "2014782305274727",
                   isFullScreen: true,
                   //下载二次确认弹窗 默认false
                   downloadConfirm: true,
@@ -303,7 +303,7 @@ class _HomePageState extends State<HomePage> {
                   return new SplashPage(
                       isBidding: false,
                       androidId: "4052216802299999",
-                      iosId: "3053975955207733");
+                      iosId: "8064986367407648");
                 }));
               },
             ),

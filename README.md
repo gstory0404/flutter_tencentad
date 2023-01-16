@@ -25,22 +25,21 @@ flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS
 
 ## 本地开发环境
 ```
-[✓] Flutter (Channel stable, 3.3.6, on macOS 13.0 22A380 darwin-x64, locale zh-Hans-CN)
-[✓] Android toolchain - develop for Android devices (Android SDK version 33.0.0-rc1)
-[✓] Xcode - develop for iOS and macOS (Xcode 14.0.1)
+[✓] Flutter (Channel stable, 3.3.10, on macOS 13.1 22C65 darwin-x64, locale zh-Hans-CN)
+[✓] Android toolchain - develop for Android devices (Android SDK version 33.0.1)
+[✓] Xcode - develop for iOS and macOS (Xcode 14.2)
 [✓] Chrome - develop for the web
-[✓] Android Studio (version 2021.3)
-[✓] IntelliJ IDEA Ultimate Edition (version 2022.2.3)
-[✓] IntelliJ IDEA Ultimate Edition (version 2022.2.3)
-[✓] VS Code (version 1.72.2)
-[✓] Connected device (3 available)
+[✓] Android Studio
+[✓] IntelliJ IDEA Ultimate Edition (version 2022.3.1)
+[✓] VS Code (version 1.74.2)
+[✓] Connected device (4 available)
 [✓] HTTP Host Availability
 ```
 
 ## 集成步骤
 #### 1、pubspec.yaml
 ```Dart
-flutter_tencentad: ^1.2.13
+flutter_tencentad: ^1.2.14
 ```
 引入
 ```Dart
