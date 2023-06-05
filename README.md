@@ -25,21 +25,21 @@ flutter_tencentad是一款集成了腾讯优量汇广告(广点通)Android和iOS
 
 ## 本地开发环境
 ```
-[✓] Flutter (Channel stable, 3.3.10, on macOS 13.1 22C65 darwin-x64, locale zh-Hans-CN)
+[✓] Flutter (Channel stable, 3.10.3, on macOS 13.4 22F66 darwin-x64, locale zh-Hans-CN)
 [✓] Android toolchain - develop for Android devices (Android SDK version 33.0.1)
-[✓] Xcode - develop for iOS and macOS (Xcode 14.2)
+[✓] Xcode - develop for iOS and macOS (Xcode 14.3.1)
 [✓] Chrome - develop for the web
-[✓] Android Studio
-[✓] IntelliJ IDEA Ultimate Edition (version 2022.3.1)
-[✓] VS Code (version 1.74.2)
+[✓] Android Studio (version 2022.1)
+[✓] IntelliJ IDEA Ultimate Edition (version 2023.1.2)
+[✓] VS Code (version 1.78.2)
 [✓] Connected device (4 available)
-[✓] HTTP Host Availability
+[✓] Network resources
 ```
 
 ## 集成步骤
 #### 1、pubspec.yaml
 ```Dart
-flutter_tencentad: ^1.2.14
+flutter_tencentad: ^latest
 ```
 引入
 ```Dart
@@ -49,7 +49,7 @@ import 'package:flutter_tencentad/flutter_tencentad.dart';
 > bidding模式下 必需要调用对应Controller 回传竞价结果
 
 #### 2、Android
-SDK(4.500.1370)已配置插件中无需额外配置，只需要在android目录中AndroidManifest.xml配置
+需要在android目录中AndroidManifest.xml配置
 
 ⚠️插件1.1.4以后不再默认集成权限，需手动配置
 ```Java
@@ -69,7 +69,7 @@ SDK(4.500.1370)已配置插件中无需额外配置，只需要在android目录�
 
 #### 3、IOS
 
-SDK(4.14.01)已配置插件中，其余根据文档配置。因为使用PlatformView，在Info.plist加入
+根据SDK文档配置。因为使用PlatformView，在Info.plist加入
 ```
  <key>io.flutter.embedded_views_preview</key>
     <true/>

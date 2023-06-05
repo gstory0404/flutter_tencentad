@@ -34,7 +34,7 @@ class _ExpressPageState extends State<ExpressPage> {
                 //android广告id
                 androidId: "4072918853903023",
                 //ios广告id
-                iosId: "3014655729431161",
+                iosId: "5065041754863035",
                 //广告宽 单位dp
                 viewWidth: 400,
                 //广告高  单位dp
@@ -63,9 +63,9 @@ class _ExpressPageState extends State<ExpressPage> {
             Text("视频贴片"),
             FlutterTencentad.expressAdView(
               //android广告id
-              androidId: "9013670915436201",
+              androidId: "4072918853903023",
               //ios广告id
-              iosId: "3074950769039285",
+              iosId: "5065041754863035",
               viewWidth: 400,
               viewHeight: 300,
               //下载二次确认弹窗 默认false
@@ -75,9 +75,9 @@ class _ExpressPageState extends State<ExpressPage> {
             Text("动态信息流（竞价）"),
             FlutterTencentad.expressAdView(
               //android广告id
-              androidId: "4033498034524284",
+              androidId: "4072918853903023",
               //ios广告id
-              iosId: "4033278955532222",
+              iosId: "5065041754863035",
               viewWidth: 400,
               viewHeight: 300,
               //下载二次确认弹窗 默认false
