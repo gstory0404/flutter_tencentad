@@ -88,7 +88,7 @@ object InterstitialAd {
                 if (isFullScreen!!) {
                     unifiedInterstitialAD?.showFullScreenAD(context)
                 } else {
-                    unifiedInterstitialAD?.showAsPopupWindow()
+                    unifiedInterstitialAD?.show()
                 }
             } else {
                 unifiedInterstitialAD?.sendLossNotification(
@@ -106,7 +106,7 @@ object InterstitialAd {
             if (isFullScreen!!) {
                 unifiedInterstitialAD?.showFullScreenAD(context)
             } else {
-                unifiedInterstitialAD?.showAsPopupWindow()
+                unifiedInterstitialAD?.show()
             }
         }
     }
