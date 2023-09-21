@@ -42,7 +42,7 @@
     _customData = dic[@"customData"];
     _reward = [[GDTRewardVideoAd alloc] initWithPlacementId:_codeId];
     _reward.delegate = self;
-    _reward.videoMuted = false;
+    _reward.videoMuted = dic[@"videoMuted"];
     self.isBidding =[dic[@"isBidding"] boolValue];
     GDTServerSideVerificationOptions  *options = [[GDTServerSideVerificationOptions alloc] init];
     options.userIdentifier = _userID;

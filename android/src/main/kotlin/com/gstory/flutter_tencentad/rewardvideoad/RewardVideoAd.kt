@@ -27,6 +27,7 @@ object RewardVideoAd {
     private var rewardAmount: Int = 0
     private var customData: String = ""
     private var downloadConfirm: Boolean = false
+    private var videoMuted: Boolean = false
 
     //是否开启竞价
     private var isBidding: Boolean = false
@@ -40,11 +41,12 @@ object RewardVideoAd {
         this.customData = params["customData"] as String
         this.downloadConfirm = params["downloadConfirm"] as Boolean
         this.isBidding = params["isBidding"] as Boolean
+        this.videoMuted = params["videoMuted"] as Boolean
         loadRewardVideoAd()
     }
 
     private fun loadRewardVideoAd() {
-        rewardVideoAD = RewardVideoAD(context, codeId, rewardVideoADListener) // 有声播放
+        rewardVideoAD = RewardVideoAD(context, codeId, rewardVideoADListener,videoMuted)
         var options = ServerSideVerificationOptions.Builder()
             .setUserId(userID)
             .setCustomData(customData)

@@ -70,6 +70,8 @@ class FlutterTencentad {
   ///
   /// [downloadConfirm] 下载二次确认弹窗 默认false
   ///
+  /// [videoMuted] 是否静音 默认false
+  ///
   /// [isBidding] 是否开启竞价模式 默认false
   static Future<bool> loadRewardVideoAd({
     required String androidId,
@@ -79,6 +81,7 @@ class FlutterTencentad {
     required String userID,
     String? customData,
     bool? downloadConfirm,
+    bool? videoMuted,
     bool? isBidding,
   }) async {
     return await _channel.invokeMethod("loadRewardVideoAd", {
@@ -88,6 +91,7 @@ class FlutterTencentad {
       "rewardAmount": rewardAmount,
       "userID": userID,
       "customData": customData ?? "",
+      "videoMuted": videoMuted ?? false,
       "downloadConfirm": downloadConfirm ?? false,
       "isBidding": isBidding ?? false,
     });

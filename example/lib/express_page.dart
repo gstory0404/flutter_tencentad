@@ -32,9 +32,9 @@ class _ExpressPageState extends State<ExpressPage> {
             Text("动态信息流/横幅/视频贴片广告"),
             FlutterTencentad.expressAdView(
                 //android广告id
-                androidId: "4072918853903023",
+                androidId: "2052358715215945",
                 //ios广告id
-                iosId: "5065041754863035",
+                iosId: "8005078841637436",
                 //广告宽 单位dp
                 viewWidth: 400,
                 //广告高  单位dp
