@@ -304,8 +304,8 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(context, MaterialPageRoute(builder: (_) {
                   return new SplashPage(
                       isBidding: false,
-                      androidId: "4052216802299999",
-                      iosId: "2065245754651975");
+                      androidId: "8082448705762345",
+                      iosId: "2025171801831087");
                 }));
               },
             ),
