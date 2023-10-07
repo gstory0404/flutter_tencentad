@@ -1,4 +1,8 @@
 ## 1.2.19
+* android升级4.542.1412
+* ios升级4.14.45
+
+## 1.2.19
 * android升级4.541.1411
 * ios升级4.14.42
 * loadRewardVideoAd激励广告新增videoMuted控制视频是否静音播放
