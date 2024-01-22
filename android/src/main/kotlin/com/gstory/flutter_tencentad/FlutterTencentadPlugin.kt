@@ -17,6 +17,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import java.lang.Exception
 
 /** FlutterTencentadPlugin */
 class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
@@ -24,12 +25,12 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private lateinit var channel: MethodChannel
     private var applicationContext: Context? = null
     private var mActivity: Activity? = null
-    private var mFlutterPluginBinding: FlutterPlugin.FlutterPluginBinding?  = null
+    private var mFlutterPluginBinding: FlutterPlugin.FlutterPluginBinding? = null
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         mActivity = binding.activity
 //        Log.e("FlutterUnionadPlugin->","onAttachedToActivity")
-        FlutterTencentAdViewPlugin.registerWith(mFlutterPluginBinding!!,mActivity!!)
+        FlutterTencentAdViewPlugin.registerWith(mFlutterPluginBinding!!, mActivity!!)
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
@@ -62,20 +63,30 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             val debug = call.argument<Boolean>("debug")
             val channelId = call.argument<Int>("channelId")
             val personalized = call.argument<Int>("personalized")
+            //日志
+            LogUtil.setAppName("flutter_tencentad")
+            LogUtil.setShow(debug!!)
             //是否开启个性化
             GlobalSetting.setPersonalizedState(personalized!!)
             //设置渠道id
             GlobalSetting.setChannel(channelId!!)
-            GDTAdSdk.init(applicationContext,appId)
-            LogUtil.setAppName("flutter_tencentad")
-            LogUtil.setShow(debug!!)
-            result.success(true)
+            GDTAdSdk.initWithoutStart(applicationContext, appId)
+            GDTAdSdk.start(object : GDTAdSdk.OnStartListener {
+                override fun onStartSuccess() {
+                    result.success(true)
+                }
+
+                override fun onStartFailed(p0: Exception?) {
+                    result.success(false)
+                }
+
+            })
             //获取sdk版本
         } else if (call.method == "getSDKVersion") {
             result.success(SDKStatus.getIntegrationSDKVersion())
             //预加载激励广告
         } else if (call.method == "loadRewardVideoAd") {
-            RewardVideoAd.init(applicationContext!!,call.arguments as Map<*, *>)
+            RewardVideoAd.init(applicationContext!!, call.arguments as Map<*, *>)
             result.success(true)
             //展示激励广告
         } else if (call.method == "showRewardVideoAd") {
@@ -83,7 +94,7 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             result.success(true)
             //预加载插屏广告
         } else if (call.method == "loadInterstitialAD") {
-            InterstitialAd.init(mActivity!!,call.arguments as Map<*, *>)
+            InterstitialAd.init(mActivity!!, call.arguments as Map<*, *>)
             result.success(true)
             //展示插屏广告
         } else if (call.method == "showInterstitialAD") {

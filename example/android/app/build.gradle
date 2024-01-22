@@ -35,7 +35,7 @@ android {
     defaultConfig {
         applicationId "com.gstory.flutter_tencentad_example"
 //        applicationId "com.hnnuomi.atree"
-        minSdkVersion 16
+        minSdkVersion flutter.minSdkVersion
         targetSdkVersion 32
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

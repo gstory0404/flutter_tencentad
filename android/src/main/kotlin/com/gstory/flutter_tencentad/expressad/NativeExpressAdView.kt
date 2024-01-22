@@ -82,7 +82,6 @@ internal class NativeExpressAdView(
                 .setAutoPlayMuted(true)
                 .build()
         )
-        nativeExpressAD?.setDownAPPConfirmPolicy(DownAPPConfirmPolicy.Default)
         nativeExpressAD?.loadAD(1)
     }
 
