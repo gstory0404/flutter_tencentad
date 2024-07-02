@@ -22,12 +22,8 @@ import io.flutter.plugin.platform.PlatformView
  **/
 
 internal class BannerAdView(
-    var activity: Activity,
-    messenger: BinaryMessenger,
-    id: Int,
-    params: Map<String?, Any?>
-) :
-    PlatformView, UnifiedBannerADListener, MethodChannel.MethodCallHandler {
+    var activity: Activity, messenger: BinaryMessenger, id: Int, params: Map<String?, Any?>
+) : PlatformView, UnifiedBannerADListener, MethodChannel.MethodCallHandler {
 
     private val TAG = "BannerAdView"
 
@@ -43,6 +39,7 @@ internal class BannerAdView(
     private var channel: MethodChannel?
 
     private var downloadConfirm: Boolean
+
     //是否开启竞价
     private var isBidding: Boolean = params["isBidding"] as Boolean
 
@@ -95,16 +92,21 @@ internal class BannerAdView(
         }
         //竞价 则返回价格 不直接加载
         if (isBidding) {
-            channel?.invokeMethod("onECPM", mutableMapOf(
-                "ecpmLevel" to unifiedBannerView?.ecpmLevel,
-                "ecpm" to unifiedBannerView?.ecpm
-            ))
+            channel?.invokeMethod(
+                "onECPM", mutableMapOf(
+                    "ecpmLevel" to unifiedBannerView?.ecpmLevel, "ecpm" to unifiedBannerView?.ecpm
+                )
+            )
         } else {
             LogUtil.e("$TAG  Banner广告加载成功回调")
-            mContainer?.addView(unifiedBannerView)
+            mContainer?.addView(
+                unifiedBannerView, FrameLayout.LayoutParams(viewWidth.toInt(), viewHeight.toInt())
+            )
             val map: MutableMap<String, Any?> = mutableMapOf(
-                "width" to UIUtils.px2dip(activity, unifiedBannerView?.width!!.toFloat()),
-                "height" to UIUtils.px2dip(activity, unifiedBannerView?.height!!.toFloat())
+//                "width" to UIUtils.px2dip(activity, unifiedBannerView?.width!!.toFloat()),
+//                "height" to UIUtils.px2dip(activity, unifiedBannerView?.height!!.toFloat())
+                "width" to viewWidth.toInt(),
+                "height" to viewHeight.toInt()
             )
             channel?.invokeMethod("onShow", map)
         }
