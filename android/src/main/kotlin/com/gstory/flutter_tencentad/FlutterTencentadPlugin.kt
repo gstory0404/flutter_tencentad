@@ -2,6 +2,7 @@ package com.gstory.flutter_tencentad
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import androidx.annotation.NonNull
 import com.gstory.flutter_tencentad.interstitialad.InterstitialAd
 import com.gstory.flutter_tencentad.rewardvideoad.RewardVideoAd
@@ -10,6 +11,7 @@ import com.qq.e.comm.DownloadService
 import com.qq.e.comm.managers.GDTAdSdk
 import com.qq.e.comm.managers.setting.GlobalSetting
 import com.qq.e.comm.managers.status.SDKStatus
+//import com.qq.e.union.tools.ToolsActivity
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -17,7 +19,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import java.lang.Exception
+
 
 /** FlutterTencentadPlugin */
 class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
@@ -59,10 +61,13 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         //注册初始化
         if (call.method == "register") {
-            val appId = call.argument<String>("androidId")
-            val debug = call.argument<Boolean>("debug")
-            val channelId = call.argument<Int>("channelId")
-            val personalized = call.argument<Int>("personalized")
+            var arguments = call.arguments as Map<String?, Any?>
+            val appId = arguments["androidId"] as String
+            val debug = arguments["debug"] as Boolean
+            val channelId = arguments["channelId"] as Int
+            val personalized = arguments["personalized"] as Int
+            //隐私管理
+            val androidPrivacy =  arguments["androidPrivacy"] as Map<String, Boolean>?
             //日志
             LogUtil.setAppName("flutter_tencentad")
             LogUtil.setShow(debug!!)
@@ -70,6 +75,8 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             GlobalSetting.setPersonalizedState(personalized!!)
             //设置渠道id
             GlobalSetting.setChannel(channelId!!)
+            LogUtil.e("androidPrivacy${androidPrivacy.toString()}")
+            GlobalSetting.setAgreeReadPrivacyInfo(androidPrivacy);
             GDTAdSdk.initWithoutStart(applicationContext, appId)
             GDTAdSdk.start(object : GDTAdSdk.OnStartListener {
                 override fun onStartSuccess() {
@@ -103,6 +110,10 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             //进入下载列表
         } else if (call.method == "enterAPPDownloadListPage") {
             DownloadService.enterAPPDownloadListPage(mActivity)
+            result.success(true)
+        //广告助手
+        } else if (call.method == "enterADTools") {
+//            mActivity?.startActivity(Intent(applicationContext, ToolsActivity::class.java))
             result.success(true)
         } else {
             result.notImplemented()

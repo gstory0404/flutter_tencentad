@@ -36,6 +36,7 @@ class FlutterTencentad {
     int? personalized,
     bool? debug,
     int? channelId,
+    Map<String,bool>? androidPrivacy,
   }) async {
     return await _channel.invokeMethod("register", {
       "androidId": androidId,
@@ -43,6 +44,7 @@ class FlutterTencentad {
       "debug": debug ?? false,
       "channelId": channelId ?? FlutterTencentadChannel.other,
       "personalized": personalized ?? FlutterTencentadPersonalized.show,
+      "androidPrivacy": androidPrivacy,
     });
   }
 
@@ -267,5 +269,10 @@ class FlutterTencentad {
   ///进入APP下载列表页
   static Future<bool> enterAPPDownloadListPage() async {
     return await _channel.invokeMethod("enterAPPDownloadListPage", {});
+  }
+
+  ///进入广告助手页
+  static Future<bool> enterADTools() async {
+    return await _channel.invokeMethod("enterADTools", {});
   }
 }

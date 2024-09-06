@@ -85,11 +85,23 @@ import 'package:flutter_tencentad/flutter_tencentad.dart';
 #### 1、SDK初始化
 ```Dart
 await FlutterTencentad.register(
-    androidId: "1200009850",//androidId
-    iosId: "1200082163", //iosId
-    debug: true, //是否显示日志log
-    personalized: FlutterTencentadPersonalized.show,//是否显示个性化推荐广告
-    channelId: FlutterTencentadChannel.other,//渠道id
+    //androidId
+    androidId: "1200310001",
+    //iosId
+    iosId: "1202937154",
+    //是否显示日志log
+    debug: true,
+    //是否显示个性化推荐广告
+    personalized: FlutterTencentadPersonalized.show,
+    //渠道id
+    channelId: FlutterTencentadChannel.other,
+    //安卓隐私设置 根绝官方文档填写
+    androidPrivacy: {
+        //优量汇SDK将不采集mac地址
+        "mac_address": false,
+        //允许优量汇SDK采集android_id
+        "android_id": false
+    }
 );
 ```
 #### 2、获取SDK版本

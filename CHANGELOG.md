@@ -1,3 +1,8 @@
+## 1.2.23
+* android更新4.600.1470
+* ios更新4.15.00
+* 初始化新增android隐私设置androidPrivacy
+
 ## 1.2.22
 * android更新4.591.1461
 * ios更新4.14.90
