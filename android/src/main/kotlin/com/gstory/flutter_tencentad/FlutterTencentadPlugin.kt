@@ -75,7 +75,6 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             GlobalSetting.setPersonalizedState(personalized!!)
             //设置渠道id
             GlobalSetting.setChannel(channelId!!)
-            LogUtil.e("androidPrivacy${androidPrivacy.toString()}")
             GlobalSetting.setAgreeReadPrivacyInfo(androidPrivacy);
             GDTAdSdk.initWithoutStart(applicationContext, appId)
             GDTAdSdk.start(object : GDTAdSdk.OnStartListener {

@@ -100,7 +100,9 @@ await FlutterTencentad.register(
         //优量汇SDK将不采集mac地址
         "mac_address": false,
         //允许优量汇SDK采集android_id
-        "android_id": false
+        "android_id": false,
+        //允许收集ip
+        "wipaddr":false
     }
 );
 ```
