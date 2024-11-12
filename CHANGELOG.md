@@ -1,3 +1,7 @@
+## 1.2.25
+* android增加namespace
+
+
 ## 1.2.24
 * android更新4.603.1473
 * ios更新4.15.10

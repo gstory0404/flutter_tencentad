@@ -28,6 +28,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace = "com.gstory.flutter_tencentad"
     compileSdkVersion 28
 
     sourceSets {
