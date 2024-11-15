@@ -29,6 +29,8 @@ class FlutterTencentad {
   /// [channelId] channelId 渠道id [FlutterTencentadChannel]
   ///
   /// [personalized] personalized 是否开启个性化广告 [FlutterTencentadPersonalized]
+  /// 
+  /// [enableCollectAppInstallStatus] 安卓隐私合规 是否开启收集应用安装状态
   ///
   static Future<bool> register({
     required String androidId,
@@ -37,6 +39,7 @@ class FlutterTencentad {
     bool? debug,
     int? channelId,
     Map<String,bool>? androidPrivacy,
+    bool? enableCollectAppInstallStatus,
   }) async {
     return await _channel.invokeMethod("register", {
       "androidId": androidId,
@@ -45,6 +48,7 @@ class FlutterTencentad {
       "channelId": channelId ?? FlutterTencentadChannel.other,
       "personalized": personalized ?? FlutterTencentadPersonalized.show,
       "androidPrivacy": androidPrivacy,
+      "enableCollectAppInstallStatus": enableCollectAppInstallStatus
     });
   }
 
