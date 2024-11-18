@@ -68,6 +68,9 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             val personalized = arguments["personalized"] as Int
             //隐私管理
             val androidPrivacy =  arguments["androidPrivacy"] as Map<String, Boolean>?
+            
+            val enableCollectAppInstallStatus = arguments["enableCollectAppInstallStatus"] as Boolean?
+
             //日志
             LogUtil.setAppName("flutter_tencentad")
             LogUtil.setShow(debug!!)
@@ -76,6 +79,14 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             //设置渠道id
             GlobalSetting.setChannel(channelId!!)
             GlobalSetting.setAgreeReadPrivacyInfo(androidPrivacy);
+                 
+            // 安卓隐私合规,设置是否收集应用安装状态
+            // https://e.qq.com/dev/help_detail.html?cid=3607&pid=10118
+            if(enableCollectAppInstallStatus != null){
+                // 建议在初始化 SDK 前进行此设置
+                GlobalSetting.setEnableCollectAppInstallStatus(enableCollectAppInstallStatus);
+            }
+
             GDTAdSdk.initWithoutStart(applicationContext, appId)
             GDTAdSdk.start(object : GDTAdSdk.OnStartListener {
                 override fun onStartSuccess() {
