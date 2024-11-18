@@ -147,6 +147,7 @@ class _HomePageState extends State<HomePage> {
         personalized: FlutterTencentadPersonalized.show,
         //渠道id
         channelId: FlutterTencentadChannel.other,
+        enableCollectAppInstallStatus: false,//安卓隐私合规 是否开启收集应用安装状态
         //安卓隐私设置
         androidPrivacy: {
           //优量汇SDK将不采集mac地址

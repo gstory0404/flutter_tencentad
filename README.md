@@ -103,7 +103,8 @@ await FlutterTencentad.register(
         "android_id": false,
         //允许收集ip
         "wipaddr":false
-    }
+    },
+    enableCollectAppInstallStatus: false,//安卓隐私合规 是否开启收集应用安装状态
 );
 ```
 #### 2、获取SDK版本

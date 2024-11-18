@@ -1,3 +1,6 @@
+## 1.2.26
+* 新增安卓隐私合规，是否开启收集应用安装状态（感谢@[langyuxiansheng](https://github.com/langyuxiansheng) pr）
+
 ## 1.2.25
 * android增加namespace
 
