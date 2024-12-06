@@ -1,5 +1,9 @@
+## 1.2.28
+* android高版本兼容
+
 ## 1.2.27
 * android升级4.610.1480
+
 
 ## 1.2.26
 * 新增安卓隐私合规，是否开启收集应用安装状态（感谢@[langyuxiansheng](https://github.com/langyuxiansheng) pr）
