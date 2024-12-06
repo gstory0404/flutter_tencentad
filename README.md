@@ -98,11 +98,17 @@ await FlutterTencentad.register(
     channelId: FlutterTencentadChannel.other,
     //安卓隐私设置 根绝官方文档填写
     androidPrivacy: {
+        //false为关闭粗略地理位置获取，不设置或者设置为true为获取
+        "cell_id": false,
         //优量汇SDK将不采集mac地址
         "mac_address": false,
-        //允许优量汇SDK采集android_id
+        //false为关闭device_id获取，不设置或者设置为true为获取
+        "device_id": false,
+        //false为关闭android_id获取，不设置或者设置为true为获取
         "android_id": false,
-        //允许收集ip
+        //false为关闭移动网络状态下获取IP地址，不设置或者设置为true为获取
+        "mipaddr":false,
+        //false为关闭WIFI状态下获取IP地址，不设置或者设置为true为获取
         "wipaddr":false
     },
     enableCollectAppInstallStatus: false,//安卓隐私合规 是否开启收集应用安装状态
