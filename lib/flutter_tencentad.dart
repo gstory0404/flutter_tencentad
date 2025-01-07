@@ -39,6 +39,7 @@ class FlutterTencentad {
     bool? debug,
     int? channelId,
     Map<String,bool>? androidPrivacy,
+    Map<String,bool>? convOptimizelnfo,
     bool? enableCollectAppInstallStatus,
   }) async {
     return await _channel.invokeMethod("register", {
@@ -47,7 +48,8 @@ class FlutterTencentad {
       "debug": debug ?? false,
       "channelId": channelId ?? FlutterTencentadChannel.other,
       "personalized": personalized ?? FlutterTencentadPersonalized.show,
-      "androidPrivacy": androidPrivacy,
+      "androidPrivacy": androidPrivacy ?? {},
+      "convOptimizelnfo": convOptimizelnfo ?? {},
       "enableCollectAppInstallStatus": enableCollectAppInstallStatus
     });
   }

@@ -110,6 +110,14 @@ await FlutterTencentad.register(
         "mipaddr":false,
         //false为关闭WIFI状态下获取IP地址，不设置或者设置为true为获取
         "wipaddr":false
+        //禁用taid获取
+        "taid": false,
+        //禁用oaid获取
+        "oaid": false
+    },
+    convOptimizelnfo: {
+        //关闭应用安装监听状态
+        "hieib": false
     },
     enableCollectAppInstallStatus: false,//安卓隐私合规 是否开启收集应用安装状态
 );

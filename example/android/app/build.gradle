@@ -24,7 +24,8 @@ if (flutterVersionName == null) {
 
 android {
     namespace = "com.gstory.flutter_tencentad_example"
-    compileSdk = flutter.compileSdkVersion
+//    compileSdk = flutter.compileSdkVersion
+    compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -40,7 +41,8 @@ android {
         applicationId "com.gstory.flutter_tencentad_example"
 //        applicationId "com.hnnuomi.atree"
         minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+//        targetSdkVersion flutter.targetSdkVersion
+        targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

@@ -147,7 +147,8 @@ class _HomePageState extends State<HomePage> {
         personalized: FlutterTencentadPersonalized.show,
         //渠道id
         channelId: FlutterTencentadChannel.other,
-        enableCollectAppInstallStatus: false,//安卓隐私合规 是否开启收集应用安装状态
+        enableCollectAppInstallStatus: false,
+        //安卓隐私合规 是否开启收集应用安装状态
         //安卓隐私设置
         androidPrivacy: {
           //false为关闭粗略地理位置获取，不设置或者设置为true为获取
@@ -159,9 +160,17 @@ class _HomePageState extends State<HomePage> {
           //false为关闭android_id获取，不设置或者设置为true为获取
           "android_id": false,
           //false为关闭移动网络状态下获取IP地址，不设置或者设置为true为获取
-          "mipaddr":false,
+          "mipaddr": false,
           //false为关闭WIFI状态下获取IP地址，不设置或者设置为true为获取
-          "wipaddr":false
+          "wipaddr": false,
+          //禁用taid获取
+          "taid": false,
+          //禁用oaid获取
+          "oaid": false
+        },
+        convOptimizelnfo: {
+          //关闭应用安装监听状态
+          "hieib": false
         });
     _sdkVersion = await FlutterTencentad.getSDKVersion();
     setState(() {});

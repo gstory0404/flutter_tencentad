@@ -68,7 +68,8 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             val personalized = arguments["personalized"] as Int
             //隐私管理
             val androidPrivacy =  arguments["androidPrivacy"] as Map<String, Boolean>?
-            
+            val convOptimizelnfo =  arguments["convOptimizelnfo"] as Map<String, Boolean>?
+
             val enableCollectAppInstallStatus = arguments["enableCollectAppInstallStatus"] as Boolean?
 
             //日志
@@ -86,6 +87,8 @@ class FlutterTencentadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 // 建议在初始化 SDK 前进行此设置
                 GlobalSetting.setEnableCollectAppInstallStatus(enableCollectAppInstallStatus);
             }
+            //关闭应用安装监听状态
+            GlobalSetting.setConvOptimizeInfo(convOptimizelnfo)
 
             GDTAdSdk.initWithoutStart(applicationContext, appId)
             GDTAdSdk.start(object : GDTAdSdk.OnStartListener {
