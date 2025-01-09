@@ -6,7 +6,7 @@
 //
 
 #import "RewardAd.h"
-#import "GDTRewardVideoAd.h"
+#import "GDTMobSDK/GDTRewardVideoAd.h"
 #import "FlutterTencentAdEvent.h"
 #import "TLogUtil.h"
 #import "TUIViewController+getCurrentVC.h"

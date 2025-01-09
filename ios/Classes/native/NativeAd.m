@@ -6,10 +6,10 @@
 //
 
 #import "NativeAd.h"
-#import "GDTNativeExpressAd.h"
+#import "GDTMobSDK/GDTNativeExpressAd.h"
 #import "TLogUtil.h"
 #import "TUIViewController+getCurrentVC.h"
-#import "GDTNativeExpressAdView.h"
+#import "GDTMobSDK/GDTNativeExpressAdView.h"
 
 #pragma mark - NaitveAdFactory
 

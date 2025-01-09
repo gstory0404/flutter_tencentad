@@ -6,7 +6,7 @@
 //
 
 #import "BannerAd.h"
-#import "GDTUnifiedBannerView.h"
+#import "GDTMobSDK/GDTUnifiedBannerView.h"
 #import "TLogUtil.h"
 #import "TUIViewController+getCurrentVC.h"
 

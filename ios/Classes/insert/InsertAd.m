@@ -6,7 +6,7 @@
 //
 
 #import "InsertAd.h"
-#import "GDTUnifiedInterstitialAd.h"
+#import "GDTMobSDK/GDTUnifiedInterstitialAd.h"
 #import "TLogUtil.h"
 #import "TUIViewController+getCurrentVC.h"
 #import "FlutterTencentAdEvent.h"

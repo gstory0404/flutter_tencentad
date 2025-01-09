@@ -1,5 +1,4 @@
 #import "FlutterTencentadPlugin.h"
-#import "GDTSDKConfig.h"
 #import "FlutterTencentAdEvent.h"
 #import "RewardAd.h"
 #import "TLogUtil.h"
@@ -7,6 +6,7 @@
 #import "SplashAd.h"
 #import "BannerAd.h"
 #import "NativeAd.h"
+#import "GDTMobSDK/GDTSDKConfig.h"
 
 @implementation FlutterTencentadPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {

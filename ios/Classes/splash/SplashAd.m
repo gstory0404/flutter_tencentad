@@ -6,7 +6,7 @@
 //
 
 #import "SplashAd.h"
-#import "GDTSplashAd.h"
+#import "GDTMobSDK/GDTSplashAd.h"
 #import "TLogUtil.h"
 
 @implementation SplashAdFactory{
