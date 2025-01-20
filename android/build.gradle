@@ -60,7 +60,7 @@ repositories {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-//    implementation 'com.qq.e.union:union:4.603.1473'
-    implementation(name: 'GDTSDK.unionNormal.4.611.1481', ext: 'aar')
+    implementation 'com.qq.e.union:union:4.620.1490'
+//    implementation(name: 'GDTSDK.unionNormal.4.611.1481', ext: 'aar')
 //    implementation 'com.qq.e.union:tools:+'
 }
