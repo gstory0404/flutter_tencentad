@@ -51,9 +51,7 @@ class _ExpressAdViewState extends State<ExpressAdView> {
     super.initState();
     _width = widget.viewWidth.toDouble();
     _height = widget.viewHeight.toDouble();
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   @override
@@ -71,8 +69,8 @@ class _ExpressAdViewState extends State<ExpressAdView> {
             "androidId": widget.androidId,
             "viewWidth": widget.viewWidth,
             "viewHeight": widget.viewHeight,
-            "downloadConfirm":widget.downloadConfirm,
-            "isBidding":widget.isBidding,
+            "downloadConfirm": widget.downloadConfirm,
+            "isBidding": widget.isBidding,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),
@@ -88,7 +86,7 @@ class _ExpressAdViewState extends State<ExpressAdView> {
             "iosId": widget.iosId,
             "viewWidth": widget.viewWidth,
             "viewHeight": widget.viewHeight,
-            "isBidding":widget.isBidding,
+            "isBidding": widget.isBidding,
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),
@@ -152,6 +150,15 @@ class _ExpressAdViewState extends State<ExpressAdView> {
       case FlutterTencentadMethod.onECPM:
         Map map = call.arguments;
         widget.callBack?.onECPM!(map["ecpmLevel"], map["ecpm"]);
+        break;
+      case FlutterTencentadMethod.onVideoPlay:
+        widget.callBack?.onVideoPlay?.call();
+        break;
+      case FlutterTencentadMethod.onVideoPause:
+        widget.callBack?.onVideoPause?.call();
+        break;
+      case FlutterTencentadMethod.onVideoStop:
+        widget.callBack?.onVideoStop?.call();
         break;
     }
   }

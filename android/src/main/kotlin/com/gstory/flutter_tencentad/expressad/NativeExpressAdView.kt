@@ -205,21 +205,25 @@ internal class NativeExpressAdView(
     //视频开始播放
     override fun onVideoStart(p0: NativeExpressADView?) {
         LogUtil.e("视频开始播放")
+        channel?.invokeMethod("onVideoPlay", "")
     }
 
     //视频暂停
     override fun onVideoPause(p0: NativeExpressADView?) {
         LogUtil.e("视频暂停")
+        channel?.invokeMethod("onVideoPause", "")
     }
 
     //视频播放结束，手动调用 stop 或者自然播放到达最后一帧时都会触发
     override fun onVideoComplete(p0: NativeExpressADView?) {
         LogUtil.e("视频播放结束")
+        channel?.invokeMethod("onVideoStop", "")
     }
 
     //视频播放时出现错误，error 对象包含了错误码和错误信息，错误码的详细内容可以参考文档第5章
     override fun onVideoError(p0: NativeExpressADView?, p1: AdError?) {
         LogUtil.e("视频播放时出现错误 ${p1?.errorCode}  ${p1?.errorMsg}")
+        channel?.invokeMethod("onVideoStop", "")
     }
 
     //进入视频落地页

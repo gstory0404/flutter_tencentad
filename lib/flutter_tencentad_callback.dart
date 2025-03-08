@@ -79,14 +79,21 @@ class FlutterTencentadExpressCallBack {
   TOnExpose? onExpose;
   TOnClose? onClose;
   TOnECPM? onECPM;
+  TOnVideoPlay? onVideoPlay;
+  TOnVideoPause? onVideoPause;
+  TOnVideoStop? onVideoStop;
 
-  FlutterTencentadExpressCallBack(
-      {this.onShow,
-      this.onFail,
-      this.onClick,
-      this.onExpose,
-      this.onClose,
-      this.onECPM});
+  FlutterTencentadExpressCallBack({
+    this.onShow,
+    this.onFail,
+    this.onClick,
+    this.onExpose,
+    this.onClose,
+    this.onECPM,
+    this.onVideoPlay,
+    this.onVideoPause,
+    this.onVideoStop,
+  });
 }
 
 ///开屏广告回调

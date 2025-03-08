@@ -222,7 +222,25 @@
  * 原生模板视频广告 player 播放状态更新回调
  */
 - (void)nativeExpressAdView:(GDTNativeExpressAdView *)nativeExpressAdView playerStatusChanged:(GDTMediaPlayerStatus)status{
-    [[TLogUtil sharedInstance] print:@"原生模板视频广告 player 播放状态更新回调"];
+    [[TLogUtil sharedInstance] print:[NSString stringWithFormat:@"原生模板视频广告 player 播放状态更新回调, 状态: %lu", (unsigned long)status]];
+    NSString *method = nil;
+    switch (status) {
+        case GDTMediaPlayerStatusStarted:
+            method = @"onVideoPlay";
+            break;
+        case GDTMediaPlayerStatusPaused:
+            method = @"onVideoPause";
+            break;
+        case GDTMediaPlayerStatusStoped:
+        case GDTMediaPlayerStatusError:
+            method = @"onVideoStop";
+            break;
+        default:
+            break;
+    }
+    if (method) {
+        [_channel invokeMethod:method arguments:nil result:nil];
+    }
 }
 
 
