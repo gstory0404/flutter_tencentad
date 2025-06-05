@@ -29,7 +29,9 @@
 }
 
 -(void)sentEvent:(NSDictionary*)arguments{
-    self.eventSink(arguments);
+    if(self.eventSink != nil){
+        self.eventSink(arguments);
+    }
 }
 
 
