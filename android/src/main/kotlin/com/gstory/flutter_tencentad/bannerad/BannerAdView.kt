@@ -99,8 +99,9 @@ internal class BannerAdView(
             )
         } else {
             LogUtil.e("$TAG  Banner广告加载成功回调")
+            val density = activity.resources.displayMetrics.density
             mContainer?.addView(
-                unifiedBannerView, FrameLayout.LayoutParams(viewWidth.toInt(), viewHeight.toInt())
+                unifiedBannerView, FrameLayout.LayoutParams((viewWidth * density).toInt(), (viewHeight * density).toInt())
             )
             val map: MutableMap<String, Any?> = mutableMapOf(
 //                "width" to UIUtils.px2dip(activity, unifiedBannerView?.width!!.toFloat()),
