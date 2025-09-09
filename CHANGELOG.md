@@ -1,3 +1,7 @@
+## 1.3.0
+* Android SDK升级4.650.1520
+* iOS SDK升级4.15.50
+
 ## 1.2.36
 * 修复Android横幅广告尺寸显示异常，感谢[jacpy](https://github.com/jacpy)的[提交](https://github.com/gstory0404/flutter_tencentad/pull/45)
 

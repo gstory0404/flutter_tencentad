@@ -138,9 +138,9 @@ class _HomePageState extends State<HomePage> {
   Future<void> _register() async {
     _isRegister = await FlutterTencentad.register(
         //androidId
-        androidId: "1200310001",
+        androidId: "1211169508",
         //iosId
-        iosId: "1202937154",
+        iosId: "1211169509",
         //是否显示日志log
         debug: true,
         //是否显示个性化推荐广告
@@ -195,9 +195,9 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 await FlutterTencentad.loadRewardVideoAd(
                   //android广告id
-                  androidId: "1025672821639423",
+                  androidId: "8260663462736446",
                   //ios广告id
-                  iosId: "3075877801134170",
+                  iosId: "2250968442134762",
                   //用户id
                   userID: "123",
                   //奖励
@@ -221,9 +221,9 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 await FlutterTencentad.loadRewardVideoAd(
                     //android广告id
-                    androidId: "6073891074921144",
+                    androidId: "8260663462736446",
                     //ios广告id
-                    iosId: "3075877801134170",
+                    iosId: "2250968442134762",
                     //用户id
                     userID: "123",
                     //奖励
@@ -246,9 +246,9 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 await FlutterTencentad.loadUnifiedInterstitialAD(
                   //android广告id
-                  androidId: "4082654735526092",
+                  androidId: "6270368452032577",
                   //ios广告id
-                  iosId: "6025576861231867",
+                  iosId: "8200166492635708",
                   //是否全屏
                   isFullScreen: false,
                   //下载二次确认弹窗 默认false
@@ -264,9 +264,9 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 await FlutterTencentad.loadUnifiedInterstitialAD(
                   //android广告id
-                  androidId: "4082654735526092",
+                  androidId: "6270368452032577",
                   //ios广告id
-                  iosId: "6025576861231867",
+                  iosId: "8200166492635708",
                   isFullScreen: true,
                   //下载二次确认弹窗 默认false
                   downloadConfirm: true,
@@ -281,9 +281,9 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 await FlutterTencentad.loadUnifiedInterstitialAD(
                   //android广告id
-                  androidId: "4082654735526092",
+                  androidId: "6270368452032577",
                   //ios广告id
-                  iosId: "6025576861231867",
+                  iosId: "8200166492635708",
                   isFullScreen: true,
                   //下载二次确认弹窗 默认false
                   downloadConfirm: true,
@@ -329,8 +329,8 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(context, MaterialPageRoute(builder: (_) {
                   return new SplashPage(
                       isBidding: false,
-                      androidId: "8082448705762345",
-                      iosId: "2025171801831087");
+                      androidId: "7240264412639400",
+                      iosId: "4210763402133659");
                 }));
               },
             ),
@@ -344,8 +344,8 @@ class _HomePageState extends State<HomePage> {
                   return new SplashPage(
                       //是否开启竞价
                       isBidding: true,
-                      androidId: "8082448705762345",
-                      iosId: "2025171801831087");
+                      androidId: "7240264412639400",
+                      iosId: "4210763402133659");
                 }));
               },
             ),

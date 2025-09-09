@@ -106,6 +106,7 @@ class _ExpressAdViewState extends State<ExpressAdView> {
 
   //监听原生view传值
   Future<dynamic> _platformCallHandler(MethodCall call) async {
+    print("${call.method} : ${call.arguments}");
     switch (call.method) {
       //显示广告
       case FlutterTencentadMethod.onShow:
