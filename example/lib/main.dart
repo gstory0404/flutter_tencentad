@@ -7,6 +7,7 @@ import 'package:flutter_tencentad_example/express_page.dart';
 import 'package:flutter_tencentad_example/splash_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -141,6 +142,8 @@ class _HomePageState extends State<HomePage> {
         androidId: "1211169508",
         //iosId
         iosId: "1211169509",
+        //ohosId
+        ohosId: "1207347907",
         //是否显示日志log
         debug: true,
         //是否显示个性化推荐广告
@@ -198,6 +201,8 @@ class _HomePageState extends State<HomePage> {
                   androidId: "8260663462736446",
                   //ios广告id
                   iosId: "2250968442134762",
+                  //ohos广告id
+                  ohosId: "5171580898607362",
                   //用户id
                   userID: "123",
                   //奖励
@@ -224,6 +229,7 @@ class _HomePageState extends State<HomePage> {
                     androidId: "8260663462736446",
                     //ios广告id
                     iosId: "2250968442134762",
+                    ohosId: "5171580898607362",
                     //用户id
                     userID: "123",
                     //奖励
@@ -249,6 +255,7 @@ class _HomePageState extends State<HomePage> {
                   androidId: "6270368452032577",
                   //ios广告id
                   iosId: "8200166492635708",
+                  ohosId: "3183311380526666",
                   //是否全屏
                   isFullScreen: false,
                   //下载二次确认弹窗 默认false
@@ -267,6 +274,7 @@ class _HomePageState extends State<HomePage> {
                   androidId: "6270368452032577",
                   //ios广告id
                   iosId: "8200166492635708",
+                  ohosId: "9133310340928744",
                   isFullScreen: true,
                   //下载二次确认弹窗 默认false
                   downloadConfirm: true,
@@ -330,7 +338,9 @@ class _HomePageState extends State<HomePage> {
                   return new SplashPage(
                       isBidding: false,
                       androidId: "7240264412639400",
-                      iosId: "4210763402133659");
+                      iosId: "4210763402133659",
+                      ohosId: "2113519330120408"
+                      );
                 }));
               },
             ),
@@ -345,7 +355,9 @@ class _HomePageState extends State<HomePage> {
                       //是否开启竞价
                       isBidding: true,
                       androidId: "7240264412639400",
-                      iosId: "4210763402133659");
+                      iosId: "4210763402133659",
+                      ohosId: "5193211370826641"
+                      );
                 }));
               },
             ),
