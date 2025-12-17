@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "flutter_tencentad",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

@@ -12,6 +12,7 @@ import 'package:flutter_tencentad/flutter_tencentad.dart';
 class ExpressAdView extends StatefulWidget {
   final String androidId;
   final String iosId;
+  final String? ohosId;
   final int viewWidth;
   final int viewHeight;
   final FlutterTencentadExpressCallBack? callBack;
@@ -23,6 +24,7 @@ class ExpressAdView extends StatefulWidget {
     Key? key,
     required this.androidId,
     required this.iosId,
+    this.ohosId,
     required this.viewWidth,
     required this.viewHeight,
     this.callBack,
@@ -84,6 +86,22 @@ class _ExpressAdViewState extends State<ExpressAdView> {
           viewType: _viewType,
           creationParams: {
             "iosId": widget.iosId,
+            "viewWidth": widget.viewWidth,
+            "viewHeight": widget.viewHeight,
+            "isBidding": widget.isBidding,
+          },
+          onPlatformViewCreated: _registerChannel,
+          creationParamsCodec: const StandardMessageCodec(),
+        ),
+      );
+    } else if (defaultTargetPlatform == TargetPlatform.ohos) {
+      return Container(
+        width: _width,
+        height: _height,
+        child: OhosView(
+          viewType: _viewType,
+          creationParams: {
+            "ohosId": widget.ohosId,
             "viewWidth": widget.viewWidth,
             "viewHeight": widget.viewHeight,
             "isBidding": widget.isBidding,

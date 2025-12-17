@@ -12,6 +12,7 @@ import 'package:flutter_tencentad/flutter_tencentad.dart';
 class SplashAdView extends StatefulWidget {
   final String androidId;
   final String iosId;
+  final String? ohosId;
   final int fetchDelay;
   final FlutterTencentadSplashCallBack? callBack;
   final bool downloadConfirm;
@@ -22,6 +23,7 @@ class SplashAdView extends StatefulWidget {
     Key? key,
     required this.androidId,
     required this.iosId,
+    this.ohosId,
     required this.fetchDelay,
     this.callBack,
     required this.downloadConfirm,
@@ -77,6 +79,23 @@ class _SplashAdViewState extends State<SplashAdView> {
           creationParams: {
             "iosId": widget.iosId,
             "fetchDelay": widget.fetchDelay,
+            "isBidding": widget.isBidding,
+          },
+          onPlatformViewCreated: _registerChannel,
+          creationParamsCodec: const StandardMessageCodec(),
+        ),
+      );
+    } else if (defaultTargetPlatform == TargetPlatform.ohos) {
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: OhosView(
+          viewType: _viewType,
+          creationParams: {
+            "ohosId": widget.ohosId,
+            "fetchDelay": widget.fetchDelay,
+            "viewWidth": MediaQuery.of(context).size.width,
+            "viewHeight": MediaQuery.of(context).size.height,
             "isBidding": widget.isBidding,
           },
           onPlatformViewCreated: _registerChannel,

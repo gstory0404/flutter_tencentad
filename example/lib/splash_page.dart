@@ -12,12 +12,15 @@ class SplashPage extends StatefulWidget {
   bool isBidding;
   String androidId;
   String iosId;
+  String ohosId;
 
   SplashPage(
       {Key? key,
       required this.isBidding,
       required this.androidId,
-      required this.iosId})
+      required this.iosId,
+      required this.ohosId,
+      })
       : super(key: key);
 
   @override
@@ -37,6 +40,8 @@ class _SplashPageState extends State<SplashPage> {
           androidId: widget.androidId,
           //ios广告id
           iosId: widget.iosId,
+          //ohos广告id
+          ohosId: widget.ohosId,
           ////设置开屏广告从请求到展示所花的最大时长（并不是指广告曝光时长），取值范围为[1500, 5000]ms
           fetchDelay: 3000,
           //下载二次确认弹窗 默认false

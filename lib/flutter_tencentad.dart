@@ -26,6 +26,8 @@ class FlutterTencentad {
   ///
   /// [iosId] iosId 必填
   ///
+  /// [ohosId] ohosId 鸿蒙平台appId
+  ///
   /// [channelId] channelId 渠道id [FlutterTencentadChannel]
   ///
   /// [personalized] personalized 是否开启个性化广告 [FlutterTencentadPersonalized]
@@ -35,6 +37,7 @@ class FlutterTencentad {
   static Future<bool> register({
     required String androidId,
     required String iosId,
+    String? ohosId,
     int? personalized,
     bool? debug,
     int? channelId,
@@ -45,6 +48,7 @@ class FlutterTencentad {
     return await _channel.invokeMethod("register", {
       "androidId": androidId,
       "iosId": iosId,
+      "ohosId": ohosId ?? "",
       "debug": debug ?? false,
       "channelId": channelId ?? FlutterTencentadChannel.other,
       "personalized": personalized ?? FlutterTencentadPersonalized.show,
@@ -68,6 +72,8 @@ class FlutterTencentad {
   ///
   /// [iosId] ios广告ID
   ///
+  /// [ohosId] ohos广告ID
+  ///
   /// [rewardName] 奖励名称
   ///
   /// [rewardAmount] 奖励金额
@@ -84,6 +90,7 @@ class FlutterTencentad {
   static Future<bool> loadRewardVideoAd({
     required String androidId,
     required String iosId,
+    String? ohosId,
     required String rewardName,
     required int rewardAmount,
     required String userID,
@@ -95,6 +102,7 @@ class FlutterTencentad {
     return await _channel.invokeMethod("loadRewardVideoAd", {
       "androidId": androidId,
       "iosId": iosId,
+      "ohosId": ohosId ?? "",
       "rewardName": rewardName,
       "rewardAmount": rewardAmount,
       "userID": userID,
@@ -121,6 +129,8 @@ class FlutterTencentad {
   ///
   /// [iosId] ios广告ID
   ///
+  /// [ohosId] ohos广告ID
+  ///
   ///  [isFullScreen] 是否全屏
   ///
   /// [downloadConfirm] 下载二次确认弹窗 默认false
@@ -130,6 +140,7 @@ class FlutterTencentad {
   static Future<bool> loadUnifiedInterstitialAD({
     required String androidId,
     required String iosId,
+    String? ohosId,
     required bool isFullScreen,
     bool? downloadConfirm,
     bool? isBidding,
@@ -137,6 +148,7 @@ class FlutterTencentad {
     return await _channel.invokeMethod("loadInterstitialAD", {
       "androidId": androidId,
       "iosId": iosId,
+      "ohosId": ohosId ?? "",
       "isFullScreen": isFullScreen,
       "downloadConfirm": downloadConfirm ?? false,
       "isBidding": isBidding ?? false,
@@ -161,6 +173,8 @@ class FlutterTencentad {
   ///
   /// [iosId] ios广告ID
   ///
+  /// [ohosId] ohos广告ID
+  ///
   /// [viewWidth] 广告宽 单位dp
   ///
   /// [viewHeight] 广告高  单位dp   宽高比应该为6.4:1
@@ -176,6 +190,7 @@ class FlutterTencentad {
   static Widget bannerAdView(
       {required String androidId,
       required String iosId,
+      String? ohosId,
       required double viewWidth,
       required double viewHeight,
       bool? downloadConfirm,
@@ -185,6 +200,7 @@ class FlutterTencentad {
     return BannerAdView(
       androidId: androidId,
       iosId: iosId,
+      ohosId: ohosId,
       viewWidth: viewWidth,
       viewHeight: viewHeight,
       callBack: callBack,
@@ -201,6 +217,8 @@ class FlutterTencentad {
   ///
   /// [iosId] ios广告ID
   ///
+  /// [ohosId] ohos广告ID
+  ///
   /// [fetchDelay] 设置开屏广告从请求到展示所花的最大时长（并不是指广告曝光时长），
   /// 取值范围为[1500, 5000]ms。如果需要使用默认值，可以调用上一个构造方法，
   /// 或者给 fetchDelay 设为0。
@@ -216,6 +234,7 @@ class FlutterTencentad {
   static Widget splashAdView(
       {required String androidId,
       required String iosId,
+      String? ohosId,
       required int fetchDelay,
       bool? downloadConfirm,
       bool? isBidding,
@@ -224,6 +243,7 @@ class FlutterTencentad {
     return SplashAdView(
       androidId: androidId,
       iosId: iosId,
+      ohosId: ohosId,
       fetchDelay: fetchDelay,
       callBack: callBack,
       downloadConfirm: downloadConfirm ?? false,
@@ -238,6 +258,8 @@ class FlutterTencentad {
   /// [androidId] android广告ID
   ///
   /// [iosId] ios广告ID
+  ///
+  /// [ohosId] ohos广告ID
   ///
   /// [viewWidth] 广告宽 单位dp
   ///
@@ -254,6 +276,7 @@ class FlutterTencentad {
   static Widget expressAdView(
       {required String androidId,
       required String iosId,
+      String? ohosId,
       required int viewWidth,
       required int viewHeight,
       bool? downloadConfirm,
@@ -263,6 +286,7 @@ class FlutterTencentad {
     return ExpressAdView(
       androidId: androidId,
       iosId: iosId,
+      ohosId: ohosId,
       viewWidth: viewWidth,
       viewHeight: viewHeight,
       callBack: callBack,
