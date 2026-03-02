@@ -32,6 +32,22 @@
     return myInstance;
 }
 
+- (UIViewController *)currentAdViewController{
+    UIViewController *controller = [UIViewController jsd_getCurrentViewController];
+    if (controller == nil) {
+        controller = [UIViewController jsd_getRootViewController];
+    }
+    return controller;
+}
+
+- (void)notifyVCInvalid{
+    NSDictionary *dictionary = @{@"adType":@"rewardAd",
+                                 @"onAdMethod":@"onFail",
+                                 @"code":@(-1),
+                                 @"message":@"广告展示的时候未收到开发者传递的有效的vc参数"};
+    [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
+}
+
 //预加载激励广告
 -(void)initAd:(NSDictionary*)arguments{
     NSDictionary *dic = arguments;
@@ -71,7 +87,12 @@
             NSDictionary *dictionary = @{GDT_M_W_E_COST_PRICE:@([arguments[@"expectCostPrice"] intValue]),
                                          GDT_M_W_H_LOSS_PRICE:@([arguments[@"highestLossPrice"] intValue])};
             [self.reward sendWinNotificationWithInfo:dictionary];
-            [self.reward showAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+            UIViewController *controller = [self currentAdViewController];
+            if (controller == nil) {
+                [self notifyVCInvalid];
+                return;
+            }
+            [self.reward showAdFromRootViewController:controller];
         }else{
             NSDictionary *dictionary = @{GDT_M_L_WIN_PRICE:@([arguments[@"winPrice"] intValue]),
                                          GDT_M_L_LOSS_REASON:@([arguments[@"lossReason"] intValue]),
@@ -79,7 +100,12 @@
             [self.reward sendWinNotificationWithInfo:dictionary];
         }
     }else{
-        [self.reward showAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+        UIViewController *controller = [self currentAdViewController];
+        if (controller == nil) {
+            [self notifyVCInvalid];
+            return;
+        }
+        [self.reward showAdFromRootViewController:controller];
     }
     
 }

@@ -51,6 +51,20 @@
 
 @implementation BannerAd
 
+- (UIViewController *)currentAdViewController{
+    UIViewController *controller = [UIViewController jsd_getCurrentViewController];
+    if (controller == nil) {
+        controller = [UIViewController jsd_getRootViewController];
+    }
+    return controller;
+}
+
+- (void)notifyVCInvalid{
+    [[TLogUtil sharedInstance] print:@"Banner展示失败：未获取到有效vc"];
+    NSDictionary *dictionary = @{@"code":@(-1),@"message":@"广告展示的时候未收到开发者传递的有效的vc参数"};
+    [self.channel invokeMethod:@"onFail" arguments:dictionary result:nil];
+}
+
 - (instancetype)initWithWithFrame:(CGRect)frame viewIdentifier:(int64_t)viewId arguments:(id)args binaryMessenger:(NSObject<FlutterBinaryMessenger> *)messenger{
     if ([super init]) {
         NSDictionary *dic = args;
@@ -91,11 +105,19 @@
 -(void)loadBannerAd{
     [_container removeFromSuperview];
     CGRect rect = {CGPointZero, CGSizeMake(_viewWidth, _viewHeight)};
-    if(self.banner == nil){
-        self.banner = [[GDTUnifiedBannerView alloc] initWithFrame:rect placementId:_codeId viewController:[UIViewController jsd_getCurrentViewController]];
-        self.banner.delegate = self;
-        self.banner.autoSwitchInterval = 30;
+    UIViewController *controller = [self currentAdViewController];
+    if (controller == nil) {
+        [self notifyVCInvalid];
+        return;
     }
+    if(self.banner != nil){
+        self.banner.delegate = nil;
+        [self.banner removeFromSuperview];
+        self.banner = nil;
+    }
+    self.banner = [[GDTUnifiedBannerView alloc] initWithFrame:rect placementId:_codeId viewController:controller];
+    self.banner.delegate = self;
+    self.banner.autoSwitchInterval = 30;
     self.container = self.banner;
     [self.banner loadAdAndShow];
 }

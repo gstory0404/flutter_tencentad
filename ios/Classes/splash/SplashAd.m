@@ -8,6 +8,7 @@
 #import "SplashAd.h"
 #import "GDTMobSDK/GDTSplashAd.h"
 #import "TLogUtil.h"
+#import "TUIViewController+getCurrentVC.h"
 
 @implementation SplashAdFactory{
     NSObject<FlutterBinaryMessenger>*_messenger;
@@ -49,6 +50,17 @@
 
 @implementation SplashAd
 
+- (void)showSplashAdIfPossible{
+    UIWindow *window = [UIViewController jsd_getKeyWindow];
+    if (window == nil) {
+        [[TLogUtil sharedInstance] print:@"开屏广告展示失败：未获取到有效window"];
+        NSDictionary *dictionary = @{@"code":@(-1),@"message":@"广告展示的时候未收到有效window参数"};
+        [_channel invokeMethod:@"onFail" arguments:dictionary result:nil];
+        return;
+    }
+    [self.splash showFullScreenAdInWindow:window withLogoImage:nil skipView:nil];
+}
+
 - (instancetype)initWithWithFrame:(CGRect)frame viewIdentifier:(int64_t)viewId arguments:(id)args binaryMessenger:(NSObject<FlutterBinaryMessenger> *)messenger{
     if ([super init]) {
         NSDictionary *dic = args;
@@ -66,7 +78,7 @@
                                              GDT_M_W_H_LOSS_PRICE:@([call.arguments[@"highestLossPrice"] intValue])};
                 [self.splash sendWinNotificationWithInfo:dictionary];
                 //展示广告
-                [self.splash showFullScreenAdInWindow:[UIApplication sharedApplication].keyWindow withLogoImage:nil skipView:nil];
+                [self showSplashAdIfPossible];
                 //竞价失败
             } else if([@"biddingFail" isEqualToString:call.method]) {
                 NSDictionary *dictionary = @{GDT_M_L_WIN_PRICE:@([call.arguments[@"winPrice"] intValue]),
@@ -117,7 +129,7 @@
         NSDictionary *dictionary = @{@"ecpmLevel":self.splash.eCPMLevel == nil ? @"" : self.splash.eCPMLevel,@"ecpm":@(self.splash.eCPM)};
         [_channel invokeMethod:@"onECPM" arguments:dictionary result:nil];
     }else{
-        [self.splash showFullScreenAdInWindow:[UIApplication sharedApplication].keyWindow withLogoImage:nil skipView:nil];
+        [self showSplashAdIfPossible];
     }
 }
 
