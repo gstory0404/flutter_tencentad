@@ -52,6 +52,14 @@
 #pragma mark - NativeAd
 @implementation NativeAd
 
+- (UIViewController *)currentAdViewController{
+    UIViewController *controller = [UIViewController jsd_getCurrentViewController];
+    if (controller == nil) {
+        controller = [UIViewController jsd_getRootViewController];
+    }
+    return controller;
+}
+
 - (instancetype)initWithWithFrame:(CGRect)frame viewIdentifier:(int64_t)viewId arguments:(id)args binaryMessenger:(NSObject<FlutterBinaryMessenger> *)messenger{
     if ([super init]) {
         NSDictionary *dic = args;
@@ -105,10 +113,16 @@
  */
 - (void)nativeExpressAdSuccessToLoad:(GDTNativeExpressAd *)nativeExpressAd views:(NSArray<__kindof GDTNativeExpressAdView *> *)views{
     [[TLogUtil sharedInstance] print:@"拉取原生模板广告成功"];
+    UIViewController *controller = [self currentAdViewController];
+    if (controller == nil) {
+        NSDictionary *dictionary = @{@"code":@(-1),@"message":@"广告展示的时候未收到开发者传递的有效的vc参数"};
+        [_channel invokeMethod:@"onFail" arguments:dictionary result:nil];
+        return;
+    }
     if (views.count) {
         [views enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             self.nativeView = (GDTNativeExpressAdView *)obj;
-            self.nativeView.controller = [UIViewController jsd_getCurrentViewController];
+            self.nativeView.controller = controller;
             //是否开启竞价
             if(self.isBidding){
                 NSDictionary *dictionary = @{@"ecpmLevel":self.nativeView.eCPMLevel == nil ? @"" : self.nativeView.eCPMLevel,@"ecpm":@(self.nativeView.eCPM)};
