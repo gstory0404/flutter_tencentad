@@ -34,6 +34,22 @@
     return myInstance;
 }
 
+- (UIViewController *)currentAdViewController{
+    UIViewController *controller = [UIViewController jsd_getCurrentViewController];
+    if (controller == nil) {
+        controller = [UIViewController jsd_getRootViewController];
+    }
+    return controller;
+}
+
+- (void)notifyVCInvalid{
+    NSDictionary *dictionary = @{@"adType":@"interactAd",
+                                 @"onAdMethod":@"onFail",
+                                 @"code":@(-1),
+                                 @"message":@"广告展示的时候未收到开发者传递的有效的vc参数"};
+    [[FlutterTencentAdEvent sharedInstance] sentEvent:dictionary];
+}
+
 //预加载激励广告
 -(void)initAd:(NSDictionary*)arguments{
     NSDictionary *dic = arguments;
@@ -48,6 +64,11 @@
 
 //展示广告
 - (void)showAd:(NSDictionary*)arguments{
+    UIViewController *controller = [self currentAdViewController];
+    if (controller == nil) {
+        [self notifyVCInvalid];
+        return;
+    }
     if(self.isBidding){
         BOOL isSuccess = [arguments[@"isSuccess"] boolValue];
         if(isSuccess){
@@ -55,9 +76,9 @@
                                          GDT_M_W_H_LOSS_PRICE:@([arguments[@"highestLossPrice"] intValue])};
             [self.interstitialAd sendWinNotificationWithInfo:dictionary];
             if(_isFullScreen){
-                [_interstitialAd presentFullScreenAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+                [_interstitialAd presentFullScreenAdFromRootViewController:controller];
             }else{
-                [_interstitialAd presentAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+                [_interstitialAd presentAdFromRootViewController:controller];
             }
         }else{
             NSDictionary *dictionary = @{GDT_M_L_WIN_PRICE:@([arguments[@"winPrice"] intValue]),
@@ -67,9 +88,9 @@
         }
     }else{
         if(_isFullScreen){
-            [_interstitialAd presentFullScreenAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+            [_interstitialAd presentFullScreenAdFromRootViewController:controller];
         }else{
-            [_interstitialAd presentAdFromRootViewController:[UIViewController jsd_getCurrentViewController]];
+            [_interstitialAd presentAdFromRootViewController:controller];
         }
     }
 }

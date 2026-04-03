@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tencentad/flutter_tencentad.dart';
 
+import 'ad_config.dart';
+
 ///
 /// Description: 描述
 /// Author: Gstory
@@ -31,10 +33,10 @@ class _ExpressPageState extends State<ExpressPage> {
             //动态信息流-原生-平台模板2.0
             Text("动态信息流/横幅/视频贴片广告"),
             FlutterTencentad.expressAdView(
-                //android广告id
-                androidId: "2210069412231616",
+              //android广告id
+                androidId: NativeAdId.androidId,
                 //ios广告id
-                iosId: "7270469402731805",
+                iosId: NativeAdId.iosId,
                 //广告宽 单位dp
                 viewWidth: 400,
                 //广告高  单位dp
@@ -63,9 +65,9 @@ class _ExpressPageState extends State<ExpressPage> {
             Text("视频贴片"),
             FlutterTencentad.expressAdView(
               //android广告id
-              androidId: "2210069412231616",
+              androidId: NativeAdId.androidId,
               //ios广告id
-              iosId: "7270469402731805",
+              iosId: NativeAdId.iosId,
               viewWidth: 400,
               viewHeight: 300,
               //下载二次确认弹窗 默认false
@@ -75,9 +77,9 @@ class _ExpressPageState extends State<ExpressPage> {
             Text("动态信息流（竞价）"),
             FlutterTencentad.expressAdView(
               //android广告id
-              androidId: "2210069412231616",
+              androidId: NativeAdId.androidId,
               //ios广告id
-              iosId: "7270469402731805",
+              iosId: NativeAdId.iosId,
               viewWidth: 400,
               viewHeight: 300,
               //下载二次确认弹窗 默认false

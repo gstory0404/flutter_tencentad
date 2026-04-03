@@ -1,3 +1,12 @@
+## 1.3.2
+* Android SDK升级4.680.1550
+* iOS SDK升级4.15.80
+
+## 1.3.1
+* Android SDK升级4.671.1541
+* iOS SDK升级4.15.75
+* 兼容UIScene生命周期，修复广告展示无效VC/Window问题，感谢[zeewell](https://github.com/zeewell)的[提交](https://github.com/gstory0404/flutter_tencentad/pull/48)
+
 ## 1.3.0
 * Android SDK升级4.650.1520
 * iOS SDK升级4.15.50

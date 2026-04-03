@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tencentad/flutter_tencentad.dart';
+import 'package:flutter_tencentad_example/ad_config.dart';
 
 ///
 /// Description: 描述
@@ -29,18 +30,13 @@ class _BannerPageState extends State<BannerPage> {
         children: [
           FlutterTencentad.bannerAdView(
             //android广告id
-            androidId: "3280862472037698",
+            androidId: BannerAdId.androidId,
             //ios广告id
-            iosId: "2240669472733809",
-            //ohos广告id
-            ohosId: "5125743518781002",
+            iosId: BannerAdId.iosId,
             //广告宽 单位dp
-            //viewWidth: 640,
+            viewWidth: 640,
             //广告高  单位dp   宽高比应该为6.4:1
-            //viewHeight: 100,
-             viewWidth: 375,
-            //广告高  单位dp   宽高比应该为6.4:1
-            viewHeight: 120,
+            viewHeight: 100,
             //下载二次确认弹窗 默认false
             downloadConfirm: true,
             // 广告回调
@@ -64,18 +60,15 @@ class _BannerPageState extends State<BannerPage> {
           ),
           FlutterTencentad.bannerAdView(
             //android广告id
-            androidId: "3280862472037698",
+            androidId: BannerAdId.androidId,
             //ios广告id
-            iosId: "2240669472733809",
-             //ohos广告id
+            iosId: BannerAdId.iosId,
+            //ohos广告id
             ohosId: "5125743518781002",
             //广告宽 单位dp
-            //viewWidth: 640,
+            viewWidth: 640,
             //广告高  单位dp   宽高比应该为6.4:1
-            //viewHeight: 100,
-             viewWidth: 375,
-            //广告高  单位dp   宽高比应该为6.4:1
-            viewHeight: 120,
+            viewHeight: 60,
             //下载二次确认弹窗 默认false
             downloadConfirm: true,
             // 广告回调

@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIViewController *)jsd_getRootViewController;
 
++ (UIWindow *)jsd_getKeyWindow;
+
 + (UIViewController *)getCurrentVCWithCurrentView:(UIView *)currentView;
 
 +(UITabBarController *)currentTtabarController;
